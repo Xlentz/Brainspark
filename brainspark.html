@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BrainSpark ⚡</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0a1f44;
+    --deep: #071530;
+    --teal: #0ec4c4;
+    --coral: #ff6b6b;
+    --yellow: #ffd93d;
+    --green: #6bcb77;
+    --purple: #a855f7;
+    --white: #f0f8ff;
+    --card-bg: rgba(255,255,255,0.08);
+    --card-border: rgba(255,255,255,0.15);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+font-family: ‘Nunito’, sans-serif;
+background: var(–deep);
+color: var(–white);
+min-height: 100vh;
+overflow-x: hidden;
+position: relative;
+}
+
+/* ── STARS BACKGROUND ── */
+.stars {
+position: fixed; inset: 0; pointer-events: none; z-index: 0;
+background:
+radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.7) 0%, transparent 100%),
+radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,.8) 0%, transparent 100%),
+radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(1px 1px at 85% 10%, rgba(255,255,255,.7) 0%, transparent 100%),
+radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(2px 2px at 45% 60%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 75% 85%, rgba(255,255,255,.5) 0%, transparent 100%);
+}
+
+/* ── OCEAN WAVES ── */
+.ocean-bg {
+position: fixed; bottom: 0; left: 0; right: 0; height: 200px;
+background: linear-gradient(180deg, transparent, rgba(14,196,196,.08) 60%, rgba(14,196,196,.15));
+pointer-events: none; z-index: 0;
+}
+
+/* ── SCREENS ── */
+.screen {
+display: none; min-height: 100vh; position: relative; z-index: 1;
+padding: 20px; flex-direction: column; align-items: center;
+}
+.screen.active { display: flex; animation: fadeIn .4s ease; }
+
+@keyframes fadeIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+@keyframes popIn  { from { opacity:0; transform: scale(.85); } to { opacity:1; transform:none; } }
+@keyframes float  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse  { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes spin   { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes shake  { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+@keyframes correct{ 0%{transform:scale(1)} 50%{transform:scale(1.12)} 100%{transform:scale(1)} }
+@keyframes starPop{ 0%{transform:scale(0) rotate(-20deg);opacity:0} 60%{transform:scale(1.3) rotate(5deg);opacity:1} 100%{transform:scale(1) rotate(0)} }
+
+/* ── LOGO ── */
+.logo {
+font-family: ‘Fredoka One’, sans-serif;
+font-size: clamp(2.8rem, 10vw, 4.5rem);
+background: linear-gradient(135deg, var(–yellow) 0%, var(–coral) 50%, var(–teal) 100%);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+filter: drop-shadow(0 0 20px rgba(255,217,61,.4));
+animation: pulse 3s infinite;
+letter-spacing: 1px;
+}
+.logo-sub {
+font-size: .95rem; font-weight: 600; color: rgba(240,248,255,.6);
+letter-spacing: 3px; text-transform: uppercase; margin-top: 4px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+padding: 14px 32px; border-radius: 50px; border: none; cursor: pointer;
+font-family: ‘Nunito’, sans-serif; font-weight: 800; font-size: 1.05rem;
+transition: all .2s; position: relative; overflow: hidden;
+-webkit-user-select: none; user-select: none;
+}
+.btn::after {
+content:’’; position:absolute; inset:0; background:rgba(255,255,255,.15);
+opacity:0; transition:opacity .2s;
+}
+.btn:active::after { opacity:1; }
+.btn:active { transform: scale(.96); }
+
+.btn-primary {
+background: linear-gradient(135deg, var(–yellow), var(–coral));
+color: #1a0a00; box-shadow: 0 6px 24px rgba(255,107,107,.4);
+font-size: 1.15rem; padding: 16px 40px;
+}
+.btn-primary:hover { box-shadow: 0 8px 32px rgba(255,107,107,.6); transform: translateY(-2px); }
+
+.btn-secondary {
+background: var(–card-bg); border: 1.5px solid var(–card-border);
+color: var(–white); backdrop-filter: blur(10px);
+}
+.btn-secondary:hover { background: rgba(255,255,255,.12); }
+
+.btn-age {
+background: var(–card-bg); border: 2px solid var(–card-border);
+color: var(–white); padding: 20px 28px; border-radius: 20px;
+flex-direction: column; gap: 6px; width: 100%; max-width: 280px;
+backdrop-filter: blur(10px); font-size: 1rem;
+}
+.btn-age .age-emoji { font-size: 2.5rem; }
+.btn-age .age-label { font-size: 1.2rem; font-weight: 800; }
+.btn-age .age-desc  { font-size: .8rem; font-weight: 600; color: rgba(240,248,255,.6); }
+.btn-age:hover, .btn-age.selected {
+border-color: var(–yellow); background: rgba(255,217,61,.12);
+box-shadow: 0 0 20px rgba(255,217,61,.3);
+}
+
+/* ── CARDS ── */
+.card {
+background: var(–card-bg); border: 1.5px solid var(–card-border);
+border-radius: 24px; padding: 24px; backdrop-filter: blur(12px);
+width: 100%; max-width: 480px;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap { width:100%; max-width:480px; margin-bottom:16px; }
+.progress-bar  {
+height: 8px; background: rgba(255,255,255,.1); border-radius: 999px; overflow:hidden;
+}
+.progress-fill {
+height:100%; border-radius:999px;
+background: linear-gradient(90deg, var(–teal), var(–yellow));
+transition: width .5s ease;
+}
+.progress-label { display:flex; justify-content:space-between; font-size:.8rem;
+font-weight:700; color:rgba(240,248,255,.5); margin-bottom:6px; }
+
+/* ── ISLAND MAP ── */
+.map-title {
+font-family: ‘Fredoka One’, sans-serif; font-size: 1.8rem;
+color: var(–yellow); text-align: center; margin-bottom: 6px;
+}
+.map-subtitle { text-align:center; color:rgba(240,248,255,.6); font-size:.9rem; margin-bottom:28px; }
+
+.islands-grid { display:flex; flex-direction:column; gap:16px; width:100%; max-width:480px; }
+
+.island-card {
+background: var(–card-bg); border: 2px solid var(–card-border);
+border-radius: 24px; padding: 20px 24px; cursor: pointer;
+display: flex; align-items: center; gap: 16px;
+backdrop-filter: blur(12px); transition: all .25s;
+position: relative; overflow: hidden;
+}
+.island-card::before {
+content:’’; position:absolute; inset:0; opacity:0;
+transition: opacity .3s;
+}
+.island-card:hover { transform: translateY(-3px); }
+.island-card:hover::before { opacity:1; }
+.island-card:active { transform: scale(.98); }
+
+.island-card.nature   { border-color: rgba(107,203,119,.4); }
+.island-card.nature::before   { background: linear-gradient(135deg, rgba(107,203,119,.08), transparent); }
+.island-card.nature:hover     { box-shadow: 0 8px 28px rgba(107,203,119,.25); border-color: var(–green); }
+
+.island-card.math     { border-color: rgba(14,196,196,.4); }
+.island-card.math::before     { background: linear-gradient(135deg, rgba(14,196,196,.08), transparent); }
+.island-card.math:hover       { box-shadow: 0 8px 28px rgba(14,196,196,.25); border-color: var(–teal); }
+
+.island-card.history  { border-color: rgba(255,217,61,.4); }
+.island-card.history::before  { background: linear-gradient(135deg, rgba(255,217,61,.08), transparent); }
+.island-card.history:hover    { box-shadow: 0 8px 28px rgba(255,217,61,.25); border-color: var(–yellow); }
+
+.island-card.tech     { border-color: rgba(168,85,247,.4); }
+.island-card.tech::before     { background: linear-gradient(135deg, rgba(168,85,247,.08), transparent); }
+.island-card.tech:hover       { box-shadow: 0 8px 28px rgba(168,85,247,.25); border-color: var(–purple); }
+
+.island-card.locked   { opacity:.5; cursor:not-allowed; }
+.island-card.locked:hover { transform:none; box-shadow:none; }
+
+.island-emoji { font-size: 3rem; animation: float 4s ease-in-out infinite; min-width:56px; text-align:center; }
+.island-info  { flex:1; }
+.island-name  { font-family:‘Fredoka One’,sans-serif; font-size:1.3rem; margin-bottom:2px; }
+.island-desc  { font-size:.82rem; color:rgba(240,248,255,.6); font-weight:600; }
+.island-stars { display:flex; gap:3px; margin-top:6px; }
+.island-stars span { font-size:1rem; }
+.island-badge {
+font-size:.7rem; font-weight:800; padding:4px 10px; border-radius:999px;
+background: rgba(255,255,255,.1); color:rgba(240,248,255,.7);
+}
+.island-badge.done { background:rgba(107,203,119,.2); color:var(–green); }
+.island-badge.new  { background:rgba(255,217,61,.2); color:var(–yellow); animation:pulse 2s infinite; }
+
+/* ── LEVEL SELECTOR ── */
+.levels-wrap { width:100%; max-width:480px; }
+.level-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.level-back { background:none; border:none; cursor:pointer; font-size:1.5rem; padding:4px; color:var(–white); }
+.level-title { font-family:‘Fredoka One’,sans-serif; font-size:1.5rem; }
+
+.level-list { display:flex; flex-direction:column; gap:12px; }
+.level-item {
+background: var(–card-bg); border: 1.5px solid var(–card-border);
+border-radius: 18px; padding: 16px 20px; cursor:pointer;
+display:flex; align-items:center; gap:14px; transition:all .2s;
+backdrop-filter:blur(12px);
+}
+.level-item:hover { background:rgba(255,255,255,.12); transform:translateX(4px); }
+.level-item:active { transform:scale(.98); }
+.level-item.locked { opacity:.4; cursor:not-allowed; }
+.level-item.locked:hover { transform:none; }
+.level-num {
+width:40px; height:40px; border-radius:50%; display:flex; align-items:center;
+justify-content:center; font-family:‘Fredoka One’,sans-serif; font-size:1.1rem;
+flex-shrink:0;
+}
+.level-num.quiz    { background:linear-gradient(135deg,var(–teal),rgba(14,196,196,.4)); }
+.level-num.logic   { background:linear-gradient(135deg,var(–coral),rgba(255,107,107,.4)); }
+.level-num.combo   { background:linear-gradient(135deg,var(–yellow),rgba(255,217,61,.4)); }
+.level-info        { flex:1; }
+.level-name        { font-weight:800; font-size:1rem; }
+.level-type        { font-size:.78rem; color:rgba(240,248,255,.55); font-weight:600; margin-top:2px; }
+.level-stars-sm    { display:flex; gap:2px; font-size:.85rem; }
+.level-lock        { font-size:1.2rem; opacity:.6; }
+
+/* ── QUESTION SCREEN ── */
+.q-header { width:100%; max-width:480px; margin-bottom:20px; }
+.q-top    { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.q-badge  {
+font-size:.75rem; font-weight:800; padding:6px 14px; border-radius:999px; letter-spacing:1px;
+text-transform:uppercase;
+}
+.q-badge.quiz  { background:rgba(14,196,196,.2); color:var(–teal); border:1px solid rgba(14,196,196,.3); }
+.q-badge.logic { background:rgba(255,107,107,.2); color:var(–coral); border:1px solid rgba(255,107,107,.3); }
+.q-score { font-weight:800; font-size:1rem; }
+.q-score span { color:var(–yellow); }
+
+.question-card {
+background: var(–card-bg); border: 1.5px solid var(–card-border);
+border-radius: 24px; padding: 28px 24px; backdrop-filter:blur(12px);
+width:100%; max-width:480px; margin-bottom:20px;
+animation: popIn .35s ease;
+}
+.question-emoji { font-size: 3.5rem; text-align:center; margin-bottom:14px; }
+.question-text  {
+font-size: 1.1rem; font-weight: 700; text-align:center; line-height:1.5;
+color: var(–white); margin-bottom: 20px;
+}
+
+/* ── ANSWER OPTIONS ── */
+.answers { display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; max-width:480px; }
+.answer-btn {
+background: var(–card-bg); border: 2px solid var(–card-border);
+border-radius: 18px; padding: 16px 12px; cursor:pointer;
+font-family:‘Nunito’,sans-serif; font-weight:700; font-size:.95rem;
+color:var(–white); text-align:center; transition:all .2s;
+backdrop-filter:blur(8px); display:flex; align-items:center;
+justify-content:center; gap:6px; min-height:70px; line-height:1.3;
+}
+.answer-btn:hover { background:rgba(255,255,255,.13); transform:scale(1.02); }
+.answer-btn:active { transform:scale(.97); }
+.answer-btn.correct {
+background:rgba(107,203,119,.25); border-color:var(–green);
+box-shadow:0 0 20px rgba(107,203,119,.4); animation:correct .4s ease;
+}
+.answer-btn.wrong {
+background:rgba(255,107,107,.2); border-color:var(–coral);
+animation:shake .4s ease;
+}
+.answer-btn.disabled { pointer-events:none; opacity:.5; }
+.answer-btn.disabled.correct { opacity:1; }
+
+/* ── FEEDBACK ── */
+.feedback {
+width:100%; max-width:480px; padding:16px 20px; border-radius:18px;
+font-weight:700; font-size:.95rem; text-align:center; margin-top:4px;
+display:none; animation:fadeIn .3s ease;
+}
+.feedback.show { display:block; }
+.feedback.correct { background:rgba(107,203,119,.15); border:1px solid rgba(107,203,119,.3); color:var(–green); }
+.feedback.wrong   { background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); color:#ff9999; }
+
+/* ── LOGIC PUZZLE ── */
+.pattern-wrap  {
+width:100%; max-width:480px; display:flex; flex-direction:column;
+align-items:center; gap:20px;
+}
+.pattern-title { font-size:.85rem; font-weight:700; color:rgba(240,248,255,.6);
+text-transform:uppercase; letter-spacing:2px; }
+.pattern-row   { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.pattern-cell  {
+width:64px; height:64px; border-radius:16px; display:flex; align-items:center;
+justify-content:center; font-size:1.7rem; font-weight:800;
+background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.12);
+transition:all .2s; position:relative;
+}
+.pattern-cell.question {
+border-color:var(–yellow); background:rgba(255,217,61,.1);
+animation:pulse 2s infinite; cursor:default; font-size:2rem;
+}
+.pattern-options { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.pattern-option {
+width:70px; height:70px; border-radius:18px; display:flex; align-items:center;
+justify-content:center; font-size:1.8rem; font-weight:800; cursor:pointer;
+background:rgba(255,255,255,.07); border:2.5px solid rgba(255,255,255,.15);
+transition:all .2s; font-family:‘Nunito’,sans-serif;
+}
+.pattern-option:hover  { background:rgba(255,255,255,.15); transform:scale(1.06); }
+.pattern-option:active { transform:scale(.95); }
+.pattern-option.correct{ border-color:var(–green); background:rgba(107,203,119,.2); }
+.pattern-option.wrong  { border-color:var(–coral); background:rgba(255,107,107,.15); animation:shake .4s; }
+.pattern-option.disabled{ pointer-events:none; opacity:.5; }
+
+/* ── RESULT SCREEN ── */
+.result-wrap { display:flex; flex-direction:column; align-items:center; gap:20px;
+width:100%; max-width:480px; text-align:center; }
+.result-trophy { font-size:5rem; animation:float 3s ease-in-out infinite; }
+.result-title  { font-family:‘Fredoka One’,sans-serif; font-size:2.2rem;
+background:linear-gradient(135deg,var(–yellow),var(–coral));
+-webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.result-msg    { color:rgba(240,248,255,.7); font-size:1rem; font-weight:600; line-height:1.5; }
+.result-stars  { display:flex; gap:10px; justify-content:center; }
+.result-star   { font-size:3rem; animation:starPop .5s ease forwards; opacity:0; }
+.result-star:nth-child(1){ animation-delay:.1s; }
+.result-star:nth-child(2){ animation-delay:.3s; }
+.result-star:nth-child(3){ animation-delay:.5s; }
+.result-star.empty { filter:grayscale(1) brightness(.4); }
+.score-summary {
+background:var(–card-bg); border:1.5px solid var(–card-border);
+border-radius:20px; padding:18px 28px; backdrop-filter:blur(12px); width:100%;
+}
+.score-row { display:flex; justify-content:space-between; padding:6px 0;
+border-bottom:1px solid rgba(255,255,255,.07); font-weight:700; }
+.score-row:last-child { border-bottom:none; }
+.score-label{ color:rgba(240,248,255,.6); }
+.score-val  { color:var(–yellow); }
+
+/* ── PROFILE BADGE ── */
+.profile-bar {
+position:fixed; top:0; left:0; right:0; z-index:100;
+display:flex; justify-content:space-between; align-items:center;
+padding:12px 20px; backdrop-filter:blur(16px);
+background:rgba(7,21,48,.7); border-bottom:1px solid rgba(255,255,255,.07);
+}
+.profile-bar.hidden { display:none; }
+.xp-display { display:flex; align-items:center; gap:8px; font-weight:800; font-size:.9rem; }
+.xp-icon    { font-size:1.2rem; }
+.xp-val     { color:var(–yellow); }
+.streak-display { display:flex; align-items:center; gap:5px; font-weight:800;
+font-size:.9rem; color:var(–coral); }
+.avatar     { width:36px; height:36px; border-radius:50%;
+background:linear-gradient(135deg,var(–teal),var(–purple));
+display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+
+/* ── CONFETTI ── */
+.confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:999; overflow:hidden; }
+.conf-particle {
+position:absolute; width:10px; height:10px; border-radius:2px;
+animation:confFall 1.5s ease-in forwards;
+}
+@keyframes confFall {
+0%   { transform:translateY(-20px) rotate(0deg); opacity:1; }
+100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
+}
+
+/* ── TIMER ── */
+.timer-ring { position:relative; width:52px; height:52px; flex-shrink:0; }
+.timer-ring svg { transform:rotate(-90deg); }
+.timer-ring circle { fill:none; stroke-width:5; }
+.timer-ring .bg    { stroke:rgba(255,255,255,.1); }
+.timer-ring .fill  { stroke:var(–teal); stroke-linecap:round;
+stroke-dasharray:126; transition:stroke-dashoffset .9s linear; }
+.timer-ring .fill.warn { stroke:var(–coral); }
+.timer-num { position:absolute; inset:0; display:flex; align-items:center;
+justify-content:center; font-family:‘Fredoka One’,sans-serif; font-size:1.1rem; }
+
+/* ── HINT ── */
+.hint-btn {
+background:none; border:1.5px solid rgba(255,255,255,.2); border-radius:999px;
+padding:6px 16px; color:rgba(240,248,255,.6); font-family:‘Nunito’,sans-serif;
+font-weight:700; font-size:.8rem; cursor:pointer; transition:all .2s;
+}
+.hint-btn:hover { border-color:var(–yellow); color:var(–yellow); }
+.hint-box {
+background:rgba(255,217,61,.08); border:1px solid rgba(255,217,61,.25);
+border-radius:14px; padding:12px 16px; font-size:.85rem; font-weight:600;
+color:rgba(240,248,255,.8); display:none; animation:fadeIn .3s; max-width:480px;
+width:100%; text-align:center;
+}
+.hint-box.show { display:block; }
+
+/* ── NEXT BTN ── */
+.next-wrap { width:100%; max-width:480px; display:flex; justify-content:center; }
+.btn-next  {
+background:linear-gradient(135deg,var(–teal),var(–green));
+color:#001a1a; font-weight:800; font-size:1.05rem; padding:14px 36px;
+border-radius:50px; border:none; cursor:pointer; display:none;
+box-shadow:0 6px 20px rgba(14,196,196,.35); transition:all .2s; margin-top:12px;
+font-family:‘Nunito’,sans-serif;
+}
+.btn-next.show { display:inline-flex; align-items:center; gap:8px; animation:fadeIn .3s; }
+.btn-next:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(14,196,196,.5); }
+.btn-next:active { transform:scale(.97); }
+
+/* ── WELCOME DECORATIONS ── */
+.deco-orb {
+position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none; opacity:.35;
+}
+.orb1 { width:280px; height:280px; background:var(–teal);  top:-80px;  right:-80px; }
+.orb2 { width:220px; height:220px; background:var(–coral); bottom:-50px; left:-60px; }
+.orb3 { width:180px; height:180px; background:var(–purple); bottom:20px; right:20px; }
+
+/* ── MISC ── */
+.separator { width:100%; height:1px; background:rgba(255,255,255,.08); margin:8px 0; }
+.spacer { flex:1; }
+.mt-auto { margin-top:auto; }
+.mt-8  { margin-top:8px; }
+.mt-16 { margin-top:16px; }
+.mt-24 { margin-top:24px; }
+.text-center { text-align:center; }
+.text-sm { font-size:.85rem; color:rgba(240,248,255,.55); font-weight:600; }
+</style>
+
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="ocean-bg"></div>
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<!-- PROFILE BAR -->
+
+<div class="profile-bar hidden" id="profileBar">
+  <div class="xp-display"><span class="xp-icon">⚡</span><span class="xp-val" id="xpVal">0</span> XP</div>
+  <div class="streak-display">🔥 <span id="streakVal">1</span> Tage</div>
+  <div class="avatar" id="avatarEl">🚀</div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 1: WELCOME
+════════════════════════════════════ -->
+
+<div class="screen active" id="screenWelcome" style="justify-content:center; min-height:100vh; overflow:hidden;">
+  <div class="deco-orb orb1"></div>
+  <div class="deco-orb orb2"></div>
+  <div class="deco-orb orb3"></div>
+
+  <div style="text-align:center; z-index:2; padding:20px;">
+    <div style="font-size:4rem; margin-bottom:16px; animation:float 3s ease-in-out infinite;">🧠</div>
+    <div class="logo">BrainSpark</div>
+    <div class="logo-sub">Rätseln · Lernen · Entdecken</div>
+
+```
+<div style="margin:40px 0 32px; background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:24px; padding:28px 24px; backdrop-filter:blur(12px);">
+  <p style="font-weight:700; font-size:1.05rem; margin-bottom:20px; color:rgba(240,248,255,.85);">Wie alt bist du?</p>
+  <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+    <button class="btn btn-age" onclick="selectAge('8-10', this)">
+      <span class="age-emoji">🐣</span>
+      <span class="age-label">8 – 10 Jahre</span>
+      <span class="age-desc">Einfache Rätsel · Viele Bilder</span>
+    </button>
+    <button class="btn btn-age" onclick="selectAge('11-14', this)">
+      <span class="age-emoji">🦅</span>
+      <span class="age-label">11 – 14 Jahre</span>
+      <span class="age-desc">Harder Modus · Zeitdruck</span>
+    </button>
+  </div>
+</div>
+
+<button class="btn btn-primary" onclick="startGame()" id="startBtn" style="opacity:.4; pointer-events:none;">
+  Abenteuer starten 🚀
+</button>
+<p class="text-sm mt-16">Willkommen in Lumoria – Deiner Entdecker-Welt!</p>
+```
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 2: MAP
+════════════════════════════════════ -->
+
+<div class="screen" id="screenMap" style="padding-top:80px; align-items:center;">
+  <div class="map-title">🗺️ Lumoria</div>
+  <div class="map-subtitle">Wähle eine Insel und starte dein Abenteuer!</div>
+
+  <div class="islands-grid">
+    <div class="island-card nature" onclick="openIsland('nature')">
+      <div class="island-emoji">🌿</div>
+      <div class="island-info">
+        <div class="island-name">Natur-Insel</div>
+        <div class="island-desc">Tiere · Pflanzen · Umwelt</div>
+        <div class="island-stars" id="starsNature"></div>
+      </div>
+      <div class="island-badge new" id="badgeNature">NEU ✨</div>
+    </div>
+
+```
+<div class="island-card math" onclick="openIsland('math')">
+  <div class="island-emoji">🔢</div>
+  <div class="island-info">
+    <div class="island-name">Mathe-Insel</div>
+    <div class="island-desc">Zahlen · Muster · Logik</div>
+    <div class="island-stars" id="starsMath"></div>
+  </div>
+  <div class="island-badge new" id="badgeMath">NEU ✨</div>
+</div>
+
+<div class="island-card history" onclick="openIsland('history')">
+  <div class="island-emoji">🏛️</div>
+  <div class="island-info">
+    <div class="island-name">Geschichte-Insel</div>
+    <div class="island-desc">Vergangenheit · Kulturen</div>
+    <div class="island-stars" id="starsHistory"></div>
+  </div>
+  <div class="island-badge new" id="badgeHistory">NEU ✨</div>
+</div>
+
+<div class="island-card tech" onclick="openIsland('tech')">
+  <div class="island-emoji">💻</div>
+  <div class="island-info">
+    <div class="island-name">Technik-Insel</div>
+    <div class="island-desc">Erfindungen · Computer · Zukunft</div>
+    <div class="island-stars" id="starsTech"></div>
+  </div>
+  <div class="island-badge new" id="badgeTech">NEU ✨</div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 3: LEVELS
+════════════════════════════════════ -->
+
+<div class="screen" id="screenLevels" style="padding-top:80px; align-items:center;">
+  <div class="levels-wrap">
+    <div class="level-header">
+      <button class="level-back" onclick="showScreen('screenMap')">←</button>
+      <div class="level-title" id="levelIslandTitle">🌿 Natur-Insel</div>
+    </div>
+    <div class="level-list" id="levelList"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 4: QUESTION
+════════════════════════════════════ -->
+
+<div class="screen" id="screenQuestion" style="padding-top:80px; align-items:center; gap:14px;">
+  <div class="q-header">
+    <div class="q-top">
+      <span class="q-badge quiz" id="qBadge">Quiz</span>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="timer-ring" id="timerRing">
+          <svg width="52" height="52" viewBox="0 0 52 52">
+            <circle class="bg" cx="26" cy="26" r="20"></circle>
+            <circle class="fill" id="timerFill" cx="26" cy="26" r="20" stroke-dashoffset="0"></circle>
+          </svg>
+          <div class="timer-num" id="timerNum">15</div>
+        </div>
+        <div class="q-score">⚡ <span id="currentScore">0</span></div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="progLabel">Frage 1 / 3</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-emoji" id="qEmoji">🌿</div>
+    <div class="question-text" id="qText">Frage lädt...</div>
+  </div>
+
+  <div class="answers" id="answersGrid"></div>
+
+  <div class="feedback" id="feedbackBox"></div>
+  <button class="hint-btn" id="hintBtn" onclick="showHint()">💡 Tipp anzeigen</button>
+  <div class="hint-box" id="hintBox"></div>
+  <div class="next-wrap"><button class="btn-next" id="nextBtn" onclick="nextQuestion()">Weiter →</button></div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 4b: LOGIC PUZZLE
+════════════════════════════════════ -->
+
+<div class="screen" id="screenLogic" style="padding-top:80px; align-items:center; gap:16px;">
+  <div class="q-header">
+    <div class="q-top">
+      <span class="q-badge logic">Logik-Rätsel</span>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="timer-ring" id="logicTimerRing">
+          <svg width="52" height="52" viewBox="0 0 52 52">
+            <circle class="bg" cx="26" cy="26" r="20"></circle>
+            <circle class="fill" id="logicTimerFill" cx="26" cy="26" r="20" stroke-dashoffset="0"></circle>
+          </svg>
+          <div class="timer-num" id="logicTimerNum">30</div>
+        </div>
+        <div class="q-score">⚡ <span id="logicScore">0</span></div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Logik-Rätsel</span>
+        <span id="logicLvlName"></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-emoji" id="logicEmoji">🧩</div>
+    <div class="question-text" id="logicText">Was kommt als nächstes?</div>
+    <div class="pattern-wrap" style="margin-top:10px;">
+      <div class="pattern-title">Die Reihe</div>
+      <div class="pattern-row" id="patternRow"></div>
+      <div class="separator" style="margin:16px 0;"></div>
+      <div class="pattern-title">Deine Antwort</div>
+      <div class="pattern-options" id="patternOptions"></div>
+    </div>
+  </div>
+
+  <div class="feedback" id="logicFeedback"></div>
+  <button class="hint-btn" id="logicHintBtn" onclick="showLogicHint()">💡 Tipp anzeigen</button>
+  <div class="hint-box" id="logicHintBox"></div>
+  <div class="next-wrap"><button class="btn-next" id="logicNextBtn" onclick="finishLevel()">Weiter →</button></div>
+</div>
+
+<!-- ════════════════════════════════════
+     SCREEN 5: RESULT
+════════════════════════════════════ -->
+
+<div class="screen" id="screenResult" style="padding-top:80px; align-items:center; justify-content:center;">
+  <div class="result-wrap">
+    <div class="result-trophy" id="resultTrophy">🏆</div>
+    <div class="result-title" id="resultTitle">Super gemacht!</div>
+    <div class="result-stars" id="resultStars"></div>
+    <div class="result-msg" id="resultMsg"></div>
+
+```
+<div class="score-summary">
+  <div class="score-row"><span class="score-label">Richtige Antworten</span><span class="score-val" id="resCorrect">0 / 0</span></div>
+  <div class="score-row"><span class="score-label">Punkte verdient</span><span class="score-val" id="resXP">+0 XP</span></div>
+  <div class="score-row"><span class="score-label">Bestzeit</span><span class="score-val" id="resTime">—</span></div>
+</div>
+
+<div style="display:flex; gap:12px; width:100%; flex-wrap:wrap; justify-content:center;">
+  <button class="btn btn-secondary" onclick="replayLevel()">🔄 Nochmal</button>
+  <button class="btn btn-primary" onclick="showScreen('screenMap')">🗺️ Zur Karte</button>
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   DYNAMIC DATA LOADING
+   Priority: 1) localStorage  2) questions.json  3) hardcoded fallback
+══════════════════════════════════════ */
+let GAME_DATA = null;
+
+async function loadQuestions() {
+  // 1. Try localStorage (saved by admin panel)
+  try {
+    const stored = localStorage.getItem('brainspark_questions');
+    if (stored) { GAME_DATA = JSON.parse(stored); return; }
+  } catch(e) {}
+  // 2. Try external questions.json in same folder
+  try {
+    const r = await fetch('questions.json');
+    if (r.ok) { GAME_DATA = await r.json(); return; }
+  } catch(e) {}
+  // 3. Hardcoded fallback so the game always works
+  GAME_DATA = FALLBACK_DATA;
+}
+
+function getLevels(island) {
+  const isl = GAME_DATA?.islands?.[island];
+  if (!isl) return [];
+  const diff = state.age === '8-10' ? 'easy' : 'hard';
+  return (isl.levels || []).filter(l => l.difficulty === diff || l.difficulty === 'all');
+}
+
+/* ══════════════════════════════════════
+   HARDCODED FALLBACK DATA
+══════════════════════════════════════ */
+const FALLBACK_QUESTIONS_EASY = {
+  nature: [
+    {
+      type:'quiz', emoji:'🦁', 
+      text:'Welches Tier ist das größte Landraubtier der Welt?',
+      answers:['Eisbär','Löwe','Tiger','Grizzlybär'],
+      correct:0, hint:'Es lebt in der Arktis und liebt Fisch.',
+      explain:'Der Eisbär ist mit bis zu 800 kg das größte Landraubtier!'
+    },
+    {
+      type:'quiz', emoji:'🌳',
+      text:'Wie nennt man den Prozess, bei dem Pflanzen Sonnenlicht in Energie umwandeln?',
+      answers:['Fotosynthese','Osmose','Zellatmung','Transpiration'],
+      correct:0, hint:'Das Wort beginnt mit "Foto-" (Licht).',
+      explain:'Bei der Fotosynthese nutzen Pflanzen Sonnenlicht, CO₂ und Wasser zur Energiegewinnung.'
+    },
+    {
+      type:'logic', emoji:'🐾',
+      text:'Welches Tier fehlt in der Reihe?',
+      pattern:['🐟','🐸','🦅','🐟','🐸','❓'],
+      options:['🦅','🐬','🦊','🐍'], correct:0,
+      hint:'Die drei Tiere wiederholen sich in einer festen Reihenfolge.',
+      explain:'Das Muster ist: Fisch → Frosch → Adler (wiederholt). Also kommt der Adler!'
+    }
+  ],
+  math: [
+    {
+      type:'quiz', emoji:'🔢',
+      text:'Was ist 7 × 8?',
+      answers:['54','56','58','64'],
+      correct:1, hint:'7 × 8 = 7 × 4 × 2 = 28 × 2 = ?',
+      explain:'7 × 8 = 56. Merktrick: 5, 6, 7, 8 → 56 = 7 × 8 !'
+    },
+    {
+      type:'quiz', emoji:'📐',
+      text:'Ein Quadrat hat eine Seite von 5 cm. Was ist sein Umfang?',
+      answers:['15 cm','20 cm','25 cm','10 cm'],
+      correct:1, hint:'Ein Quadrat hat 4 gleich lange Seiten.',
+      explain:'Umfang = 4 × Seite = 4 × 5 cm = 20 cm'
+    },
+    {
+      type:'logic', emoji:'🔢',
+      text:'Welche Zahl fehlt in der Reihe?',
+      pattern:['2','4','8','16','32','❓'],
+      options:['48','60','64','56'], correct:2,
+      hint:'Jede Zahl wird mit 2 multipliziert.',
+      explain:'Die Zahlen verdoppeln sich: 2 → 4 → 8 → 16 → 32 → 64!'
+    }
+  ],
+  history: [
+    {
+      type:'quiz', emoji:'🏛️',
+      text:'Wer war der erste Mensch auf dem Mond?',
+      answers:['Buzz Aldrin','Neil Armstrong','Yuri Gagarin','John Glenn'],
+      correct:1, hint:'Sein Nachname klingt wie ein starker Arm.',
+      explain:'Neil Armstrong betrat am 20. Juli 1969 als erster Mensch den Mond!'
+    },
+    {
+      type:'quiz', emoji:'🗼',
+      text:'In welchem Jahr wurde der Eiffelturm gebaut?',
+      answers:['1889','1901','1875','1920'],
+      correct:0, hint:'Er wurde für die Weltausstellung in Paris gebaut – kurz vor 1900.',
+      explain:'Der Eiffelturm wurde 1889 von Gustave Eiffel erbaut. Er ist 330 m hoch!'
+    },
+    {
+      type:'logic', emoji:'📅',
+      text:'Welche Jahreszahl passt in die Reihe?',
+      pattern:['1900','1920','1940','1960','1980','❓'],
+      options:['1990','2000','2010','2020'], correct:1,
+      hint:'Wie viele Jahre liegen zwischen den Zahlen?',
+      explain:'Die Zahlen steigen um je 20 Jahre. 1980 + 20 = 2000!'
+    }
+  ],
+  tech: [
+    {
+      type:'quiz', emoji:'💻',
+      text:'Wer gilt als Erfinder des World Wide Web (WWW)?',
+      answers:['Steve Jobs','Bill Gates','Tim Berners-Lee','Elon Musk'],
+      correct:2, hint:'Er arbeitet im CERN in der Schweiz.',
+      explain:'Tim Berners-Lee erfand das WWW 1989 – damit wurde das Internet für alle nutzbar!'
+    },
+    {
+      type:'quiz', emoji:'🤖',
+      text:'Was bedeutet "KI" in der Technologie?',
+      answers:['Künstliche Intelligenz','Kreative Innovation','Kurze Information','Komplexe Infrastruktur'],
+      correct:0, hint:'KI-Systeme können lernen und Entscheidungen treffen.',
+      explain:'KI steht für Künstliche Intelligenz – Computer, die "denken" und lernen können!'
+    },
+    {
+      type:'logic', emoji:'💡',
+      text:'Welches Symbol kommt als nächstes?',
+      pattern:['⚡','🔋','💡','⚡','🔋','❓'],
+      options:['💻','💡','🔌','⚡'], correct:1,
+      hint:'Drei Symbole wiederholen sich der Reihe nach.',
+      explain:'Das Muster: Blitz → Batterie → Glühbirne (wiederholt). Also kommt die Glühbirne!'
+    }
+  ]
+};
+
+const HARDER = {
+  nature: [
+    {type:'quiz',emoji:'🧬',
+     text:'Wie nennt man das Phänomen, wenn ein Tier die Farbe seiner Umgebung annimmt?',
+     answers:['Mimikry','Tarnung','Camouflage','Adaptation'],
+     correct:2,hint:'Das Wort kommt aus dem Französischen.',
+     explain:'Camouflage (Tarnung) schützt viele Tiere wie Chamäleons vor Feinden!'},
+    {type:'quiz',emoji:'🌊',
+     text:'Welches Gas erzeugen Pflanzen bei der Fotosynthese?',
+     answers:['CO₂','Stickstoff','Sauerstoff','Wasserdampf'],
+     correct:2,hint:'Wir atmen es ein – ohne es könnten wir nicht leben.',
+     explain:'Pflanzen produzieren Sauerstoff (O₂) – deshalb sind sie so wichtig für unser Klima!'},
+    {type:'logic',emoji:'🐾',
+     text:'Welche Zahl fehlt in der Fibonacci-ähnlichen Reihe?',
+     pattern:['1','1','2','3','5','❓'],
+     options:['6','7','8','9'],correct:2,
+     hint:'Addiere immer die letzten zwei Zahlen.',
+     explain:'1+1=2, 1+2=3, 2+3=5, 3+5=8! Das ist die berühmte Fibonacci-Folge!'}
+  ],
+  math:[
+    {type:'quiz',emoji:'📊',
+     text:'Was ist der größte gemeinsame Teiler (ggT) von 12 und 18?',
+     answers:['3','4','6','9'],correct:2,
+     hint:'Welche Zahl teilt sowohl 12 als auch 18 ohne Rest?',
+     explain:'Teiler von 12: 1,2,3,4,6,12 – Teiler von 18: 1,2,3,6,9,18 → ggT = 6'},
+    {type:'quiz',emoji:'📐',
+     text:'Ein Dreieck hat die Winkel 60° und 80°. Wie groß ist der dritte Winkel?',
+     answers:['30°','40°','50°','60°'],correct:1,
+     hint:'Alle drei Winkel in einem Dreieck ergeben zusammen 180°.',
+     explain:'180° - 60° - 80° = 40°. Die Winkelsumme im Dreieck ist immer 180°!'},
+    {type:'logic',emoji:'🔢',
+     text:'Welche Zahl fehlt in der Reihe?',
+     pattern:['3','6','12','24','48','❓'],
+     options:['72','84','96','100'],correct:2,
+     hint:'Multipliziere jede Zahl mit dem gleichen Faktor.',
+     explain:'Jede Zahl wird mit 2 multipliziert: 48 × 2 = 96!'}
+  ],
+  history:[
+    {type:'quiz',emoji:'🏺',
+     text:'Welches antike Weltwunder steht noch heute?',
+     answers:['Koloss von Rhodos','Hängende Gärten','Pyramide von Gizeh','Leuchtturm von Alexandria'],
+     correct:2,hint:'Es befindet sich in Ägypten.',
+     explain:'Die Pyramide von Gizeh ist das einzige der 7 antiken Weltwunder, das noch erhalten ist!'},
+    {type:'quiz',emoji:'⚔️',
+     text:'In welchem Jahr begann der Erste Weltkrieg?',
+     answers:['1912','1914','1916','1918'],correct:1,
+     hint:'Es war zwei Jahre vor 1916.',
+     explain:'Der Erste Weltkrieg begann am 28. Juli 1914 und endete 1918.'},
+    {type:'logic',emoji:'👑',
+     text:'Welche Zahl kommt als nächstes?',
+     pattern:['100','95','85','70','❓'],
+     options:['60','55','50','45'],correct:2,
+     hint:'Die Abstände zwischen den Zahlen werden größer.',
+     explain:'Die Differenzen: -5, -10, -15, -20... → 70 - 20 = 50!'}
+  ],
+  tech:[
+    {type:'quiz',emoji:'🖥️',
+     text:'Was bedeutet "CPU"?',
+     answers:['Central Processing Unit','Computer Power Unit','Core Processing Utility','Central Program Unit'],
+     correct:0,hint:'Es ist das "Gehirn" des Computers.',
+     explain:'CPU = Central Processing Unit. Sie führt alle Berechnungen im Computer durch!'},
+    {type:'quiz',emoji:'🌐',
+     text:'In welcher Programmiersprache wurde das originale Minecraft geschrieben?',
+     answers:['Python','C++','Java','JavaScript'],correct:2,
+     hint:'Diese Sprache hat einen Kaffeebecher als Logo.',
+     explain:'Minecraft wurde von Markus "Notch" Persson in Java programmiert!'},
+    {type:'logic',emoji:'💻',
+     text:'Welcher Wert fehlt in der Binärreihe?',
+     pattern:['1','10','11','100','101','❓'],
+     options:['110','111','1000','10'],correct:0,
+     hint:'Das ist Binärcode – jede Stelle ist doppelt so viel wert wie die rechte.',
+     explain:'Im Binärsystem: 1,2,3,4,5,6 → also folgt 110 (= 6 in Dezimal)!'}
+  ]
+};
+
+// Build FALLBACK_DATA in the JSON island format so getLevels() works
+const FALLBACK_DATA = { version:'fallback', islands:{} };
+['nature','math','history','tech'].forEach(isl => {
+  FALLBACK_DATA.islands[isl] = { levels: [] };
+  const easy = FALLBACK_QUESTIONS_EASY[isl] || [];
+  const hard  = (typeof FALLBACK_QUESTIONS_HARD !== 'undefined' && FALLBACK_QUESTIONS_HARD[isl]) || [];
+  easy.forEach((q,i) => FALLBACK_DATA.islands[isl].levels.push({...q, id:`${isl.slice(0,3)}-e${i}`, difficulty:'easy'}));
+  hard.forEach((q,i) => FALLBACK_DATA.islands[isl].levels.push({...q, id:`${isl.slice(0,3)}-h${i}`, difficulty:'hard'}));
+});
+const FALLBACK_QUESTIONS_HARD = {
+  nature:[
+    {type:'quiz',emoji:'🧬',text:'Wie nennt man das Phänomen, wenn ein Tier die Farbe seiner Umgebung annimmt?',answers:['Mimikry','Tarnung','Camouflage','Adaptation'],correct:2,hint:'Das Wort kommt aus dem Französischen.',explain:'Camouflage (Tarnung) schützt viele Tiere wie Chamäleons vor Feinden!'},
+    {type:'quiz',emoji:'🌊',text:'Welches Gas erzeugen Pflanzen bei der Fotosynthese?',answers:['CO₂','Stickstoff','Sauerstoff','Wasserdampf'],correct:2,hint:'Wir atmen es ein.',explain:'Pflanzen produzieren Sauerstoff (O₂)!'},
+    {type:'logic',emoji:'🐾',text:'Welche Zahl fehlt in der Fibonacci-Reihe?',pattern:['1','1','2','3','5','❓'],options:['6','7','8','9'],correct:2,hint:'Addiere die letzten zwei Zahlen.',explain:'3+5=8! Das ist die Fibonacci-Folge!'}
+  ],
+  math:[
+    {type:'quiz',emoji:'📊',text:'Was ist der ggT von 12 und 18?',answers:['3','4','6','9'],correct:2,hint:'Welche Zahl teilt beide?',explain:'ggT = 6'},
+    {type:'quiz',emoji:'📐',text:'Ein Dreieck hat 60° und 80°. Wie groß ist der dritte Winkel?',answers:['30°','40°','50°','60°'],correct:1,hint:'Alle Winkel = 180°.',explain:'180-60-80=40°!'},
+    {type:'logic',emoji:'🔢',text:'Welche Zahl fehlt?',pattern:['3','6','12','24','48','❓'],options:['72','84','96','100'],correct:2,hint:'×2 pro Schritt.',explain:'48×2=96!'}
+  ],
+  history:[
+    {type:'quiz',emoji:'🏺',text:'Welches Weltwunder steht noch?',answers:['Koloss von Rhodos','Hängende Gärten','Pyramide von Gizeh','Leuchtturm von Alexandria'],correct:2,hint:'In Ägypten.',explain:'Nur die Pyramide von Gizeh!'},
+    {type:'quiz',emoji:'⚔️',text:'Wann begann der Erste Weltkrieg?',answers:['1912','1914','1916','1918'],correct:1,hint:'Zwei Jahre vor 1916.',explain:'28. Juli 1914!'},
+    {type:'logic',emoji:'👑',text:'Welche Zahl kommt als nächstes?',pattern:['100','95','85','70','❓'],options:['60','55','50','45'],correct:2,hint:'Abstände werden größer.',explain:'-5,-10,-15,-20 → 70-20=50!'}
+  ],
+  tech:[
+    {type:'quiz',emoji:'🖥️',text:'Was bedeutet CPU?',answers:['Central Processing Unit','Computer Power Unit','Core Processing Utility','Central Program Unit'],correct:0,hint:'Gehirn des Computers.',explain:'Central Processing Unit!'},
+    {type:'quiz',emoji:'🌐',text:'In welcher Sprache wurde Minecraft geschrieben?',answers:['Python','C++','Java','JavaScript'],correct:2,hint:'Kaffeebecher-Logo.',explain:'Java von Notch!'},
+    {type:'logic',emoji:'💻',text:'Welcher Wert fehlt in der Binärreihe?',pattern:['1','10','11','100','101','❓'],options:['110','111','1000','10'],correct:0,hint:'Binärcode – zähle weiter.',explain:'110 = 6 dezimal!'}
+  ]
+};
+// Re-populate FALLBACK_DATA with hard levels now that FALLBACK_QUESTIONS_HARD exists
+['nature','math','history','tech'].forEach(isl => {
+  const hard = FALLBACK_QUESTIONS_HARD[isl] || [];
+  hard.forEach((q,i) => FALLBACK_DATA.islands[isl].levels.push({...q, id:`${isl.slice(0,3)}-h${i}`, difficulty:'hard'}));
+});
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let state = {
+  age: null,
+  xp: 0,
+  island: null,
+  questions: [],
+  qIndex: 0,
+  correct: 0,
+  score: 0,
+  timer: null,
+  timerVal: 15,
+  levelStars: {},
+  startTime: 0,
+};
+
+/* ══════════════════════════════════════
+   SCREEN MANAGEMENT
+══════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const bar = document.getElementById('profileBar');
+  bar.classList.toggle('hidden', id === 'screenWelcome');
+}
+
+/* ══════════════════════════════════════
+   WELCOME
+══════════════════════════════════════ */
+function selectAge(age, btn) {
+  state.age = age;
+  document.querySelectorAll('.btn-age').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const sb = document.getElementById('startBtn');
+  sb.style.opacity = '1'; sb.style.pointerEvents = 'auto';
+}
+
+async function startGame() {
+  if (!state.age) return;
+  document.getElementById('startBtn').textContent = '⏳ Lädt...';
+  await loadQuestions();
+  updateProfileBar();
+  showScreen('screenMap');
+  updateMapStars();
+}
+
+function updateProfileBar() {
+  document.getElementById('xpVal').textContent = state.xp;
+}
+
+/* ══════════════════════════════════════
+   MAP
+══════════════════════════════════════ */
+function updateMapStars() {
+  ['nature','math','history','tech'].forEach(island => {
+    const el = document.getElementById('stars' + capitalize(island));
+    const stars = state.levelStars[island] || 0;
+    el.innerHTML = [1,2,3].map(i => `<span>${i <= stars ? '⭐' : '☆'}</span>`).join('');
+    const badge = document.getElementById('badge' + capitalize(island));
+    if (stars >= 3) { badge.textContent = '✅ Fertig'; badge.className = 'island-badge done'; }
+    else if (stars > 0) { badge.textContent = '▶ Weiter'; badge.className = 'island-badge'; }
+    else { badge.textContent = 'NEU ✨'; badge.className = 'island-badge new'; }
+  });
+}
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+/* ══════════════════════════════════════
+   ISLAND / LEVEL
+══════════════════════════════════════ */
+function openIsland(island) {
+  state.island = island;
+  const names = {nature:'🌿 Natur-Insel', math:'🔢 Mathe-Insel', history:'🏛️ Geschichte-Insel', tech:'💻 Technik-Insel'};
+  document.getElementById('levelIslandTitle').textContent = names[island];
+
+  const levels = getLevels(island);
+  const ll = document.getElementById('levelList');
+  ll.innerHTML = '';
+
+  if (!levels.length) {
+    ll.innerHTML = '<div style="text-align:center;padding:32px;color:rgba(240,248,255,.5);font-size:.9rem;">Keine Level für diese Altersgruppe.<br>Füge Level im Admin-Panel hinzu! 🛠️</div>';
+    showScreen('screenLevels');
+    return;
+  }
+
+  const completedIds = state.completedLevels?.[island] || {};
+
+  levels.forEach((q, i) => {
+    const isCompleted = !!completedIds[q.id];
+    const div = document.createElement('div');
+    div.className = 'level-item';
+    const typeColor = q.type === 'logic' ? 'logic' : 'quiz';
+    const typeLabel = q.type === 'logic' ? '🧩 Logik-Rätsel' : `❓ Frage ${i+1}`;
+    const timeLabel = state.age === '11-14' ? 'Mit Zeitdruck ⏱' : 'Entspannt 😊';
+    const doneIcon  = isCompleted ? '⭐' : '›';
+    div.innerHTML = `
+      <div class="level-num ${typeColor}">${i+1}</div>
+      <div class="level-info">
+        <div class="level-name">${typeLabel}</div>
+        <div class="level-type">${timeLabel}</div>
+      </div>
+      <span style="color:rgba(255,255,255,.5);font-size:1.2rem;">${doneIcon}</span>
+    `;
+    div.onclick = () => startLevel(island, i);
+    ll.appendChild(div);
+  });
+
+  showScreen('screenLevels');
+}
+
+/* ══════════════════════════════════════
+   QUIZ LEVEL
+══════════════════════════════════════ */
+let currentLevelIdx = 0;
+let currentLevelId  = null;
+
+function startLevel(island, idx) {
+  const levels = getLevels(island);
+  const q = levels[idx];
+  if (!q) return;
+  currentLevelIdx = idx;
+  currentLevelId  = q.id;
+  state.island    = island;
+  state.score     = 0;
+  state.startTime = Date.now();
+
+  if (q.type === 'logic') {
+    startLogicPuzzle(q);
+  } else {
+    startQuiz(q);
+  }
+}
+
+function startQuiz(q) {
+  stopTimer();
+  document.getElementById('qBadge').textContent = '❓ Quiz';
+  document.getElementById('qBadge').className = 'q-badge quiz';
+  document.getElementById('qEmoji').textContent = q.emoji;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('currentScore').textContent = state.xp;
+  document.getElementById('progLabel').textContent = 'Quiz-Frage';
+  document.getElementById('progPct').textContent = 'Los!';
+  document.getElementById('progFill').style.width = '0%';
+  document.getElementById('feedbackBox').className = 'feedback';
+  document.getElementById('feedbackBox').textContent = '';
+  document.getElementById('hintBox').className = 'hint-box';
+  document.getElementById('nextBtn').className = 'btn-next';
+  document.getElementById('hintBtn').style.display = 'inline-flex';
+
+  const grid = document.getElementById('answersGrid');
+  grid.innerHTML = '';
+  q.answers.forEach((ans, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = ans;
+    btn.onclick = () => checkAnswer(i, q, btn);
+    grid.appendChild(btn);
+  });
+
+  const timeLimit = state.age === '11-14' ? 15 : 25;
+  startTimer(timeLimit, 'timerFill', 'timerNum', () => timeUpQuiz(q));
+
+  showScreen('screenQuestion');
+}
+
+function checkAnswer(idx, q, btn) {
+  stopTimer();
+  const allBtns = document.querySelectorAll('.answer-btn');
+  allBtns.forEach((b, i) => {
+    b.classList.add('disabled');
+    if (i === q.correct) b.classList.add('correct');
+    else if (i === idx && i !== q.correct) b.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (idx === q.correct) {
+    fb.className = 'feedback correct show';
+    fb.innerHTML = '🎉 Richtig! ' + q.explain;
+    state.xp += 10;
+    state.score += 10;
+    updateProfileBar();
+  } else {
+    fb.className = 'feedback wrong show';
+    fb.innerHTML = '❌ Leider falsch. ' + q.explain;
+  }
+  document.getElementById('nextBtn').className = 'btn-next show';
+}
+
+function timeUpQuiz(q) {
+  const allBtns = document.querySelectorAll('.answer-btn');
+  allBtns.forEach((b, i) => {
+    b.classList.add('disabled');
+    if (i === q.correct) b.classList.add('correct');
+  });
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback wrong show';
+  fb.innerHTML = '⏰ Zeit abgelaufen! Die Antwort war: ' + q.answers[q.correct];
+  document.getElementById('nextBtn').className = 'btn-next show';
+}
+
+function showHint() {
+  const q = getLevels(state.island)[currentLevelIdx];
+  if (!q) return;
+  document.getElementById('hintBox').className = 'hint-box show';
+  document.getElementById('hintBox').innerHTML = '💡 ' + q.hint;
+  document.getElementById('hintBtn').style.display = 'none';
+}
+
+function nextQuestion() {
+  finishLevel();
+}
+
+/* ══════════════════════════════════════
+   LOGIC PUZZLE
+══════════════════════════════════════ */
+function startLogicPuzzle(q) {
+  stopTimer();
+  document.getElementById('logicEmoji').textContent = q.emoji;
+  document.getElementById('logicText').textContent = q.text;
+  document.getElementById('logicScore').textContent = state.xp;
+  document.getElementById('logicLvlName').textContent = 'Rätsel';
+  document.getElementById('logicFeedback').className = 'feedback';
+  document.getElementById('logicHintBox').className = 'hint-box';
+  document.getElementById('logicNextBtn').className = 'btn-next';
+  document.getElementById('logicHintBtn').style.display = 'inline-flex';
+
+  const row = document.getElementById('patternRow');
+  row.innerHTML = '';
+  q.pattern.forEach(p => {
+    const cell = document.createElement('div');
+    cell.className = 'pattern-cell' + (p === '❓' ? ' question' : '');
+    cell.textContent = p;
+    row.appendChild(cell);
+  });
+
+  const opts = document.getElementById('patternOptions');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'pattern-option';
+    btn.textContent = opt;
+    btn.onclick = () => checkLogic(i, q, btn);
+    opts.appendChild(btn);
+  });
+
+  const timeLimit = state.age === '11-14' ? 30 : 45;
+  startTimer(timeLimit, 'logicTimerFill', 'logicTimerNum', () => timeUpLogic(q));
+
+  showScreen('screenLogic');
+}
+
+function checkLogic(idx, q, btn) {
+  stopTimer();
+  document.querySelectorAll('.pattern-option').forEach(b => b.classList.add('disabled'));
+  const fb = document.getElementById('logicFeedback');
+
+  if (idx === q.correct) {
+    btn.classList.add('correct');
+    // Fill in the question mark
+    const cells = document.querySelectorAll('.pattern-cell.question');
+    cells.forEach(c => { c.textContent = q.options[idx]; c.style.animation = 'correct .5s ease'; c.style.borderColor = 'var(--green)'; });
+    fb.className = 'feedback correct show';
+    fb.innerHTML = '🎉 Perfekt! ' + q.explain;
+    state.xp += 15;
+    state.score += 15;
+    updateProfileBar();
+    spawnConfetti();
+  } else {
+    btn.classList.add('wrong');
+    fb.className = 'feedback wrong show';
+    fb.innerHTML = '❌ Nicht ganz! ' + q.explain;
+  }
+  document.getElementById('logicNextBtn').className = 'btn-next show';
+}
+
+function timeUpLogic(q) {
+  document.querySelectorAll('.pattern-option').forEach((b,i) => {
+    b.classList.add('disabled');
+    if (i === q.correct) b.classList.add('correct');
+  });
+  const fb = document.getElementById('logicFeedback');
+  fb.className = 'feedback wrong show';
+  fb.innerHTML = '⏰ Zeit! ' + q.explain;
+  document.getElementById('logicNextBtn').className = 'btn-next show';
+}
+
+function showLogicHint() {
+  const q = getLevels(state.island)[currentLevelIdx];
+  if (!q) return;
+  document.getElementById('logicHintBox').className = 'hint-box show';
+  document.getElementById('logicHintBox').innerHTML = '💡 ' + q.hint;
+  document.getElementById('logicHintBtn').style.display = 'none';
+}
+
+/* ══════════════════════════════════════
+   RESULTS
+══════════════════════════════════════ */
+function finishLevel() {
+  stopTimer();
+  const elapsed  = Math.round((Date.now() - state.startTime) / 1000);
+  const earned   = state.score;
+  const stars    = earned >= 15 ? 3 : earned >= 10 ? 2 : earned >= 1 ? 1 : 0;
+
+  // Track completed levels per island
+  if (!state.completedLevels) state.completedLevels = {};
+  if (!state.completedLevels[state.island]) state.completedLevels[state.island] = {};
+  if (stars > 0) state.completedLevels[state.island][currentLevelId] = stars;
+
+  // Update island star total (count completed levels)
+  const total = Object.keys(state.completedLevels[state.island]||{}).length;
+  state.levelStars[state.island] = Math.min(total, 3);
+
+  // Trophy & msg
+  const trophies = ['😔','🥉','🥈','🏆'];
+  const titles   = ['Nicht schlecht!','Gut gemacht!','Super!','Perfekt! 🎉'];
+  const msgs     = [
+    'Du hast das Beste gegeben – beim nächsten Mal klappt es besser! 💪',
+    'Eine Bronzemedaille! Übe weiter und du wirst besser! 🏅',
+    'Tolle Leistung! Du bist auf dem richtigen Weg! 🌟',
+    'Fantastisch! Du hast alles richtig gemacht! Du bist ein echtes Gehirn-Genie! 🧠⚡',
+  ];
+
+  document.getElementById('resultTrophy').textContent = trophies[stars];
+  document.getElementById('resultTitle').textContent  = titles[stars];
+  document.getElementById('resultMsg').textContent    = msgs[stars];
+  document.getElementById('resCorrect').textContent   = earned > 0 ? 'Richtig! ✓' : 'Weiter üben!';
+  document.getElementById('resXP').textContent        = `+${earned} XP`;
+  document.getElementById('resTime').textContent      = `${elapsed}s`;
+
+  const starsEl = document.getElementById('resultStars');
+  starsEl.innerHTML = '';
+  for (let i = 1; i <= 3; i++) {
+    const s = document.createElement('div');
+    s.className = 'result-star' + (i > stars ? ' empty' : '');
+    s.textContent = '⭐';
+    starsEl.appendChild(s);
+  }
+
+  if (stars === 3) spawnConfetti();
+  updateMapStars();
+  showScreen('screenResult');
+}
+
+function replayLevel() {
+  startLevel(state.island, currentLevelIdx);
+}
+
+/* ══════════════════════════════════════
+   TIMER
+══════════════════════════════════════ */
+function startTimer(seconds, fillId, numId, onDone) {
+  stopTimer();
+  let remaining = seconds;
+  const fill = document.getElementById(fillId);
+  const num  = document.getElementById(numId);
+  const circumference = 2 * Math.PI * 20; // r=20
+
+  function update() {
+    const pct = remaining / seconds;
+    fill.style.strokeDashoffset = circumference * (1 - pct);
+    num.textContent = remaining;
+    if (remaining <= 5) fill.classList.add('warn');
+    else fill.classList.remove('warn');
+  }
+
+  fill.style.strokeDashoffset = '0';
+  fill.classList.remove('warn');
+  update();
+
+  state.timer = setInterval(() => {
+    remaining--;
+    update();
+    if (remaining <= 0) { stopTimer(); onDone(); }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (state.timer) { clearInterval(state.timer); state.timer = null; }
+}
+
+/* ══════════════════════════════════════
+   CONFETTI
+══════════════════════════════════════ */
+function spawnConfetti() {
+  const wrap  = document.getElementById('confettiWrap');
+  const colors = ['#ffd93d','#ff6b6b','#6bcb77','#0ec4c4','#a855f7','#fff'];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'conf-particle';
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      animation-duration:${1.2+Math.random()*.8}s;
+      animation-delay:${Math.random()*.4}s;
+      transform:rotate(${Math.random()*360}deg);
+    `;
+    wrap.appendChild(p);
+    setTimeout(() => p.remove(), 2500);
+  }
+}
+</script>
+
+</body>
+</html>
