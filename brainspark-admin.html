@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>BrainSpark Admin ⚙️</title>
+    <style>
+        :root {
+            --bg: #0d1117; --surface: #161b22; --border: #30363d;
+            --text: #e6edf3; --accent: #ffd93d; --teal: #0ec4c4;
+        }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: var(--surface); padding: 20px; border-radius: 15px; border: 1px solid var(--border); }
+        textarea { width: 100%; height: 200px; background: #000; color: #0f0; font-family: monospace; padding: 10px; border-radius: 8px; }
+        .btn { background: var(--teal); border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .info { background: rgba(255,255,0,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BrainSpark Admin ⚙️</h1>
+        <div class="info">
+            <strong>Anleitung:</strong><br>
+            1. Kopiere den Inhalt deiner <code>questions.json</code> hier hinein.<br>
+            2. Bearbeite die Inseln oder füge neue Typen (quiz, pattern, code, hybrid) hinzu.<br>
+            3. Klicke auf "JSON Kopieren" und speichere es in deiner Datei.
+        </div>
+        
+        <textarea id="jsonEditor"></textarea>
+        <br><br>
+        <button class="btn" onclick="copyJSON()">JSON Kopieren 📋</button>
+        <button class="btn" style="background: var(--accent); color: #000;" onclick="beautify()">Formatieren ✨</button>
+    </div>
+
+    <script>
+        function beautify() {
+            const el = document.getElementById('jsonEditor');
+            try {
+                const obj = JSON.parse(el.value);
+                el.value = JSON.stringify(obj, null, 2);
+            } catch(e) { alert("Ungültiges JSON!"); }
+        }
+
+        function copyJSON() {
+            const el = document.getElementById('jsonEditor');
+            el.select();
+            document.execCommand('copy');
+            alert("In die Zwischenablage kopiert! Jetzt in questions.json einfügen.");
+        }
+
+        // Beispiel-Laden
+        fetch('questions.json').then(r => r.text()).then(t => {
+            document.getElementById('jsonEditor').value = t;
+        });
+    </script>
+</body>
+</html>

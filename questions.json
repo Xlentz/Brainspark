@@ -1,0 +1,60 @@
+{
+  "islands": {
+    "logic_island": {
+      "name": "Rätsel-Riff",
+      "emoji": "🧩",
+      "levels": [
+        {
+          "type": "pattern",
+          "ageRange": "8-10",
+          "emoji": "🔢",
+          "text": "Welche Zahl folgt als Nächstes?",
+          "pattern": [2, 4, 8, 16, "?"],
+          "answers": ["20", "24", "32", "64"],
+          "correct": 2,
+          "explain": "Jede Zahl wird verdoppelt. 16 x 2 = 32!"
+        },
+        {
+          "type": "code",
+          "ageRange": "11-14",
+          "emoji": "🔐",
+          "text": "Knacke den Code: Wenn A=1 und C=3, was ist dann C-A-B?",
+          "correct": "312",
+          "explain": "Einfach die Buchstaben durch ihre Stelle im Alphabet ersetzen!"
+        },
+        {
+          "type": "hybrid",
+          "ageRange": "8-10",
+          "emoji": "🧪",
+          "text": "Kombi-Herausforderung!",
+          "step1": {
+            "question": "Wie viele Beine hat ein Käfer?",
+            "answers": ["4", "6", "8"],
+            "correct": 1,
+            "hint": "Die Zahl ist 6"
+          },
+          "step2": {
+            "text": "Rechne: Hinweis-Zahl + 10 = ?",
+            "correct": "16"
+          },
+          "explain": "Erst Bio, dann Mathe - du hast es drauf!"
+        }
+      ]
+    },
+    "nature_island": {
+      "name": "Bio-Dschungel",
+      "emoji": "🌿",
+      "levels": [
+        {
+          "type": "quiz",
+          "ageRange": "8-10",
+          "emoji": "🐘",
+          "text": "Welches Tier hat einen Rüssel?",
+          "answers": ["Elefant", "Nashorn", "Giraffe"],
+          "correct": 0,
+          "explain": "Nur der Elefant nutzt seinen Rüssel wie eine Hand."
+        }
+      ]
+    }
+  }
+}

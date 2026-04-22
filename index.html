@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BrainSpark ⚡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean: #0a1f44; --deep: #071530; --teal: #0ec4c4;
+            --coral: #ff6b6b; --yellow: #ffd93d; --green: #6bcb77;
+            --purple: #a855f7; --white: #f0f8ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--deep);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, var(--ocean) 0%, var(--deep) 100%);
+            z-index: -1;
+        }
+
+        #game-container {
+            width: 90%; max-width: 500px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 30px; padding: 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        h1 { font-family: 'Fredoka One', cursive; color: var(--yellow); font-size: 2.5rem; margin-bottom: 10px; }
+        .hidden { display: none !important; }
+
+        .btn {
+            background: var(--teal); color: var(--deep); border: none;
+            padding: 15px 25px; border-radius: 15px; font-size: 1.1rem;
+            font-weight: 800; cursor: pointer; transition: 0.2s; margin: 10px 5px;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--teal); }
+
+        /* Spiel-Elemente */
+        .island-btn {
+            background: rgba(255,255,255,0.1); padding: 15px; margin: 10px 0;
+            border-radius: 15px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .island-btn:hover { background: var(--purple); }
+
+        .pattern-display { font-size: 1.8rem; letter-spacing: 5px; margin: 20px 0; color: var(--yellow); font-weight: 800; }
+        .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .answer-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 15px; border-radius: 12px; cursor: pointer; font-size: 1rem;
+        }
+        .answer-btn:hover { background: rgba(255,255,255,0.2); }
+
+        #timer-wrap { height: 6px; background: rgba(0,0,0,0.3); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        #timer-bar { height: 100%; background: var(--green); width: 100%; transition: width 1s linear; }
+
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 12px; font-weight: 700; line-height: 1.4; }
+        .correct { background: var(--green); color: var(--deep); }
+        .wrong { background: var(--coral); color: white; }
+
+        input[type="text"] {
+            width: 100%; padding: 15px; border-radius: 12px; border: none;
+            background: rgba(255,255,255,0.2); color: white; font-size: 1.2rem; text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div id="game-container">
+        <div id="view-setup">
+            <h1>BrainSpark ⚡</h1>
+            <p>Wähle dein Alter für die passenden Rätsel:</p>
+            <button class="btn" onclick="startApp('8-10')">8 - 10 Jahre</button>
+            <button class="btn" onclick="startApp('11-14')">11 - 14 Jahre</button>
+        </div>
+
+        <div id="view-islands" class="hidden">
+            <h2>Wähle eine Insel</h2>
+            <div id="island-list"></div>
+        </div>
+
+        <div id="view-quiz" class="hidden">
+            <div id="timer-wrap"><div id="timer-bar"></div></div>
+            <div id="q-emoji" style="font-size: 3rem; margin-bottom: 10px;"></div>
+            <p id="q-text" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;"></p>
+            <div id="q-content"></div> <div id="feedback" class="feedback hidden"></div>
+        </div>
+
+        <div id="view-result" class="hidden">
+            <h2 id="res-title">Insel abgeschlossen!</h2>
+            <p id="res-score" style="font-size: 1.5rem; margin: 20px 0;"></p>
+            <button class="btn" onclick="location.reload()">ZUM HAUPTMENÜ</button>
+        </div>
+    </div>
+
+    <script>
+        let db = null;
+        let userAge = "8-10";
+        let currentIsland = null;
+        let currentLevels = [];
+        let levelIdx = 0;
+        let score = 0;
+        let timer = null;
+
+        async function init() {
+            try {
+                const res = await fetch('questions.json');
+                db = await res.json();
+            } catch(e) { alert("Fehler beim Laden der questions.json!"); }
+        }
+
+        function startApp(age) {
+            userAge = age;
+            showView('view-islands');
+            renderIslands();
+        }
+
+        function renderIslands() {
+            const list = document.getElementById('island-list');
+            list.innerHTML = '';
+            Object.entries(db.islands).forEach(([key, island]) => {
+                const div = document.createElement('div');
+                div.className = 'island-btn';
+                div.innerHTML = `<span>${island.emoji} ${island.name}</span> ➔`;
+                div.onclick = () => startIsland(island);
+                list.appendChild(div);
+            });
+        }
+
+        function startIsland(island) {
+            currentIsland = island;
+            // Filter Level nach Alter
+            currentLevels = island.levels.filter(l => l.ageRange === userAge);
+            if(currentLevels.length === 0) {
+                alert("Keine Level für diese Altersgruppe gefunden!");
+                return;
+            }
+            levelIdx = 0; score = 0;
+            showView('view-quiz');
+            loadLevel();
+        }
+
+        function loadLevel() {
+            const level = currentLevels[levelIdx];
+            const content = document.getElementById('q-content');
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('hidden');
+            content.innerHTML = '';
+            
+            document.getElementById('q-emoji').textContent = level.emoji || "❓";
+            document.getElementById('q-text').textContent = level.text;
+
+            // RÄTSEL-TYP LOGIK
+            if(level.type === 'quiz' || level.type === 'pattern') {
+                if(level.type === 'pattern') {
+                    content.innerHTML = `<div class="pattern-display">${level.pattern.join(' ')}</div>`;
+                }
+                const grid = document.createElement('div');
+                grid.className = 'answer-grid';
+                level.answers.forEach((ans, i) => {
+                    const b = document.createElement('button');
+                    b.className = 'answer-btn';
+                    b.textContent = ans;
+                    b.onclick = () => checkAnswer(i);
+                    grid.appendChild(b);
+                });
+                content.appendChild(grid);
+            } 
+            else if(level.type === 'code') {
+                content.innerHTML = `<input type="text" id="code-input" placeholder="Lösung eingeben...">
+                                    <button class="btn" onclick="checkCode()">OK</button>`;
+            }
+            else if(level.type === 'hybrid') {
+                content.innerHTML = `<p style="font-style:italic; margin-bottom:10px;">Schritt 1: Quizfrage</p>
+                                     <div class="answer-grid"></div>`;
+                const grid = content.querySelector('.answer-grid');
+                level.step1.answers.forEach((ans, i) => {
+                    const b = document.createElement('button');
+                    b.className = 'answer-btn';
+                    b.textContent = ans;
+                    b.onclick = () => {
+                        if(i === level.step1.correct) {
+                            content.innerHTML = `<p>✅ Korrekt! Hinweis: <strong>${level.step1.hint}</strong></p>
+                                                 <p style="margin-top:15px;">${level.step2.text}</p>
+                                                 <input type="text" id="code-input">
+                                                 <button class="btn" onclick="checkCode(true)">Lösen</button>`;
+                        } else { checkAnswer(-1); }
+                    };
+                    grid.appendChild(b);
+                });
+            }
+
+            startTimer();
+        }
+
+        function checkAnswer(idx) {
+            clearInterval(timer);
+            const level = currentLevels[levelIdx];
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('hidden');
+
+            if(idx === level.correct) {
+                feedback.innerHTML = `🌟 Richtig! <br><small>${level.explain}</small>`;
+                feedback.className = "feedback correct";
+                score++;
+            } else {
+                feedback.innerHTML = `⚠️ Nicht ganz... <br><small>${level.explain}</small>`;
+                feedback.className = "feedback wrong";
+            }
+
+            setTimeout(nextLevel, 4000);
+        }
+
+        function checkCode(isHybrid = false) {
+            const input = document.getElementById('code-input').value.trim().toLowerCase();
+            const level = currentLevels[levelIdx];
+            const solution = isHybrid ? level.step2.correct.toString().toLowerCase() : level.correct.toString().toLowerCase();
+            
+            if(input === solution) checkAnswer(isHybrid ? level.step2.correct : level.correct);
+            else checkAnswer(-1);
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            let time = 20;
+            const bar = document.getElementById('timer-bar');
+            bar.style.width = '100%';
+            timer = setInterval(() => {
+                time--;
+                bar.style.width = (time/20*100) + '%';
+                if(time <= 0) { clearInterval(timer); checkAnswer(-1); }
+            }, 1000);
+        }
+
+        function nextLevel() {
+            levelIdx++;
+            if(levelIdx < currentLevels.length) loadLevel();
+            else showResult();
+        }
+
+        function showResult() {
+            showView('view-result');
+            document.getElementById('res-score').textContent = `${score} von ${currentLevels.length} Punkten`;
+        }
+
+        function showView(id) {
+            ['view-setup', 'view-islands', 'view-quiz', 'view-result'].forEach(v => {
+                document.getElementById(v).classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        init();
+    </script>
+</body>
+</html>
