@@ -1,0 +1,16 @@
+{
+  "name": "Nexoria",
+  "short_name": "Nexoria",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#071530",
+  "theme_color": "#071530",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
