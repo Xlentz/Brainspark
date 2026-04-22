@@ -1,0 +1,1072 @@
+{
+"name": "English Explorer",
+"emoji": "🇬🇧",
+"color": "#ff4757",
+"levels": [
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "🐶",
+"text": "Was heißt 'Hund' auf Englisch?",
+"answers": ["Cat", "Dog", "Bird", "Fish"],
+"correct": 1,
+"explain": "Dog ist das englische Wort für Hund."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "🐱",
+"text": "Welches Tier ist eine 'Cat'?",
+"answers": ["Maus", "Hund", "Katze", "Pferd"],
+"correct": 2,
+"explain": "Cat bedeutet Katze."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "🍎",
+"text": "Welche Farbe hat ein 'Apple' meistens?",
+"answers": ["Blue", "Red", "Black", "White"],
+"correct": 1,
+"explain": "Äpfel sind oft rot, und Rot heißt auf Englisch 'Red'."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "☀️",
+"text": "Was bedeutet 'Sun'?",
+"answers": ["Mond", "Stern", "Wolke", "Sonne"],
+"correct": 3,
+"explain": "The sun is shining bedeutet: Die Sonne scheint."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "🔢",
+"text": "Welche Zahl ist 'three'?",
+"answers": ["1", "2", "3", "4"],
+"correct": 2,
+"explain": "One, two, three! Three ist die 3."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "💧",
+"text": "Was trinkt man, wenn man 'Water' bestellt?",
+"answers": ["Milch", "Saft", "Wasser", "Tee"],
+"correct": 2,
+"explain": "Water ist das englische Wort für Wasser."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "📘",
+"text": "Was ist ein 'Book'?",
+"answers": ["Stift", "Buch", "Heft", "Tafel"],
+"correct": 1,
+"explain": "In einem Book kann man lesen."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "🏫",
+"text": "Wie sagt man 'Schule' auf Englisch?",
+"answers": ["School", "House", "Garden", "Park"],
+"correct": 0,
+"explain": "Man geht morgens in die School."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "👦",
+"text": "Was bedeutet 'Boy'?",
+"answers": ["Mädchen", "Junge", "Mann", "Frau"],
+"correct": 1,
+"explain": "Ein Boy ist ein Junge."
+},
+{
+"type": "quiz",
+"ageRange": "8-10",
+"emoji": "👧",
+"text": "Was bedeutet 'Girl'?",
+"answers": ["Junge", "Baby", "Mädchen", "Oma"],
+"correct": 2,
+"explain": "Ein Girl ist ein Mädchen."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🔢",
+"text": "Wie geht die Zahlen-Reihe weiter?",
+"pattern": ["one", "two", "three", "?"],
+"answers": ["five", "six", "four", "ten"],
+"correct": 2,
+"explain": "Nach der drei (three) kommt die vier (four)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "📅",
+"text": "Welcher Tag fehlt?",
+"pattern": ["Monday", "Tuesday", "Wednesday", "?"],
+"answers": ["Friday", "Sunday", "Thursday", "Saturday"],
+"correct": 2,
+"explain": "Nach Mittwoch (Wednesday) kommt Donnerstag (Thursday)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🅰️",
+"text": "Welcher Buchstabe kommt als nächstes?",
+"pattern": ["A", "B", "C", "?"],
+"answers": ["E", "D", "F", "G"],
+"correct": 1,
+"explain": "Im Alphabet folgt das D nach dem C."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🎨",
+"text": "Welche Farbe kommt in diesem Muster als nächstes?",
+"pattern": ["red", "blue", "red", "blue", "?"],
+"answers": ["green", "red", "yellow", "black"],
+"correct": 1,
+"explain": "Ein einfaches AB-Muster! Nach 'blue' kommt wieder 'red'."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🐾",
+"text": "Welches Tier ist das nächste?",
+"pattern": ["cat", "dog", "cat", "dog", "?"],
+"answers": ["mouse", "bird", "cat", "fish"],
+"correct": 2,
+"explain": "Nach dem Hund (dog) ist wieder die Katze (cat) an der Reihe."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🔢",
+"text": "Zweier-Schritte auf Englisch! Was fehlt?",
+"pattern": ["two", "four", "six", "?"],
+"answers": ["seven", "eight", "nine", "ten"],
+"correct": 1,
+"explain": "Immer plus zwei! Nach sechs (six) kommt acht (eight)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🌙",
+"text": "Wie geht die Tageszeiten-Reihe weiter?",
+"pattern": ["morning", "afternoon", "evening", "?"],
+"answers": ["day", "night", "week", "year"],
+"correct": 1,
+"explain": "Nach dem Abend (evening) kommt die Nacht (night)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "📏",
+"text": "Finde die richtige Größe!",
+"pattern": ["small", "medium", "large", "?"],
+"answers": ["tiny", "extra large", "short", "long"],
+"correct": 1,
+"explain": "Nach klein, mittel und groß kommt extra groß (extra large)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "✋",
+"text": "Wie viele Finger zeige ich?",
+"pattern": ["five", "four", "three", "?"],
+"answers": ["one", "six", "two", "ten"],
+"correct": 2,
+"explain": "Es wird runtergezählt! Nach drei (three) kommt zwei (two)."
+},
+{
+"type": "pattern",
+"ageRange": "8-10",
+"emoji": "🌞",
+"text": "Welche Jahreszeit folgt?",
+"pattern": ["spring", "summer", "autumn", "?"],
+"answers": ["winter", "fall", "rain", "sun"],
+"correct": 0,
+"explain": "Nach dem Herbst (autumn) kommt der Winter."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🐷",
+"text": "Schreibe das englische Wort für 'Schwein' (3 Buchstaben).",
+"correct": "pig",
+"explain": "Ein Schwein heißt auf Englisch pig."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🥛",
+"text": "Was heißt 'Milch' auf Englisch?",
+"correct": "milk",
+"explain": "Milch übersetzt man mit milk."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🚗",
+"text": "Schreibe das englische Wort für 'Auto' (3 Buchstaben).",
+"correct": "car",
+"explain": "Ein Auto ist ein car."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "👋",
+"text": "Wie sagt man 'Hallo' auf Englisch? (5 Buchstaben)",
+"correct": "hello",
+"explain": "Die Begrüßung lautet hello."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🌳",
+"text": "Was heißt 'Baum' auf Englisch? (4 Buchstaben)",
+"correct": "tree",
+"explain": "Ein Baum ist ein tree."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🏠",
+"text": "Schreibe das Wort für 'Haus' auf Englisch.",
+"correct": "house",
+"explain": "Dein Zuhause ist oft ein house."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🍞",
+"text": "Was bedeutet 'Brot' auf Englisch?",
+"correct": "bread",
+"explain": "Brot heißt bread."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🐟",
+"text": "Wie nennt man einen 'Fisch' auf Englisch?",
+"correct": "fish",
+"explain": "Fisch schreibt man fish."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "✅",
+"text": "Was heißt 'Ja' auf Englisch? (3 Buchstaben)",
+"correct": "yes",
+"explain": "Ja heißt yes."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "❌",
+"text": "Was heißt 'Nein' auf Englisch? (2 Buchstaben)",
+"correct": "no",
+"explain": "Nein heißt no."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "⚽",
+"text": "Was heißt 'spielen' auf Englisch?",
+"correct": "play",
+"explain": "Spielen übersetzt man mit play."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🏃",
+"text": "Wie sagt man 'rennen' auf Englisch? (3 Buchstaben)",
+"correct": "run",
+"explain": "Rennen heißt run."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🛏️",
+"text": "Was heißt 'Bett' auf Englisch? (3 Buchstaben)",
+"correct": "bed",
+"explain": "Man schläft in einem bed."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🐦",
+"text": "Wie nennt man einen 'Vogel' auf Englisch?",
+"correct": "bird",
+"explain": "Ein Vogel ist ein bird."
+},
+{
+"type": "code",
+"ageRange": "8-10",
+"emoji": "🐸",
+"text": "Was heißt 'Frosch' auf Englisch?",
+"correct": "frog",
+"explain": "Ein Frosch ist ein frog."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🍎",
+"text": "Farben und Früchte",
+"step1": {
+"question": "Welche Farbe hat eine Zitrone auf Englisch?",
+"answers": ["Blue", "Yellow", "Green"],
+"correct": 1
+},
+"step2": {
+"text": "Schreibe die Frucht 'Apfel' auf Englisch.",
+"correct": "apple"
+},
+"explain": "Zitronen sind yellow (gelb), und Apfel heißt apple."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🐶",
+"text": "Tier-Mathe",
+"step1": {
+"question": "Was heißt Hund auf Englisch?",
+"answers": ["Cat", "Mouse", "Dog"],
+"correct": 2
+},
+"step2": {
+"text": "Wie viele Beine hat ein normaler 'dog' (als Zahl)?",
+"correct": "4"
+},
+"explain": "Ein Hund (dog) hat 4 Beine."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "📅",
+"text": "Tage zählen",
+"step1": {
+"question": "Was ist 'Monday' auf Deutsch?",
+"answers": ["Montag", "Dienstag", "Mittwoch"],
+"correct": 0
+},
+"step2": {
+"text": "Wie viele Tage hat eine Woche? (Gib eine Zahl ein)",
+"correct": "7"
+},
+"explain": "Montag ist Monday, und eine Woche hat 7 Tage."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "👨‍👩‍👧",
+"text": "Familien-Mix",
+"step1": {
+"question": "Wer ist der 'Father'?",
+"answers": ["Mutter", "Bruder", "Vater"],
+"correct": 2
+},
+"step2": {
+"text": "Wie schreibt man 'Mutter' auf Englisch?",
+"correct": "mother"
+},
+"explain": "Father ist der Vater, Mother ist die Mutter."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🔟",
+"text": "Zahlen-Rätsel",
+"step1": {
+"question": "Welche Zahl ist 'ten'?",
+"answers": ["5", "10", "20"],
+"correct": 1
+},
+"step2": {
+"text": "Wie lautet das englische Wort für 5?",
+"correct": "five"
+},
+"explain": "Ten ist 10, und 5 heißt five."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "👁️",
+"text": "Körperteile",
+"step1": {
+"question": "Was ist die 'Hand' auf Englisch?",
+"answers": ["Foot", "Leg", "Hand"],
+"correct": 2
+},
+"step2": {
+"text": "Wie viele 'hands' hat ein normaler Mensch? (Als Zahl)",
+"correct": "2"
+},
+"explain": "Hand schreibt man auf Englisch genauso! Man hat 2 davon."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🍌",
+"text": "Fruchtige Farben",
+"step1": {
+"question": "Welche Farbe hat eine Banane?",
+"answers": ["Yellow", "Red", "Black"],
+"correct": 0
+},
+"step2": {
+"text": "Schreibe das englische Wort für Banane.",
+"correct": "banana"
+},
+"explain": "Eine Banane ist yellow, und auf Englisch heißt sie fast gleich: banana."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🌙",
+"text": "Tag und Nacht",
+"step1": {
+"question": "Was heißt 'Morning'?",
+"answers": ["Abend", "Morgen", "Mittag"],
+"correct": 1
+},
+"step2": {
+"text": "Schreibe das englische Wort für 'Nacht'.",
+"correct": "night"
+},
+"explain": "Morning ist der Morgen, night ist die Nacht."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "☔",
+"text": "Wetter-Wissen",
+"step1": {
+"question": "Was bedeutet 'Rain'?",
+"answers": ["Schnee", "Regen", "Wind"],
+"correct": 1
+},
+"step2": {
+"text": "Was heißt Sonne auf Englisch?",
+"correct": "sun"
+},
+"explain": "Rain ist Regen, die Sonne ist the sun."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "✏️",
+"text": "Schul-Dinge",
+"step1": {
+"question": "Was ist ein 'Pen'?",
+"answers": ["Tisch", "Stift", "Buch"],
+"correct": 1
+},
+"step2": {
+"text": "Schreibe das englische Wort für 'Buch'.",
+"correct": "book"
+},
+"explain": "Ein Pen ist ein Stift, und aus einem Book (Buch) liest man."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🧍",
+"text": "Freunde",
+"step1": {
+"question": "Was bedeutet 'Friend'?",
+"answers": ["Feind", "Lehrer", "Freund"],
+"correct": 2
+},
+"step2": {
+"text": "Wie schreibt man 'Mädchen' auf Englisch?",
+"correct": "girl"
+},
+"explain": "Ein Friend ist ein Freund oder eine Freundin."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🧀",
+"text": "Essen",
+"step1": {
+"question": "Was ist 'Cheese'?",
+"answers": ["Käse", "Wurst", "Ei"],
+"correct": 0
+},
+"step2": {
+"text": "Welches Tier (auf Englisch) liebt Käse im Comic? (5 Buchstaben)",
+"correct": "mouse"
+},
+"explain": "Cheese ist Käse, und eine mouse (Maus) isst ihn gern."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🚪",
+"text": "Im Haus",
+"step1": {
+"question": "Was ist eine 'Door'?",
+"answers": ["Fenster", "Tür", "Wand"],
+"correct": 1
+},
+"step2": {
+"text": "Schreibe das englische Wort für Haus.",
+"correct": "house"
+},
+"explain": "Man öffnet die Tür (door), um ins Haus (house) zu kommen."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "🐄",
+"text": "Bauernhof",
+"step1": {
+"question": "Welches Tier ist eine 'Cow'?",
+"answers": ["Pferd", "Kuh", "Schaf"],
+"correct": 1
+},
+"step2": {
+"text": "Welches Getränk (auf Englisch) gibt uns die Kuh?",
+"correct": "milk"
+},
+"explain": "Die cow (Kuh) gibt uns milk (Milch)."
+},
+{
+"type": "hybrid",
+"ageRange": "8-10",
+"emoji": "⚽",
+"text": "Sport",
+"step1": {
+"question": "Was spielt man bei 'Football'?",
+"answers": ["Fußball", "Tennis", "Basketball"],
+"correct": 0
+},
+"step2": {
+"text": "Schreibe das englische Wort für 'spielen'.",
+"correct": "play"
+},
+"explain": "Football ist Fußball (oder American Football) und spielen heißt play."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "⏳",
+"text": "Was ist die Simple Past Form von 'go'?",
+"answers": ["goed", "goes", "went", "gone"],
+"correct": 2,
+"explain": "'Go' ist ein unregelmäßiges Verb. Die Vergangenheitsform ist 'went'."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🐁",
+"text": "Was ist die Mehrzahl (Plural) von 'mouse'?",
+"answers": ["mouses", "mice", "mees", "mices"],
+"correct": 1,
+"explain": "Es heißt 'one mouse', aber 'two mice'. Ein unregelmäßiger Plural!"
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🔥",
+"text": "Was ist das Gegenteil (Opposite) von 'hot'?",
+"answers": ["warm", "cold", "freezing", "cool"],
+"correct": 1,
+"explain": "Heiß ist 'hot', kalt ist 'cold'."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "📦",
+"text": "Welche Präposition ist hier richtig? 'The book is ___ the table.'",
+"answers": ["in", "at", "on", "under"],
+"correct": 2,
+"explain": "Wenn etwas auf einer Oberfläche liegt, benutzt man 'on'."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "👍",
+"text": "Wie lautet die Steigerung (Comparative) von 'good'?",
+"answers": ["gooder", "more good", "best", "better"],
+"correct": 3,
+"explain": "'Good' ist unregelmäßig. Es heißt good, better, best."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "👎",
+"text": "Was ist der Superlativ (höchste Stufe) von 'bad'?",
+"answers": ["baddest", "worse", "worst", "most bad"],
+"correct": 2,
+"explain": "Die Steigerung lautet: bad, worse, worst (schlecht, schlechter, am schlechtesten)."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "👁️",
+"text": "Welcher Satz steht im Present Perfect?",
+"answers": ["I see a dog.", "I saw a dog.", "I have seen a dog.", "I will see a dog."],
+"correct": 2,
+"explain": "Present Perfect wird mit 'have/has' + 3. Verbform (Past Participle) gebildet."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "👶",
+"text": "Was ist die Mehrzahl von 'child'?",
+"answers": ["childs", "children", "childrens", "childes"],
+"correct": 1,
+"explain": "'Children' ist bereits die Mehrzahl von Kind. Kein 's' am Ende!"
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "⏰",
+"text": "Was bedeutet das Adverb 'always'?",
+"answers": ["niemals", "manchmal", "oft", "immer"],
+"correct": 3,
+"explain": "'Always' heißt immer, 'never' heißt niemals."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "💰",
+"text": "Was ist das Gegenteil von 'cheap' (billig)?",
+"answers": ["expensive", "poor", "rich", "costly"],
+"correct": 0,
+"explain": "Billig ist 'cheap', teuer ist 'expensive'."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🏃",
+"text": "Welches Hilfsverb benutzt man in der Verneinung im Simple Present (z.B. bei 'run')?",
+"answers": ["did", "don't / doesn't", "haven't", "wasn't"],
+"correct": 1,
+"explain": "Man sagt: I don't run oder He doesn't run."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🕰️",
+"text": "Was bedeutet 'yesterday'?",
+"answers": ["heute", "morgen", "gestern", "bald"],
+"correct": 2,
+"explain": "Yesterday ist gestern, tomorrow ist morgen."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🚗",
+"text": "Was ist das Synonym (gleiche Bedeutung) für 'fast'?",
+"answers": ["slow", "quick", "heavy", "light"],
+"correct": 1,
+"explain": "Fast und quick bedeuten beide 'schnell'."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🗣️",
+"text": "Wie bildet man die Verlaufsform (Present Progressive)?",
+"answers": ["Verb + ed", "am/is/are + Verb + ing", "have + Verb", "will + Verb"],
+"correct": 1,
+"explain": "Z.B.: I am talking. Das beschreibt etwas, das genau jetzt passiert."
+},
+{
+"type": "quiz",
+"ageRange": "11-14",
+"emoji": "🏢",
+"text": "Was ist eine 'library'?",
+"answers": ["Buchhandlung", "Bücherei / Bibliothek", "Schule", "Kino"],
+"correct": 1,
+"explain": "Eine Library ist eine Bibliothek. Buchhandlung wäre 'bookshop'."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🚶",
+"text": "Vervollständige die unregelmäßigen Verbformen von 'go'!",
+"pattern": ["go", "went", "?"],
+"answers": ["goed", "goes", "gone", "going"],
+"correct": 2,
+"explain": "Die drei Stammformen sind: go - went - gone."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "👀",
+"text": "Welche Verbform von 'see' fehlt?",
+"pattern": ["see", "saw", "?"],
+"answers": ["seed", "seen", "seeing", "sees"],
+"correct": 1,
+"explain": "Die Formen lauten: see - saw - seen."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🐘",
+"text": "Steigere das Adjektiv 'big'!",
+"pattern": ["big", "bigger", "?"],
+"answers": ["biggest", "biger", "more big", "most big"],
+"correct": 0,
+"explain": "Big, bigger, biggest. Bei einsilbigen Wörtern verdoppelt sich oft der Konsonant."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🌟",
+"text": "Steigere das Adjektiv 'good'!",
+"pattern": ["good", "better", "?"],
+"answers": ["goodest", "more better", "best", "greatest"],
+"correct": 2,
+"explain": "Good, better, best. Diese Steigerung ist komplett unregelmäßig."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🥇",
+"text": "Ordnungszahlen! Welche kommt nach 'second'?",
+"pattern": ["first", "second", "?"],
+"answers": ["three", "third", "four", "fourth"],
+"correct": 1,
+"explain": "First (1.), second (2.), third (3.)."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🍔",
+"text": "Verbformen von 'eat'!",
+"pattern": ["eat", "ate", "?"],
+"answers": ["eated", "eaten", "eating", "eat"],
+"correct": 1,
+"explain": "Die Formen sind: eat - ate - eaten."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🔥",
+"text": "Steigere das Adjektiv 'hot'!",
+"pattern": ["hot", "hotter", "?"],
+"answers": ["hottest", "more hot", "most hot", "hotest"],
+"correct": 0,
+"explain": "Hot, hotter, hottest. Mit doppeltem 't'!"
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🌧️",
+"text": "Steigere das Adjektiv 'bad'!",
+"pattern": ["bad", "worse", "?"],
+"answers": ["baddest", "worst", "worser", "more bad"],
+"correct": 1,
+"explain": "Bad, worse, worst (schlecht, schlechter, am schlechtesten)."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "🔤",
+"text": "Personalpronomen Objektform: I -> me. Was wird aus 'he'?",
+"pattern": ["I -> me", "she -> her", "he -> ?"],
+"answers": ["his", "him", "he", "hers"],
+"correct": 1,
+"explain": "Aus er (he) wird ihm/ihn (him)."
+},
+{
+"type": "pattern",
+"ageRange": "11-14",
+"emoji": "✍️",
+"text": "Verbformen von 'write'!",
+"pattern": ["write", "wrote", "?"],
+"answers": ["writed", "written", "writing", "wrote"],
+"correct": 1,
+"explain": "Die Formen sind: write - wrote - written."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🛍️",
+"text": "Was ist die Simple Past Form von 'buy' (kaufen)?",
+"correct": "bought",
+"explain": "Buy wird zu bought."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🐢",
+"text": "Was ist das Gegenteil von 'fast' (schnell)?",
+"correct": "slow",
+"explain": "Langsam heißt slow."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "😊",
+"text": "Nenne ein englisches Synonym für 'glad' (froh) mit 5 Buchstaben.",
+"correct": "happy",
+"explain": "Happy und glad bedeuten beide glücklich/froh."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🏆",
+"text": "Übersetze das Wort 'Erfolg' ins Englische.",
+"correct": "success",
+"explain": "Erfolg heißt success."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🦶",
+"text": "Was ist der Plural (Mehrzahl) von 'foot' (Fuß)?",
+"correct": "feet",
+"explain": "Ein unregelmäßiger Plural: one foot, two feet."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🦷",
+"text": "Was ist der Plural von 'tooth' (Zahn)?",
+"correct": "teeth",
+"explain": "Wie bei foot/feet wird das 'oo' zu 'ee': tooth/teeth."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "⚾",
+"text": "Was ist die Simple Past Form von 'catch' (fangen)?",
+"correct": "caught",
+"explain": "Catch wird zu caught."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "📦",
+"text": "Was ist die Simple Past Form von 'bring' (bringen)?",
+"correct": "brought",
+"explain": "Bring wird zu brought."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🧠",
+"text": "Ein Synonym für 'clever' mit 5 Buchstaben lautet?",
+"correct": "smart",
+"explain": "Smart bedeutet schlau oder clever."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🛫",
+"text": "Was ist das Gegenteil von 'arrive' (ankommen)? (6 Buchstaben)",
+"correct": "depart",
+"explain": "Ankommen ist arrive, abfliegen/abfahren ist depart. (Auch 'leave' geht oft, aber depart ist das direkte Gegenteil bei Reisen)."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "👩",
+"text": "Was ist der Plural von 'woman'?",
+"correct": "women",
+"explain": "Aus woman wird women. Die Aussprache ändert sich auch!"
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "👨",
+"text": "Was ist der Plural von 'man'?",
+"correct": "men",
+"explain": "Aus man wird men."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🔪",
+"text": "Was ist der Plural von 'knife' (Messer)?",
+"correct": "knives",
+"explain": "Wörter auf -fe bilden den Plural oft mit -ves (knife -> knives)."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🍃",
+"text": "Was ist der Plural von 'leaf' (Blatt)?",
+"correct": "leaves",
+"explain": "Wie bei knife wird das 'f' zu 'ves': leaves."
+},
+{
+"type": "code",
+"ageRange": "11-14",
+"emoji": "🌍",
+"text": "Übersetze 'Umwelt' ins Englische. (11 Buchstaben)",
+"correct": "environment",
+"explain": "Die Umwelt heißt environment."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "⏳",
+"text": "Zeiten-Check",
+"step1": {
+"question": "Welches Signalwort passt zum Simple Past?",
+"answers": ["tomorrow", "usually", "yesterday"],
+"correct": 2
+},
+"step2": {
+"text": "Schreibe das Simple Past von 'make'.",
+"correct": "made"
+},
+"explain": "Yesterday ist ein Signal für die Vergangenheit. Make wird zu made."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "📏",
+"text": "Menge und Zahl",
+"step1": {
+"question": "Benutzt man 'much' oder 'many' bei zählbaren Dingen (wie Äpfeln)?",
+"answers": ["much", "many", "beides"],
+"correct": 1
+},
+"step2": {
+"text": "Benutzt man 'much' oder 'many' bei Wasser (water)?",
+"correct": "much"
+},
+"explain": "Many apples (zählbar), aber much water (nicht zählbar)."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "❓",
+"text": "Fragen stellen",
+"step1": {
+"question": "Welches Wort ist richtig: '___ you like pizza?'",
+"answers": ["Does", "Are", "Do"],
+"correct": 2
+},
+"step2": {
+"text": "Welches Wort fehlt hier? '___ he like pizza?'",
+"correct": "does"
+},
+"explain": "Bei he, she, it (3. Person Singular) muss das 's' mit: Does he...?"
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "🍬",
+"text": "Ein bisschen Grammatik",
+"step1": {
+"question": "Nimmt man in Aussagesätzen meist 'some' oder 'any'?",
+"answers": ["some", "any", "keins"],
+"correct": 0
+},
+"step2": {
+"text": "Welches der beiden nimmt man meist in verneinten Sätzen (I don't have ___)?",
+"correct": "any"
+},
+"explain": "I have some apples (+) / I don't have any apples (-)."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "🔗",
+"text": "Relativpronomen",
+"step1": {
+"question": "Welches Pronomen nutzt man für Dinge: 'The book ___ I read.'",
+"answers": ["who", "which", "where"],
+"correct": 1
+},
+"step2": {
+"text": "Welches Pronomen nutzt man für Personen (The man ___ helped me)?",
+"correct": "who"
+},
+"explain": "Who für Personen, which für Dinge."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "🔄",
+"text": "Gegenteile mit Präfix",
+"step1": {
+"question": "Wie macht man 'happy' zum Gegenteil (unglücklich)?",
+"answers": ["inhappy", "unhappy", "dishappy"],
+"correct": 1
+},
+"step2": {
+"text": "Wie lautet das Gegenteil von 'friendly' durch eine Vorsilbe?",
+"correct": "unfriendly"
+},
+"explain": "Das Präfix 'un-' macht aus happy unhappy und aus friendly unfriendly."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "🎭",
+"text": "Sufixe (Nachsilben)",
+"step1": {
+"question": "Was bedeutet die Endung '-less' (z.B. in useless)?",
+"answers": ["sehr viel", "ohne", "vielleicht"],
+"correct": 1
+},
+"step2": {
+"text": "Wenn 'hope' Hoffnung heißt, was bedeutet dann 'hopeless' auf Deutsch?",
+"correct": "hoffnungslos"
+},
+"explain": "Die Endung -less bedeutet 'ohne' bzw. '-los'."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "🗣️",
+"text": "Phrasal Verbs",
+"step1": {
+"question": "Was bedeutet 'to give up'?",
+"answers": ["hochgeben", "aufgeben", "abgeben"],
+"correct": 1
+},
+"step2": {
+"text": "Was bedeutet 'to go on' (z.B. The show must go on)? (1 Wort, deutsch)",
+"correct": "weitergehen"
+},
+"explain": "Phrasal Verbs haben oft andere Bedeutungen als ihre Einzelteile."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "📝",
+"text": "If-Sätze (Bedingung)",
+"step1": {
+"question": "If it rains, I ___ stay at home. (Typ 1)",
+"answers": ["will", "would", "had"],
+"correct": 0
+},
+"step2": {
+"text": "If I had money, I ___ buy a car. (Typ 2)",
+"correct": "would"
+},
+"explain": "Im Typ 1 steht will, im Typ 2 (unwahrscheinlich) steht would."
+},
+{
+"type": "hybrid",
+"ageRange": "11-14",
+"emoji": "📖",
+"text": "Leseverstehen / Idiome",
+"step1": {
+"question": "Was meint jemand mit 'It is a piece of cake'?",
+"answers": ["Es ist Kuchen", "Es ist sehr einfach", "Es ist teuer"],
+"correct": 1
+},
+"step2": {
+"text": "Was bedeutet 'It is raining cats and dogs' (starker ___)? (1 Wort)",
+"correct": "Regen"
+},
+"explain": "Englische Sprichwörter klingen wörtlich übersetzt oft lustig!"
+}
+]
+}
