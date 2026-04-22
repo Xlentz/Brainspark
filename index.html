@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BrainSpark ⚡ Das Quiz-Abenteuer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean: #0a1f44;
+            --deep: #071530;
+            --teal: #0ec4c4;
+            --coral: #ff6b6b;
+            --yellow: #ffd93d;
+            --green: #6bcb77;
+            --purple: #a855f7;
+            --white: #f0f8ff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--deep);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animierter Sternenhintergrund */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, var(--ocean) 0%, var(--deep) 100%);
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--d) infinite ease-in-out;
+        }
+
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        /* Game Container */
+        #game-container {
+            width: 90%;
+            max-width: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; margin-bottom: 1rem; color: var(--yellow); }
+
+        .btn {
+            background: var(--teal);
+            color: var(--deep);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0.5rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px var(--teal); }
+        .btn:active { transform: translateY(0); }
+
+        .btn-option {
+            display: block;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-align: left;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-option:hover { background: var(--purple); border-color: var(--purple); color: white; }
+
+        .hidden { display: none !important; }
+
+        /* Timer */
+        #timer-wrap { margin-bottom: 1.5rem; position: relative; height: 10px; background: rgba(0,0,0,0.3); border-radius: 5px; overflow: hidden; }
+        #timer-bar { height: 100%; background: var(--green); width: 100%; transition: width 1s linear, background 0.3s; }
+
+        .island-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .island-card:hover { background: rgba(255,255,255,0.15); }
+
+        #question-emoji { font-size: 3rem; margin-bottom: 1rem; }
+        #question-text { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; min-height: 4rem; }
+
+        .feedback { font-weight: 700; margin-top: 1rem; padding: 1rem; border-radius: 10px; }
+        .correct { background: var(--green); color: var(--deep); }
+        .wrong { background: var(--coral); color: white; }
+
+    </style>
+</head>
+<body>
+
+    <div class="stars" id="star-field"></div>
+
+    <div id="game-container">
+        <div id="screen-start">
+            <h1>BrainSpark ⚡</h1>
+            <p style="margin-bottom: 2rem;">Bist du bereit für das ultimative Quiz?</p>
+            <button class="btn" onclick="showIslandSelection()">Spiel starten</button>
+        </div>
+
+        <div id="screen-islands" class="hidden">
+            <h2>Wähle eine Insel</h2>
+            <div id="island-list" style="margin-top: 1.5rem;"></div>
+        </div>
+
+        <div id="screen-quiz" class="hidden">
+            <div id="timer-wrap"><div id="timer-bar"></div></div>
+            <div id="question-emoji"></div>
+            <div id="question-text">Lade Frage...</div>
+            <div id="options-list"></div>
+            <div id="feedback" class="feedback hidden"></div>
+        </div>
+
+        <div id="screen-result" class="hidden">
+            <h2 id="result-title">Insel geschafft!</h2>
+            <p id="result-text" style="font-size: 1.2rem; margin: 1.5rem 0;"></p>
+            <button class="btn" onclick="location.reload()">Hauptmenü</button>
+        </div>
+    </div>
+
+    <script>
+        let gameData = null;
+        let currentIsland = null;
+        let currentLevelIdx = 0;
+        let score = 0;
+        let timer = null;
+        let timeLeft = 15;
+
+        // Sterne generieren
+        const starField = document.getElementById('star-field');
+        for(let i=0; i<100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size; star.style.height = size;
+            star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+            starField.appendChild(star);
+        }
+
+        // Daten laden
+        async function init() {
+            try {
+                const response = await fetch('questions.json');
+                if (!response.ok) throw new Error('Netzwerkfehler beim Laden der JSON');
+                gameData = await response.json();
+                console.log("Daten geladen:", gameData);
+            } catch (err) {
+                document.getElementById('question-text').textContent = "Fehler beim Laden der Fragen. Stelle sicher, dass die questions.json im selben Ordner liegt.";
+                console.error(err);
+            }
+        }
+
+        function showIslandSelection() {
+            if(!gameData) return alert("Daten noch nicht geladen. Bitte kurz warten.");
+            switchScreen('screen-islands');
+            const list = document.getElementById('island-list');
+            list.innerHTML = '';
+
+            Object.entries(gameData.islands).forEach(([key, island]) => {
+                const div = document.createElement('div');
+                div.className = 'island-card';
+                div.innerHTML = `<h3>${island.emoji} ${island.name}</h3><p>${island.levels.length} Level</p>`;
+                div.onclick = () => startIsland(key);
+                list.appendChild(div);
+            });
+        }
+
+        function startIsland(key) {
+            currentIsland = gameData.islands[key];
+            currentLevelIdx = 0;
+            score = 0;
+            switchScreen('screen-quiz');
+            loadLevel();
+        }
+
+        function loadLevel() {
+            const level = currentIsland.levels[currentLevelIdx];
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('hidden');
+            
+            document.getElementById('question-emoji').textContent = level.emoji;
+            document.getElementById('question-text').textContent = level.text;
+            
+            const options = document.getElementById('options-list');
+            options.innerHTML = '';
+
+            // Timer zurücksetzen
+            resetTimer();
+
+            level.answers.forEach((ans, idx) => {
+                const b = document.createElement('button');
+                b.className = 'btn btn-option';
+                b.textContent = ans;
+                b.onclick = () => checkAnswer(idx);
+                options.appendChild(b);
+            });
+        }
+
+        function checkAnswer(idx) {
+            clearInterval(timer);
+            const level = currentIsland.levels[currentLevelIdx];
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('hidden');
+
+            if (idx === level.correct) {
+                feedback.textContent = "Richtig! 🌟 " + level.explain;
+                feedback.className = "feedback correct";
+                score++;
+            } else {
+                feedback.textContent = "Leider falsch... ⚠️ " + level.explain;
+                feedback.className = "feedback wrong";
+            }
+
+            setTimeout(() => {
+                currentLevelIdx++;
+                if(currentLevelIdx < currentIsland.levels.length) {
+                    loadLevel();
+                } else {
+                    showResult();
+                }
+            }, 3500);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 20;
+            const bar = document.getElementById('timer-bar');
+            bar.style.width = '100%';
+            bar.style.background = 'var(--green)';
+
+            timer = setInterval(() => {
+                timeLeft--;
+                const pct = (timeLeft / 20) * 100;
+                bar.style.width = pct + '%';
+                
+                if(timeLeft <= 5) bar.style.background = 'var(--coral)';
+                
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    checkAnswer(-1); // Zeit abgelaufen
+                }
+            }, 1000);
+        }
+
+        function showResult() {
+            switchScreen('screen-result');
+            document.getElementById('result-title').textContent = `${currentIsland.emoji} ${currentIsland.name} beendet!`;
+            document.getElementById('result-text').innerHTML = `Du hast <strong>${score} von ${currentIsland.levels.length}</strong> Fragen richtig beantwortet.`;
+        }
+
+        function switchScreen(id) {
+            ['screen-start', 'screen-islands', 'screen-quiz', 'screen-result'].forEach(s => {
+                document.getElementById(s).classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        init();
+    </script>
+</body>
+</html>
