@@ -1,0 +1,27 @@
+{
+  "name": "Zahlen-Zauber",
+  "emoji": "🔢",
+  "color": "#ffd93d",
+  "levels": [
+    { "type": "pattern", "ageRange": "8-10", "emoji": "➕", "text": "Setze die Reihe logisch fort!", "pattern": [5, 10, 15, 20, "?"], "answers": ["21", "25", "30", "50"], "correct": 1, "explain": "Hier werden immer 5 dazugerechnet!" },
+    { "type": "quiz", "ageRange": "8-10", "emoji": "🍕", "text": "Du teilst eine Pizza in 4 gleich große Stücke. Du isst 2 davon. Wie viel ist übrig?", "answers": ["Die Hälfte", "Ein Viertel", "Alles", "Nichts"], "correct": 0, "explain": "2 von 4 ist genau die Hälfte (1/2)." },
+    { "type": "code", "ageRange": "8-10", "emoji": "⏰", "text": "Eine Stunde hat 60 Minuten. Wie viele Minuten hat eine halbe Stunde?", "correct": "30", "explain": "60 geteilt durch 2 ist 30." },
+    { "type": "quiz", "ageRange": "8-10", "emoji": "📐", "text": "Wie viele Ecken hat ein ganz normaler Spielwürfel?", "answers": ["4", "6", "8", "12"], "correct": 2, "explain": "Ein Würfel hat 6 Flächen, aber 8 Ecken!" },
+    { "type": "pattern", "ageRange": "8-10", "emoji": "➖", "text": "Welche Zahl kommt als Nächstes?", "pattern": [100, 90, 80, 70, "?"], "answers": ["65", "60", "50", "0"], "correct": 1, "explain": "Es werden in jedem Schritt immer 10 abgezogen." },
+    { "type": "quiz", "ageRange": "8-10", "emoji": "🥚", "text": "Ein 'Dutzend' Eier... wie viele Eier sind das?", "answers": ["6", "10", "12", "20"], "correct": 2, "explain": "Dutzend ist ein altes Wort für die Zahl 12." },
+    { "type": "code", "ageRange": "8-10", "emoji": "🖐️", "text": "Wie viele Finger haben 5 normale Hände zusammen?", "correct": "25", "explain": "5 Hände mal 5 Finger ergibt 25!" },
+    { "type": "quiz", "ageRange": "8-10", "emoji": "🚲", "text": "Wie viele Räder haben 3 Autos und 2 Fahrräder zusammen?", "answers": ["10", "12", "14", "16"], "correct": 3, "explain": "3 Autos (12 Räder) + 2 Fahrräder (4 Räder) = 16." },
+    { "type": "pattern", "ageRange": "8-10", "emoji": "🔢", "text": "Wie geht diese Zahlen-Verdopplung weiter?", "pattern": [1, 2, 4, 8, "?"], "answers": ["10", "12", "16", "20"], "correct": 2, "explain": "Die Zahlen verdoppeln sich immer! 8 + 8 = 16." },
+    { "type": "hybrid", "ageRange": "8-10", "emoji": "🍭", "text": "Teil 1: Was ist 15 minus 7?", "step1": { "answers": ["6", "8", "9"], "correct": 1, "hint": "8" }, "step2": { "text": "Du hast 8 Lollis und verschenkst genau die Hälfte. Wie viele hast du noch?", "correct": "4" }, "explain": "8 geteilt durch 2 ist 4." },
+    { "type": "pattern", "ageRange": "11-14", "emoji": "🌀", "text": "Fibonacci-Folge: Addiere immer die letzten zwei Zahlen!", "pattern": [1, 1, 2, 3, 5, 8, "?"], "answers": ["10", "11", "13", "15"], "correct": 2, "explain": "5 + 8 = 13!" },
+    { "type": "quiz", "ageRange": "11-14", "emoji": "📈", "text": "Was ist die Quadratwurzel aus 144?", "answers": ["10", "12", "14", "16"], "correct": 1, "explain": "12 mal 12 ergibt 144." },
+    { "type": "code", "ageRange": "11-14", "emoji": "✖️", "text": "Beachte die Klammern! Berechne: (12 + 8) * 5 / 2", "correct": "50", "explain": "Klammer zuerst: 20 * 5 = 100. Danach 100 / 2 = 50." },
+    { "type": "quiz", "ageRange": "11-14", "emoji": "🥧", "text": "Wie nennt man die berühmte Kreiszahl 3,14159...?", "answers": ["Phi", "Pi", "Alpha", "Radius"], "correct": 1, "explain": "Pi beschreibt das Verhältnis von Umfang zu Durchmesser eines Kreises." },
+    { "type": "pattern", "ageRange": "11-14", "emoji": "🔢", "text": "Primzahlen sind nur durch 1 und sich selbst teilbar. Welche folgt?", "pattern": [2, 3, 5, 7, 11, "?"], "answers": ["12", "13", "15", "17"], "correct": 1, "explain": "Die nächste Primzahl ist 13." },
+    { "type": "quiz", "ageRange": "11-14", "emoji": "📐", "text": "Ein Dreieck hat zwei Winkel von jeweils 60 Grad. Wie groß ist der dritte Winkel?", "answers": ["30", "60", "90", "120"], "correct": 1, "explain": "Die Summe der Winkel im Dreieck ist immer 180 Grad! 180 - 60 - 60 = 60." },
+    { "type": "code", "ageRange": "11-14", "emoji": "🛒", "text": "Ein T-Shirt kostet 20 Euro. Es gibt 25% Rabatt. Wie viel Euro kostet es jetzt?", "correct": "15", "explain": "25% ist ein Viertel. Ein Viertel von 20 ist 5. 20 - 5 = 15 Euro." },
+    { "type": "hybrid", "ageRange": "11-14", "emoji": "⚡", "text": "Teil 1: Wie viele Sekunden hat eine volle Stunde?", "step1": { "answers": ["60", "600", "3600"], "correct": 2, "hint": "3600" }, "step2": { "text": "Bilde die Quersumme aus der Zahl 3600 (addiere alle Ziffern): 3+6+0+0 = ?", "correct": "9" }, "explain": "60 Minuten mal 60 Sekunden = 3600. Die Quersumme ist 9." },
+    { "type": "quiz", "ageRange": "11-14", "emoji": "🎱", "text": "Wie hoch ist die Wahrscheinlichkeit bei einem fairen Spielwürfel eine 6 zu werfen?", "answers": ["1/2", "1/4", "1/6", "1/10"], "correct": 2, "explain": "Es gibt 6 Seiten, jede hat die gleiche chance: 1 zu 6." },
+    { "type": "quiz", "ageRange": "11-14", "emoji": "🏛️", "text": "Nach welchem Mathematiker ist der Satz a² + b² = c² benannt?", "answers": ["Einstein", "Newton", "Pythagoras", "Gauß"], "correct": 2, "explain": "Pythagoras nutzte dies für Berechnungen an rechtwinkligen Dreiecken." }
+  ]
+}
