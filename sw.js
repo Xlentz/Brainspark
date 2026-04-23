@@ -7,7 +7,7 @@ const CORE_ASSETS = [
   './icon.png'
 ];
 
-// Versuche nur Kategorien zu laden, die wahrscheinlich existieren (z.B. 1-10)
+// Versuche nur Kategorien zu laden, die wahrscheinlich existieren (z.B. 1-20)
 const CATEGORY_ASSETS = [];
 for (let i = 1; i <= 20; i++) {
   CATEGORY_ASSETS.push(`./category-${i}.json`);
