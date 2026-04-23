@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexoria</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#071530">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean: #0a1f44; --deep: #071530; --teal: #0ec4c4;
+            --coral: #ff6b6b; --yellow: #ffd93d; --green: #6bcb77;
+            --purple: #a855f7; --white: #f0f8ff;
+            --accent: var(--teal);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--deep); color: var(--white);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden;
+        }
+        
+        /* Hintergrund-Sterne Fix: z-index korrigiert */
+        .stars { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            pointer-events: none; z-index: -1; 
+        }
+
+        header {
+            width: 100%; padding: 15px 20px; display: flex; justify-content: space-between;
+            align-items: center; background: rgba(10, 31, 68, 0.9); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100; border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .stats-top { display: flex; gap: 15px; align-items: center; }
+        .xp-pill { background: var(--purple); padding: 5px 12px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; }
+        .mode-badge { background: var(--teal); padding: 5px 12px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; }
+
+        .container { width: 100%; max-width: 500px; padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .hidden { display: none !important; }
+
+        /* Card Styles */
+        .card { background: var(--ocean); padding: 25px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; }
+        h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; margin-bottom: 10px; color: var(--teal); }
+        h2 { margin-bottom: 20px; font-weight: 800; }
+
+        .btn {
+            background: var(--accent); color: white; border: none; padding: 15px 25px;
+            border-radius: 16px; font-family: 'Nunito', sans-serif; font-weight: 800;
+            font-size: 1.1rem; cursor: pointer; transition: transform 0.2s; margin: 10px 0; width: 100%;
+        }
+        .btn:active { transform: scale(0.95); }
+        .btn-secondary { background: rgba(255,255,255,0.1); }
+        .btn-active { border: 3px solid white; }
+
+        input {
+            width: 100%; padding: 15px; border-radius: 12px; border: none; margin-bottom: 20px;
+            background: rgba(255,255,255,0.1); color: white; font-size: 1.1rem; text-align: center;
+        }
+
+        /* Category Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .cat-card {
+            background: var(--ocean); padding: 20px; border-radius: 20px; text-align: center;
+            border-bottom: 4px solid rgba(0,0,0,0.3); cursor: pointer;
+        }
+        .cat-best { display: block; font-size: 0.8rem; opacity: 0.7; margin-top: 5px; }
+
+        /* Quiz UI */
+        .q-box { margin-bottom: 20px; }
+        .progress-container { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-bottom: 20px; }
+        .progress-bar { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.3s; }
+        .emoji-large { font-size: 4rem; margin: 20px 0; }
+        
+        .feedback { padding: 20px; border-radius: 16px; margin-top: 20px; font-weight: 700; }
+        .correct { background: var(--green); color: var(--deep); }
+        .wrong { background: var(--coral); color: white; }
+
+        /* Badges */
+        .badge-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; text-align: left; }
+        .badge-item { 
+            display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); 
+            padding: 12px; border-radius: 15px; opacity: 0.4;
+        }
+        .badge-item.active { opacity: 1; background: rgba(255,255,255,0.1); border-left: 4px solid var(--yellow); }
+        .badge-icon { font-size: 1.8rem; }
+        .badge-info h4 { font-size: 0.9rem; margin-bottom: 2px; }
+        .badge-info p { font-size: 0.75rem; opacity: 0.8; line-height: 1.2; }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <header id="main-header" class="hidden">
+        <div class="stats-top" onclick="showView('view-profile')">
+            <span id="display-name-nav" style="font-weight: 800;">Gast</span>
+            <div class="xp-pill">✨ <span id="total-xp">0</span> XP</div>
+        </div>
+        <div id="current-mode-display" class="mode-badge">Junior</div>
+    </header>
+
+    <div class="container">
+        
+        <section id="view-setup" class="card">
+            <h1>Nexoria</h1>
+            <p>Willkommen im Wissens-Kosmos!</p>
+            <div class="emoji-large">👨‍🚀</div>
+            <input type="text" id="name-input" placeholder="Dein Name..." maxlength="12">
+            <button class="btn" onclick="saveName()">Starten</button>
+        </section>
+
+        <section id="view-categories" class="hidden">
+            <h2>Wähle ein Abenteuer</h2>
+            <div class="grid" id="category-grid"></div>
+            <button class="btn btn-secondary" style="margin-top: 30px;" onclick="showView('view-profile')">Profil & Erfolge</button>
+        </section>
+
+        <section id="view-profile" class="hidden card">
+            <h2>Dein Profil</h2>
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 0.8rem; opacity: 0.7;">Dein Name:</label>
+                <input type="text" id="name-change" onchange="updateName(this.value)">
+            </div>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button id="age-btn-junior" class="btn" onclick="setAge('8-10')">Junior (8-10)</button>
+                <button id="age-btn-profi" class="btn" onclick="setAge('11-14')">Profi (11-14)</button>
+            </div>
+            <div id="badge-lexicon" class="badge-list"></div>
+            <button class="btn btn-secondary" onclick="showView('view-categories')">Zurück</button>
+        </section>
+
+        <section id="view-quiz" class="hidden card">
+            <div class="progress-container"><div id="progress-bar" class="progress-bar"></div></div>
+            <div id="q-emoji" class="emoji-large">❓</div>
+            <h3 id="q-text" style="margin-bottom: 25px; line-height: 1.4;">Lade Aufgabe...</h3>
+            <div id="answer-area"></div>
+            <div id="feedback-area" class="hidden">
+                <div id="feedback-text" class="feedback"></div>
+                <button class="btn" onclick="nextLevel()">Weiter</button>
+            </div>
+        </section>
+
+        <section id="view-result" class="hidden card">
+            <h2>Abgeschlossen!</h2>
+            <div class="emoji-large">🏆</div>
+            <h1 id="res-score">0 / 10</h1>
+            <p id="xp-gained" style="color: var(--yellow); font-weight: 800; margin-bottom: 20px;"></p>
+            <button class="btn" onclick="showView('view-categories')">Nächstes Quiz</button>
+        </section>
+
+    </div>
+
+    <script>
+        // --- SERVICE WORKER REGISTRIERUNG ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registriert!'))
+                    .catch(err => console.log('SW Fehler:', err));
+            });
+        }
+
+        let ageGroup = '8-10', categories = [], currentLevels = [];
+        let levelIdx = 0, score = 0, hybridStep = 1, currentCatId = null;
+
+        const badgeData = {
+            'first': { n: 'Erster Schritt', d: 'Beende dein erstes Quiz.', e: '🥉' },
+            'xp': { n: 'Wissens-Jäger', d: 'Sammle insgesamt 1.000 XP.', e: '🔥' },
+            'king': { n: 'Kategorie-König', d: 'Erreiche in 3 Kategorien 10/10 Punkte.', e: '👑' },
+            'cat1_8-10': { n: 'Junior Natur-Schützer', d: 'Bio-Dschungel Junior gemeistert.', e: '🌿' },
+            'cat3_8-10': { n: 'Junior Zeit-Reisender', d: 'Zeitreise Junior gemeistert.', e: '⏳' },
+            'cat4_8-10': { n: 'Junior Astronaut', d: 'Kosmos Junior gemeistert.', e: '🚀' },
+            'cat5_8-10': { n: 'Junior Logik-Genie', d: 'Rätsel Junior gemeistert.', e: '🧩' },
+            'cat7_8-10': { n: 'Junior English Speaker', d: 'English Junior gemeistert.', e: '🇬🇧' },
+            'cat1_11-14': { n: 'Profi Natur-Schützer', d: 'Bio-Dschungel Profi gemeistert.', e: '🌳' },
+            'cat3_11-14': { n: 'Profi Zeit-Reisender', d: 'Zeitreise Profi gemeistert.', e: '🏛️' },
+            'cat4_11-14': { n: 'Profi Astronaut', d: 'Kosmos Profi gemeistert.', e: '🛰️' },
+            'cat5_11-14': { n: 'Profi Logik-Genie', d: 'Rätsel Profi gemeistert.', e: '🧠' },
+            'cat7_11-14': { n: 'Profi English Speaker', d: 'English Profi gemeistert.', e: '🌍' }
+        };
+
+        let stats = JSON.parse(localStorage.getItem('nexoria_v1.1_stats')) || { 
+            xp: 0, highscores: {}, name: '', badges: [], age: '8-10' 
+        };
+
+        async function init() {
+            if(stats.name) {
+                ageGroup = stats.age || '8-10';
+                updateHeader();
+                showView('view-categories');
+            }
+            
+            // Paralleles Laden der Kategorien für bessere Performance
+            const catIds = [1, 2, 3, 4, 5, 6, 7];
+            await Promise.all(catIds.map(async (id) => {
+                try {
+                    const res = await fetch(`category-${id}.json`);
+                    if(res.ok) {
+                        const data = await res.json();
+                        categories.push({ id, ...data });
+                    }
+                } catch(e) {}
+            }));
+            renderCategories();
+        }
+
+        function saveName() {
+            const input = document.getElementById('name-input').value.trim();
+            if(input.length < 2) return;
+            stats.name = input;
+            saveStats();
+            updateHeader();
+            showView('view-categories');
+        }
+
+        function updateName(val) { 
+            if(val.trim().length >= 2) {
+                stats.name = val.trim(); 
+                saveStats(); 
+                updateHeader(); 
+            }
+        }
+
+        function setAge(age) {
+            ageGroup = age;
+            stats.age = age;
+            saveStats();
+            updateHeader();
+            renderCategories();
+        }
+
+        function updateHeader() {
+            document.getElementById('main-header').classList.remove('hidden');
+            document.getElementById('display-name-nav').textContent = stats.name || 'Gast';
+            document.getElementById('name-change').value = stats.name || '';
+            document.getElementById('total-xp').textContent = stats.xp.toLocaleString();
+            
+            const modeLabel = ageGroup === '8-10' ? 'Junior' : 'Profi';
+            const badge = document.getElementById('current-mode-display');
+            badge.textContent = modeLabel;
+            badge.style.background = ageGroup === '8-10' ? 'var(--purple)' : 'var(--coral)';
+            
+            document.getElementById('age-btn-junior').className = ageGroup === '8-10' ? 'btn btn-active' : 'btn btn-secondary';
+            document.getElementById('age-btn-profi').className = ageGroup === '11-14' ? 'btn btn-active' : 'btn btn-secondary';
+        }
+
+        function renderBadges() {
+            const container = document.getElementById('badge-lexicon');
+            container.innerHTML = '<h4>Deine Erfolge</h4>';
+            Object.keys(badgeData).forEach(id => {
+                const b = badgeData[id];
+                const active = stats.badges.includes(id);
+                const item = document.createElement('div');
+                item.className = `badge-item ${active ? 'active' : ''}`;
+                item.innerHTML = `<div class="badge-icon">${active ? b.e : '🔒'}</div>
+                                  <div class="badge-info">
+                                      <h4>${active ? b.n : 'Noch gesperrt'}</h4>
+                                      <p>${b.d}</p>
+                                  </div>`;
+                container.appendChild(item);
+            });
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('category-grid');
+            grid.innerHTML = '';
+            categories.sort((a,b) => a.id - b.id).forEach(cat => {
+                const best = stats.highscores[`cat_${cat.id}_${ageGroup}`] || 0;
+                const div = document.createElement('div');
+                div.className = 'cat-card';
+                div.innerHTML = `<span style="font-size:2.5rem">${cat.emoji}</span><br>
+                                 <strong style="font-size:0.9rem">${cat.name}</strong>
+                                 <span class="cat-best">Best: ${best}/10</span>`;
+                div.onclick = () => startQuiz(cat);
+                grid.appendChild(div);
+            });
+        }
+
+        function startQuiz(cat) {
+            currentCatId = cat.id;
+            document.documentElement.style.setProperty('--accent', cat.color || '#0ec4c4');
+            currentLevels = cat.levels.filter(l => l.ageRange === ageGroup);
+            if(currentLevels.length === 0) return alert("Keine Aufgaben gefunden!");
+            
+            currentLevels = currentLevels.sort(() => Math.random() - 0.5).slice(0, 10);
+            levelIdx = 0; score = 0; hybridStep = 1;
+            showView('view-quiz');
+            loadLevel();
+        }
+
+        function loadLevel() {
+            const level = currentLevels[levelIdx];
+            document.getElementById('feedback-area').classList.add('hidden');
+            const area = document.getElementById('answer-area');
+            area.innerHTML = '';
+            
+            document.getElementById('progress-bar').style.width = `${(levelIdx / 10) * 100}%`;
+            document.getElementById('q-emoji').textContent = level.emoji;
+            
+            if(level.type === 'hybrid') {
+                const step = hybridStep === 1 ? level.step1 : level.step2;
+                document.getElementById('q-text').textContent = step.text || step.question;
+                if(hybridStep === 1) renderQuiz(step.answers, step.correct, true);
+                else renderCode(true);
+            } else {
+                document.getElementById('q-text').textContent = level.text || level.question;
+                if(level.type === 'code') renderCode();
+                else renderQuiz(level.answers, level.correct);
+            }
+        }
+
+        function renderQuiz(answers, correctIdx, isHybrid = false) {
+            answers.forEach((ans, i) => {
+                const b = document.createElement('button');
+                b.className = 'btn';
+                b.textContent = ans;
+                b.onclick = () => {
+                    if(i === correctIdx) { 
+                        if(isHybrid) { hybridStep=2; loadLevel(); } 
+                        else { score++; showFeedback(true); } 
+                    } else showFeedback(false);
+                };
+                document.getElementById('answer-area').appendChild(b);
+            });
+        }
+
+        function renderCode(isHybrid = false) {
+            const area = document.getElementById('answer-area');
+            area.innerHTML = `<input type="text" id="code-in" placeholder="Antwort..." autocomplete="off">
+                             <button class="btn" onclick="checkCode(${isHybrid})">Prüfen</button>`;
+            // Sanfter Fokus für Mobilgeräte
+            setTimeout(() => document.getElementById('code-in').focus(), 400);
+        }
+
+        function checkCode(isHybrid) {
+            const val = document.getElementById('code-in').value.trim().toLowerCase();
+            const level = currentLevels[levelIdx];
+            const correct = isHybrid ? level.step2.correct : level.correct;
+            if(val === correct.toString().toLowerCase()) { score++; showFeedback(true); }
+            else showFeedback(false);
+        }
+
+        function showFeedback(isCorrect) {
+            const level = currentLevels[levelIdx];
+            const area = document.getElementById('feedback-area');
+            const txt = document.getElementById('feedback-text');
+            txt.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+            txt.innerHTML = isCorrect ? `✨ <strong>Richtig!</strong><br>${level.explain}` : `❌ <strong>Nicht ganz...</strong><br>${level.explain}`;
+            area.classList.remove('hidden');
+            document.getElementById('answer-area').innerHTML = '';
+        }
+
+        function nextLevel() {
+            levelIdx++; hybridStep = 1;
+            if(levelIdx < 10) loadLevel();
+            else finishQuiz();
+        }
+
+        function finishQuiz() {
+            const catKey = `cat_${currentCatId}_${ageGroup}`;
+            if(score > (stats.highscores[catKey] || 0)) stats.highscores[catKey] = score;
+            const xpGained = score * 10;
+            stats.xp += xpGained;
+
+            const addB = (id) => { if(!stats.badges.includes(id)) stats.badges.push(id); };
+            addB('first');
+            if(stats.xp >= 1000) addB('xp');
+            if(score === 10) {
+                const specificBadge = `cat${currentCatId}_${ageGroup}`;
+                if(badgeData[specificBadge]) addB(specificBadge);
+            }
+            if(Object.values(stats.highscores).filter(s => s === 10).length >= 3) addB('king');
+
+            saveStats(); updateHeader(); showView('view-result');
+            document.getElementById('res-score').textContent = `${score} / 10`;
+            document.getElementById('xp-gained').textContent = `+${xpGained} XP gesammelt!`;
+        }
+
+        function saveStats() { localStorage.setItem('nexoria_v1.1_stats', JSON.stringify(stats)); }
+
+        function showView(id) {
+            if(id === 'view-profile') renderBadges();
+            ['view-setup', 'view-profile', 'view-categories', 'view-quiz', 'view-result'].forEach(v => {
+                document.getElementById(v).classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        init();
+    </script>
+</body>
+</html>
