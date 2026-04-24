@@ -29,7 +29,7 @@
     { "type": "quiz", "ageRange": "8-10", "emoji": "🦁", "text": "Welches Tier ist der 'Lion'?", "answers": ["Der Tiger", "Der Bär", "Der Löwe", "Der Wolf"], "correct": 2, "explain": "Lion heißt Löwe." },
     { "type": "quiz", "ageRange": "8-10", "emoji": "🐘", "text": "Welches Tier ist ein 'Elephant'?", "answers": ["Ein Elefant", "Ein Nilpferd", "Ein Nashorn", "Eine Giraffe"], "correct": 0, "explain": "Elephant bedeutet Elefant." },
     { "type": "quiz", "ageRange": "8-10", "emoji": "🖐️", "text": "Was ist deine 'Hand'?", "answers": ["Dein Fuß", "Deine Hand", "Dein Kopf", "Dein Arm"], "correct": 1, "explain": "Hand wird im Englischen genauso geschrieben wie im Deutschen." },
-    { "type": "quiz", "ageRange": "8-10", "emoji": "🥛", "text": "Was bedeutet 'Water'?", "answers": ["Saft", "Wasser", "Tee", "Kaffee"], "correct": 1, "explain": "Water bedeutet Wasser." },
+    { "type": "quiz", "ageRange": "8-10", "emoji": "💧", "text": "Was bedeutet 'Water'?", "answers": ["Saft", "Wasser", "Tee", "Kaffee"], "correct": 1, "explain": "Water bedeutet Wasser." },
     { "type": "quiz", "ageRange": "8-10", "emoji": "🌳", "text": "Was ist ein 'Tree'?", "answers": ["Ein Turm", "Ein Tier", "Ein Baum", "Ein Tisch"], "correct": 2, "explain": "Tree bedeutet Baum." },
     { "type": "quiz", "ageRange": "8-10", "emoji": "👧", "text": "Was ist ein 'Girl'?", "answers": ["Ein Junge", "Ein Mädchen", "Ein Mann", "Eine Frau"], "correct": 1, "explain": "Girl bedeutet Mädchen." },
     { "type": "quiz", "ageRange": "8-10", "emoji": "👦", "text": "Was ist ein 'Boy'?", "answers": ["Ein Junge", "Ein Mädchen", "Ein Baby", "Ein Opa"], "correct": 0, "explain": "Boy bedeutet Junge." },
