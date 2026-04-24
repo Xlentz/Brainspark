@@ -21,404 +21,329 @@
             min-height: 100vh; display: flex; flex-direction: column; align-items: center;
             overflow-x: hidden;
         }
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0a1f44 0%, #071530 100%); overflow: hidden; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%); }
         
-        /* Globale Schwierigkeitsanzeige */
-        #difficulty-tag {
-            position: fixed; top: 10px; right: 10px; padding: 5px 12px;
-            background: rgba(255,255,255,0.1); border-radius: 20px;
-            font-size: 0.8rem; font-weight: 800; color: var(--yellow);
-            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); z-index: 100;
+        header { 
+            width: 100%; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(10, 31, 68, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; 
+            border-bottom: 2px solid rgba(14, 196, 196, 0.2); 
         }
+        .logo-container { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; }
+        .logo-text { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--teal); }
 
-        .view { width: 100%; max-width: 500px; padding: 20px; flex: 1; display: flex; flex-direction: column; animation: fadeIn 0.3s ease; }
+        .header-stats { display: flex; align-items: center; gap: 10px; }
+        .diff-pill { background: rgba(255,217,61,0.2); color: var(--yellow); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; border: 1px solid var(--yellow); }
+        .xp-pill { background: rgba(14, 196, 196, 0.2); color: var(--teal); padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: 800; }
+
+        main { width: 100%; max-width: 500px; padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .view { animation: fadeIn 0.3s ease; }
         .hidden { display: none !important; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { font-family: 'Fredoka One', cursive; font-size: 3rem; text-align: center; margin-bottom: 10px; color: var(--yellow); text-shadow: 0 4px var(--coral); }
-        .card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 24px; padding: 20px; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.1); }
-        
-        input, select { 
-            width: 100%; padding: 15px; border-radius: 15px; border: none; margin: 10px 0; 
-            font-family: inherit; font-size: 1.1rem; background: var(--white); color: var(--deep);
+        .card { background: rgba(255,255,255,0.05); border-radius: 24px; padding: 20px; border: 2px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
+        input, select { width: 100%; padding: 15px; border-radius: 15px; border: none; margin: 10px 0; background: var(--white); font-family: inherit; font-size: 1rem; }
+
+        .btn { 
+            background: var(--accent); color: var(--deep); border: none; padding: 16px; border-radius: 18px; 
+            font-weight: 800; font-size: 18px; cursor: pointer; width: 100%; margin-top: 10px; 
+            box-shadow: 0 4px 0 #088e8e; 
         }
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #088e8e; }
+        .btn-sec { background: var(--coral); box-shadow: 0 4px 0 #d14d4d; color: white; }
 
-        .btn {
-            background: var(--accent); color: var(--white); border: none; padding: 15px 30px;
-            border-radius: 18px; font-weight: 800; font-size: 1.2rem; cursor: pointer;
-            box-shadow: 0 6px 0 #088e8e; transition: all 0.1s; width: 100%; margin-top: 10px;
-        }
-        .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #088e8e; }
-        .btn-secondary { background: var(--coral); box-shadow: 0 6px 0 #d14d4d; }
-        .btn-secondary:active { box-shadow: 0 2px 0 #d14d4d; }
-
-        /* Profil-spezifisch */
-        .profile-group { margin-bottom: 15px; text-align: left; }
-        .profile-group label { font-weight: 800; font-size: 0.9rem; color: var(--teal); margin-left: 5px; }
-
-        .stat-box { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 12px 20px; border-radius: 15px; margin-bottom: 10px; }
-        #badge-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
-        .badge-item { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 10px; text-align: center; opacity: 0.3; filter: grayscale(1); transition: 0.3s; }
-        .badge-item.earned { opacity: 1; filter: grayscale(0); background: rgba(14, 196, 196, 0.2); border: 1px solid var(--teal); }
-        .badge-icon { font-size: 2rem; }
-        .badge-name { font-size: 0.7rem; font-weight: 700; margin-top: 5px; }
-
-        /* Quiz & Map */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        /* Kategorien-Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .cat-card { 
-            background: var(--card-color); border-radius: 20px; padding: 20px; text-align: center;
-            cursor: pointer; transition: transform 0.2s; border: 2px solid rgba(255,255,255,0.1);
+            aspect-ratio: 1; border-radius: 24px; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; cursor: pointer; border: 3px solid rgba(255,255,255,0.1); transition: 0.2s;
         }
         .cat-card:active { transform: scale(0.95); }
-        .cat-emoji { font-size: 2.5rem; display: block; margin-bottom: 5px; }
-        
-        .answer-grid { display: grid; gap: 10px; margin-top: 20px; }
-        .ans-btn { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; color: white; font-weight: 700; text-align: left; font-size: 1rem; cursor: pointer; }
+        .cat-emoji { font-size: 40px; margin-bottom: 8px; }
+        .cat-name { font-weight: 800; font-size: 14px; text-align: center; }
+
+        /* Quiz */
+        .ans-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .ans-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; color: white; font-weight: 700; text-align: left; cursor: pointer; }
         .ans-btn.correct { background: var(--green); border-color: #4ba356; }
         .ans-btn.wrong { background: var(--coral); border-color: #d14d4d; }
+
+        /* Badges im Profil */
+        .badge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+        .badge-box { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px; text-align: center; opacity: 0.2; filter: grayscale(1); }
+        .badge-box.earned { opacity: 1; filter: grayscale(0); border: 1px solid var(--yellow); }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    <div id="difficulty-tag" class="hidden"></div>
+    <div class="stars"></div>
 
-    <div id="view-setup" class="view">
-        <h1>NEXORIA</h1>
-        <div class="card">
-            <h2 style="text-align:center; margin-bottom:15px;">Willkommen, Entdecker!</h2>
-            <input type="text" id="player-name" placeholder="Dein Name..." maxlength="12">
-            <div style="margin: 20px 0;">
-                <p style="font-weight:800; margin-bottom:10px;">Deine Schwierigkeit:</p>
-                <div style="display:flex; gap:10px;">
-                    <label style="flex:1; background:rgba(255,255,255,0.1); padding:10px; border-radius:10px; text-align:center;">
-                        <input type="radio" name="age" value="8-10" checked style="width:auto;"> Junior
-                    </label>
-                    <label style="flex:1; background:rgba(255,255,255,0.1); padding:10px; border-radius:10px; text-align:center;">
-                        <input type="radio" name="age" value="11-14" style="width:auto;"> Senior
-                    </label>
-                </div>
-            </div>
-            <button class="btn" onclick="startAdventure()">Abenteuer starten!</button>
+    <header id="main-header" class="hidden">
+        <div class="logo-container" onclick="showView('view-categories')">
+            <img src="image.png" class="logo-img" alt="Logo">
+            <span class="logo-text">Nexoria</span>
         </div>
-    </div>
+        <div class="header-stats">
+            <div id="head-diff" class="diff-pill">JUNIOR</div>
+            <div class="xp-pill"><span id="head-xp">0</span> XP</div>
+            <div onclick="showView('view-profile')" style="cursor:pointer; font-size:20px;">👤</div>
+        </div>
+    </header>
 
-    <div id="view-map" class="view hidden">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <div onclick="showView('view-profile')" style="cursor:pointer; display:flex; align-items:center; gap:10px;">
-                <div style="background:var(--teal); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800;">👤</div>
-                <span id="map-player-name" style="font-weight:800;">?</span>
-            </div>
-            <div style="font-weight:800; color:var(--yellow);"><span id="map-xp">0</span> XP</div>
-        </div>
-        <h2 style="margin-bottom:15px; font-family:'Fredoka One';">Wähle dein Ziel:</h2>
-        <div class="grid" id="category-grid"></div>
-    </div>
-
-    <div id="view-quiz" class="view hidden">
-        <div class="card" id="quiz-card">
-            <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:800; font-size:0.9rem;">
-                <span id="quiz-cat-name">?</span>
-                <span id="quiz-progress">1/10</span>
-            </div>
-            <div id="question-emoji" style="font-size:3rem; text-align:center; margin-bottom:10px;">❓</div>
-            <h3 id="question-text" style="text-align:center; min-height:60px;">Frage lädt...</h3>
-            
-            <div id="answer-container" class="answer-grid"></div>
-            <div id="code-container" class="hidden">
-                <input type="text" id="code-input" placeholder="Deine Antwort...">
-                <button class="btn" onclick="checkCode()">Prüfen</button>
-            </div>
-            
-            <div id="explanation" class="hidden" style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.2); border-radius:15px; font-size:0.9rem; line-height:1.4;"></div>
-            <button id="next-btn" class="btn hidden" style="margin-top:20px;" onclick="nextQuestion()">Weiter</button>
-        </div>
-    </div>
-
-    <div id="view-result" class="view hidden">
-        <div class="card" style="text-align:center;">
-            <h2 id="result-title">Super!</h2>
-            <div id="result-score" style="font-size:3rem; font-weight:800; margin:20px 0; color:var(--yellow);">0 / 10</div>
-            <p id="xp-gained" style="font-weight:800; color:var(--teal); margin-bottom:20px;">+0 XP</p>
-            <button class="btn" onclick="showView('view-map')">Zur Karte</button>
-        </div>
-    </div>
-
-    <div id="view-profile" class="view hidden">
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
-            <button class="btn" style="width:auto; padding:10px 20px; margin:0;" onclick="showView('view-map')">←</button>
-            <h2 style="font-family:'Fredoka One';">Dein Profil</h2>
-        </div>
-        
-        <div class="card">
-            <div class="profile-group">
-                <label>Benutzername</label>
-                <input type="text" id="prof-name-input" placeholder="Dein Name...">
-            </div>
-            
-            <div class="profile-group">
-                <label>Schwierigkeit</label>
-                <select id="prof-age-select">
+    <main>
+        <section id="view-setup" class="view">
+            <div class="card" style="text-align:center;">
+                <h1 style="font-size:3rem; color:var(--yellow);">NEXORIA</h1>
+                <p>Bereit für dein Abenteuer?</p>
+                <input type="text" id="in-name" placeholder="Dein Name..." maxlength="12">
+                <select id="in-age">
                     <option value="8-10">Junior (8-10 Jahre)</option>
                     <option value="11-14">Senior (11-14 Jahre)</option>
                 </select>
+                <button class="btn" onclick="completeSetup()">Starten!</button>
             </div>
+        </section>
 
-            <button class="btn" onclick="saveProfileSettings()" style="margin-bottom: 20px;">Einstellungen speichern</button>
+        <section id="view-categories" class="view hidden">
+            <h2 style="margin-bottom:20px; font-family:'Fredoka One';">Wähle dein Ziel:</h2>
+            <div class="grid" id="cat-grid"></div>
+        </section>
 
-            <div class="stat-box">
-                <span>Gesamt XP</span>
-                <span id="prof-xp" style="color:var(--yellow); font-weight:800;">0</span>
+        <section id="view-quiz" class="view hidden">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; font-weight:800; font-size:12px; margin-bottom:15px;">
+                    <span id="q-cat-title">Kategorie</span>
+                    <span id="q-count">1/10</span>
+                </div>
+                <div id="q-emoji" style="font-size:50px; text-align:center; margin-bottom:10px;">❓</div>
+                <h3 id="q-text" style="text-align:center; margin-bottom:20px;">Frage...</h3>
+                
+                <div id="q-answers" class="ans-list"></div>
+                <div id="q-input-wrap" class="hidden">
+                    <input type="text" id="q-input-val" placeholder="Deine Antwort...">
+                    <button class="btn" onclick="checkInputAnswer()">Prüfen</button>
+                </div>
+
+                <div id="q-feedback" class="hidden" style="margin-top:20px; padding:15px; background:rgba(0,0,0,0.2); border-radius:15px; font-size:14px;"></div>
+                <button id="q-next" class="btn hidden" onclick="nextQuestion()">Weiter</button>
             </div>
+        </section>
 
-            <h3 style="margin-top:20px; margin-bottom:10px;">Deine Abzeichen</h3>
-            <div id="badge-container"></div>
-        </div>
+        <section id="view-result" class="view hidden">
+            <div class="card" style="text-align:center;">
+                <h2 id="res-title">Super!</h2>
+                <div id="res-score" style="font-size:40px; font-weight:800; color:var(--yellow); margin:20px 0;">0 / 10</div>
+                <p id="res-xp" style="font-weight:800; color:var(--teal);">+0 XP</p>
+                <button class="btn" onclick="showView('view-categories')">Zurück zur Karte</button>
+            </div>
+        </section>
 
-        <button class="btn btn-secondary" onclick="resetApp()">Spielstand löschen</button>
-    </div>
+        <section id="view-profile" class="view hidden">
+            <div class="card">
+                <h2 style="font-family:'Fredoka One'; margin-bottom:15px;">Dein Profil</h2>
+                <div style="text-align:left;">
+                    <label style="font-size:12px; font-weight:800; color:var(--teal);">Name ändern</label>
+                    <input type="text" id="prof-name-in">
+                    
+                    <label style="font-size:12px; font-weight:800; color:var(--teal);">Schwierigkeit ändern</label>
+                    <select id="prof-age-in">
+                        <option value="8-10">Junior (8-10 Jahre)</option>
+                        <option value="11-14">Senior (11-14 Jahre)</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="saveProfileChanges()">Speichern</button>
+                
+                <div style="margin-top:25px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+                    <h3 style="font-size:14px;">Deine Erfolge</h3>
+                    <div id="badge-grid" class="badge-grid"></div>
+                </div>
+                <button class="btn btn-sec" style="margin-top:30px;" onclick="resetApp()">Spielstand löschen</button>
+            </div>
+        </section>
+    </main>
 
     <script>
-        let stats = JSON.parse(localStorage.getItem('nexoria_v1.1_stats')) || { name: "Entdecker", xp: 0, badges: [], ageRange: "8-10" };
-        let currentAgeRange = stats.ageRange || "8-10";
+        let stats = JSON.parse(localStorage.getItem('nexoria_v1.1_stats')) || { name: "", xp: 0, badges: [], age: "8-10" };
+        let categoryData = {};
         let currentQuestions = [];
         let currentIdx = 0;
         let score = 0;
-        let currentCategory = null;
+        let currentCatId = 0;
 
-        const badgeData = {
-            'first': { name: 'Erster Schritt', emoji: '👣' },
-            'bio': { name: 'Natur-Profi', emoji: '🌿' },
-            'math': { name: 'Zahlen-Genie', emoji: '🔢' },
-            'hist': { name: 'Zeitreisender', emoji: '⏳' },
-            'tech': { name: 'Technik-Freak', emoji: '🚀' },
-            'quiz': { name: 'Rätsel-Meister', emoji: '🧩' },
-            'sport': { name: 'Athlet', emoji: '⚽' },
-            'lang': { name: 'Polyglott', emoji: '🇬🇧' },
-            'media': { name: 'Medien-Star', emoji: '🎬' }
-        };
+        const emojis = { 1:"🌿", 2:"🔢", 3:"⏳", 4:"🚀", 5:"🧩", 6:"⚽", 7:"🇬🇧", 8:"🎬" };
 
-        function initGame() {
-            if(localStorage.getItem('nexoria_v1.1_stats')) {
-                updateUI();
-                showView('view-map');
+        function init() {
+            if(stats.name) {
+                showView('view-categories');
+                updateHeader();
             }
-            createStars();
+            loadCategories();
         }
 
-        function createStars() {
-            const container = document.getElementById('stars');
-            for(let i=0; i<80; i++) {
-                const s = document.createElement('div');
-                s.style.position = 'absolute';
-                s.style.width = Math.random()*3 + 'px';
-                s.style.height = s.style.width;
-                s.style.background = 'white';
-                s.style.borderRadius = '50%';
-                s.style.top = Math.random()*100 + '%';
-                s.style.left = Math.random()*100 + '%';
-                s.style.opacity = Math.random();
-                container.appendChild(s);
-            }
-        }
-
-        function startAdventure() {
-            const name = document.getElementById('player-name').value;
-            if(!name) return alert("Wie heißt du?");
-            stats.name = name;
-            currentAgeRange = document.querySelector('input[name="age"]:checked').value;
-            stats.ageRange = currentAgeRange;
-            saveStats();
-            updateUI();
-            showView('view-map');
-        }
-
-        function updateUI() {
-            document.getElementById('map-player-name').textContent = stats.name;
-            document.getElementById('map-xp').textContent = stats.xp;
-            
-            // Update globale Schwierigkeitsanzeige
-            const tag = document.getElementById('difficulty-tag');
-            tag.textContent = currentAgeRange === "8-10" ? "JUNIOR" : "SENIOR";
-            tag.classList.remove('hidden');
-            
-            renderCategories();
-        }
-
-        function renderCategories() {
-            const grid = document.getElementById('category-grid');
-            grid.innerHTML = '';
+        async function loadCategories() {
             for(let i=1; i<=8; i++) {
-                fetch(`category-${i}.json`).then(r => r.json()).then(cat => {
-                    const div = document.createElement('div');
-                    div.className = 'cat-card';
-                    div.style.setProperty('--card-color', cat.color);
-                    div.innerHTML = `<span class="cat-emoji">${cat.emoji}</span><span style="font-weight:800; font-size:0.8rem;">${cat.name}</span>`;
-                    div.onclick = () => startQuiz(cat);
-                    grid.appendChild(div);
-                }).catch(e => console.log("Fehler bei Kategorie", i));
+                try {
+                    const r = await fetch(`category-${i}.json`);
+                    categoryData[i] = await r.json();
+                } catch(e) {}
             }
+            renderCategoryGrid();
         }
 
-        function saveProfileSettings() {
-            const newName = document.getElementById('prof-name-input').value;
-            const newAge = document.getElementById('prof-age-select').value;
-            
-            if(!newName) return alert("Bitte gib einen Namen ein.");
-            
-            stats.name = newName;
-            stats.ageRange = newAge;
-            currentAgeRange = newAge;
-            
+        function completeSetup() {
+            const n = document.getElementById('in-name').value;
+            if(!n) return alert("Gib einen Namen ein!");
+            stats.name = n;
+            stats.age = document.getElementById('in-age').value;
             saveStats();
-            updateUI();
-            alert("Einstellungen gespeichert!");
-            showView('view-map');
+            updateHeader();
+            showView('view-categories');
         }
 
-        function startQuiz(cat) {
-            currentCategory = cat;
-            currentQuestions = cat.levels.filter(q => q.ageRange === currentAgeRange);
-            // Mische Fragen und nimm max 10
-            currentQuestions = currentQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
-            
-            currentIdx = 0;
-            score = 0;
-            document.getElementById('quiz-cat-name').textContent = cat.name;
+        function updateHeader() {
+            document.getElementById('main-header').classList.remove('hidden');
+            document.getElementById('head-xp').textContent = stats.xp;
+            document.getElementById('head-diff').textContent = stats.age === "8-10" ? "JUNIOR" : "SENIOR";
+        }
+
+        function renderCategoryGrid() {
+            const g = document.getElementById('cat-grid');
+            g.innerHTML = '';
+            Object.keys(categoryData).forEach(id => {
+                const cat = categoryData[id];
+                const d = document.createElement('div');
+                d.className = 'cat-card';
+                d.style.backgroundColor = cat.color + '22';
+                d.style.borderColor = cat.color;
+                d.innerHTML = `<span class="cat-emoji">${cat.emoji}</span><span class="cat-name">${cat.name}</span>`;
+                d.onclick = () => startQuiz(id);
+                g.appendChild(d);
+            });
+        }
+
+        function startQuiz(id) {
+            currentCatId = id;
+            const cat = categoryData[id];
+            currentQuestions = cat.levels.filter(q => q.ageRange === stats.age).sort(() => 0.5 - Math.random()).slice(0, 10);
+            currentIdx = 0; score = 0;
+            document.getElementById('q-cat-title').textContent = cat.name;
             showView('view-quiz');
             showQuestion();
         }
 
         function showQuestion() {
             const q = currentQuestions[currentIdx];
-            document.getElementById('quiz-progress').textContent = `${currentIdx + 1} / ${currentQuestions.length}`;
-            document.getElementById('question-emoji').textContent = q.emoji || "❓";
-            document.getElementById('question-text').textContent = q.text;
-            document.getElementById('explanation').classList.add('hidden');
-            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('q-count').textContent = `${currentIdx + 1} / ${currentQuestions.length}`;
+            document.getElementById('q-emoji').textContent = q.emoji || "❓";
+            document.getElementById('q-text').textContent = q.text;
+            document.getElementById('q-feedback').classList.add('hidden');
+            document.getElementById('q-next').classList.add('hidden');
             
-            const ansContainer = document.getElementById('answer-container');
-            const codeContainer = document.getElementById('code-container');
-            ansContainer.innerHTML = '';
-            ansContainer.classList.add('hidden');
-            codeContainer.classList.add('hidden');
+            const ansBox = document.getElementById('q-answers');
+            const inBox = document.getElementById('q-input-wrap');
+            ansBox.innerHTML = ''; ansBox.classList.add('hidden'); inBox.classList.add('hidden');
 
             if(q.type === 'quiz' || q.type === 'pattern') {
-                ansContainer.classList.remove('hidden');
+                ansBox.classList.remove('hidden');
                 q.answers.forEach((a, i) => {
                     const b = document.createElement('button');
                     b.className = 'ans-btn';
                     b.textContent = a;
                     b.onclick = () => checkAnswer(i, b);
-                    ansContainer.appendChild(b);
+                    ansBox.appendChild(b);
                 });
-            } else if(q.type === 'code') {
-                codeContainer.classList.remove('hidden');
-                document.getElementById('code-input').value = '';
-                document.getElementById('code-input').disabled = false;
+            } else {
+                inBox.classList.remove('hidden');
+                document.getElementById('q-input-val').value = '';
+                document.getElementById('q-input-val').disabled = false;
             }
         }
 
         function checkAnswer(idx, btn) {
+            if(!document.getElementById('q-next').classList.contains('hidden')) return;
             const q = currentQuestions[currentIdx];
-            if(document.getElementById('next-btn').classList.contains('hidden') === false) return;
-
-            const buttons = document.querySelectorAll('.ans-btn');
-            if(idx === q.correct) {
-                btn.classList.add('correct');
-                score++;
-            } else {
-                btn.classList.add('wrong');
-                buttons[q.correct].classList.add('correct');
-            }
+            if(idx === q.correct) { btn.classList.add('correct'); score++; }
+            else { btn.classList.add('wrong'); document.querySelectorAll('.ans-btn')[q.correct].classList.add('correct'); }
             showFeedback(q.explain);
         }
 
-        function checkCode() {
+        function checkInputAnswer() {
             const q = currentQuestions[currentIdx];
-            const val = document.getElementById('code-input').value.trim().toLowerCase();
-            const correct = q.correct.toString().toLowerCase();
-            
-            if(val === correct) {
-                score++;
-                document.getElementById('code-input').style.background = "#6bcb77";
-            } else {
-                document.getElementById('code-input').style.background = "#ff6b6b";
-            }
-            document.getElementById('code-input').disabled = true;
+            const val = document.getElementById('q-input-val').value.trim().toLowerCase();
+            if(val === q.correct.toString().toLowerCase()) { score++; }
+            document.getElementById('q-input-val').disabled = true;
             showFeedback(q.explain);
         }
 
-        function showFeedback(text) {
-            const exp = document.getElementById('explanation');
-            exp.innerHTML = `<strong>Wusstest du schon?</strong><br>${text}`;
-            exp.classList.remove('hidden');
-            document.getElementById('next-btn').classList.remove('hidden');
+        function showFeedback(txt) {
+            const f = document.getElementById('q-feedback');
+            f.innerHTML = `<strong>Wusstest du schon?</strong><br>${txt}`;
+            f.classList.remove('hidden');
+            document.getElementById('q-next').classList.remove('hidden');
         }
 
         function nextQuestion() {
             currentIdx++;
-            if(currentIdx < currentQuestions.length) {
-                showQuestion();
-            } else {
-                finishQuiz();
-            }
+            if(currentIdx < currentQuestions.length) showQuestion();
+            else finishQuiz();
         }
 
         function finishQuiz() {
             showView('view-result');
-            document.getElementById('result-score').textContent = `${score} / ${currentQuestions.length}`;
-            const gainedXP = score * 10;
-            document.getElementById('xp-gained').textContent = `+${gainedXP} XP!`;
+            document.getElementById('res-score').textContent = `${score} / ${currentQuestions.length}`;
+            const xp = score * 10;
+            document.getElementById('res-xp').textContent = `+${xp} XP`;
+            stats.xp += xp;
             
-            stats.xp += gainedXP;
-            if(!stats.badges.includes('first')) stats.badges.push('first');
-            
-            // Kategorie-spezifische Badges
-            const badgeMap = { 'Bio-Dschungel': 'bio', 'Zahlen-Zauber': 'math', 'Zeitreise': 'hist', 'Kosmos & Technik': 'tech', 'Rätsel-Reich': 'quiz', 'Sport & Spiel': 'sport', 'English Explorer': 'lang', 'Medien-Macher': 'media' };
-            const bId = badgeMap[currentCategory.name];
-            if(score >= 7 && bId && !stats.badges.includes(bId)) stats.badges.push(bId);
-            
+            if(score >= 7) {
+                const bId = `cat${currentCatId}_${stats.age}`;
+                if(!stats.badges.includes(bId)) stats.badges.push(bId);
+            }
             saveStats();
-            updateUI();
+            updateHeader();
+        }
+
+        function saveProfileChanges() {
+            const n = document.getElementById('prof-name-in').value;
+            if(!n) return alert("Name darf nicht leer sein!");
+            stats.name = n;
+            stats.age = document.getElementById('prof-age-in').value;
+            saveStats();
+            updateHeader();
+            alert("Profil aktualisiert!");
+            showView('view-categories');
+        }
+
+        function renderBadges() {
+            const g = document.getElementById('badge-grid');
+            g.innerHTML = '';
+            // Zeige alle 16 möglichen Badges (8 Kategorien x 2 Schwierigkeiten)
+            for(let age of ["8-10", "11-14"]) {
+                for(let i=1; i<=8; i++) {
+                    const bId = `cat${i}_${age}`;
+                    const earned = stats.badges.includes(bId);
+                    const label = age === "8-10" ? "Jr" : "Sr";
+                    g.innerHTML += `<div class="badge-box ${earned?'earned':''}" title="${categoryData[i]?.name || ''} ${label}">
+                        <div style="font-size:20px;">${emojis[i]}</div>
+                        <div style="font-size:8px; font-weight:800;">${label}</div>
+                    </div>`;
+                }
+            }
+        }
+
+        function showView(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            if(id === 'view-profile') {
+                document.getElementById('prof-name-in').value = stats.name;
+                document.getElementById('prof-age-in').value = stats.age;
+                renderBadges();
+            }
         }
 
         function saveStats() { localStorage.setItem('nexoria_v1.1_stats', JSON.stringify(stats)); }
+        function resetApp() { if(confirm("Spielstand wirklich löschen?")) { localStorage.clear(); location.reload(); } }
 
-        function showView(id) {
-            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-            if(id === 'view-profile') renderProfile();
-        }
-
-        function renderProfile() {
-            const container = document.getElementById('badge-container');
-            if(!container) return;
-            container.innerHTML = '';
-            Object.keys(badgeData).forEach(id => {
-                const b = badgeData[id];
-                const earned = stats.badges.includes(id);
-                container.innerHTML += `<div class="badge-item ${earned?'earned':''}">
-                    <div class="badge-icon">${b.emoji}</div>
-                    <div class="badge-name">${b.name}</div>
-                </div>`;
-            });
-            document.getElementById('prof-xp').textContent = stats.xp;
-            document.getElementById('prof-name-input').value = stats.name;
-            document.getElementById('prof-age-select').value = stats.ageRange || "8-10";
-        }
-
-        function resetApp() { 
-            if(confirm("Möchtest du wirklich alle Spielstände löschen?")) { 
-                localStorage.clear(); 
-                location.reload(); 
-            } 
-        }
-
-        initGame();
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.log("SW Fehler:", err));
-        }
+        init();
     </script>
 </body>
 </html>
