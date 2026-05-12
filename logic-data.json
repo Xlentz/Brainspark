@@ -1,0 +1,808 @@
+{
+  "denkraum": [
+    {
+      "id": "d001",
+      "type": "sequence",
+      "difficulty": "easy",
+      "emoji": "🔢",
+      "title": "Zahlenfolge",
+      "question": "Welche Zahl kommt als nächstes? 3, 6, 12, 24, ?",
+      "answer": "48",
+      "acceptedAnswers": ["48"],
+      "hint": "Schau dir an, was passiert, wenn du eine Zahl nimmst und sie mit einer bestimmten Zahl multiplizierst.",
+      "explain": "Jede Zahl wird verdoppelt: 3×2=6, 6×2=12, 12×2=24, 24×2=48."
+    },
+    {
+      "id": "d002",
+      "type": "analogy",
+      "difficulty": "easy",
+      "emoji": "🔗",
+      "title": "Analogie",
+      "question": "Buch : Bibliothek = Gemälde : ?",
+      "answer": "Museum",
+      "acceptedAnswers": ["Museum", "museum", "Kunstmuseum", "kunstmuseum", "Galerie", "galerie"],
+      "hint": "Wo werden Bücher gesammelt? Wo werden Gemälde gesammelt?",
+      "explain": "Bücher werden in Bibliotheken aufbewahrt. Gemälde werden in Museen (oder Galerien) aufbewahrt."
+    },
+    {
+      "id": "d003",
+      "type": "truth",
+      "difficulty": "medium",
+      "emoji": "🎭",
+      "title": "Wahrheit oder Lüge?",
+      "question": "Anna sagt immer die Wahrheit. Ben lügt immer. Anna sagt: 'Ben sagt, er ist ehrlich.' Was sagt das über Ben aus?",
+      "answer": "Ben lügt",
+      "acceptedAnswers": ["Ben lügt", "er lügt", "lügt", "Ben ist unehrlich"],
+      "hint": "Anna sagt die Wahrheit. Also ist das, was Anna über Bens Aussage sagt, wahr. Aber was würde ein Lügner über sich selbst sagen?",
+      "explain": "Ein Lügner würde sagen 'Ich bin ehrlich' (weil er lügt). Anna gibt Bens Aussage korrekt wieder (sie sagt die Wahrheit). Also lügt Ben – er behauptet ehrlich zu sein, ist es aber nicht."
+    },
+    {
+      "id": "d004",
+      "type": "sequence",
+      "difficulty": "easy",
+      "emoji": "🔡",
+      "title": "Buchstabenfolge",
+      "question": "A, C, F, J, O, ?",
+      "answer": "U",
+      "acceptedAnswers": ["U", "u"],
+      "hint": "Schau dir die Abstände zwischen den Buchstaben an: +2, +3, +4, +5 ...",
+      "explain": "A(+2)C(+3)F(+4)J(+5)O(+6)U. Die Abstände wachsen um 1: 2, 3, 4, 5, 6."
+    },
+    {
+      "id": "d005",
+      "type": "weight",
+      "difficulty": "medium",
+      "emoji": "⚖️",
+      "title": "Das Wiegeschema",
+      "question": "Du hast 9 Kugeln. Eine ist schwerer als die anderen 8, die alle gleich schwer sind. Du hast eine Balkenwaage und darfst sie nur 2 Mal benutzen. Wie findest du die schwere Kugel?",
+      "answer": "Drei gegen drei wiegen, dann die schwerere Gruppe aufteilen und 1 gegen 1",
+      "acceptedAnswers": ["drei gegen drei", "3 gegen 3", "drei auf jede seite", "gruppe von drei"],
+      "hint": "Leg nicht alle auf einmal auf die Waage. Teile zuerst in drei Gruppen auf.",
+      "explain": "1. Wiegen: 3 vs. 3. Wenn eine Seite schwerer: schwere Kugel ist darunter. Wenn gleich: schwere Kugel ist in der 3er-Gruppe, die nicht gewogen wurde. 2. Wiegen: 1 vs. 1 aus der verdächtigen Gruppe. Fertig!"
+    },
+    {
+      "id": "d006",
+      "type": "syllogism",
+      "difficulty": "easy",
+      "emoji": "💡",
+      "title": "Schlussfolgerung",
+      "question": "Alle Hunde sind Tiere. Rex ist ein Hund. Was folgt daraus?",
+      "answer": "Rex ist ein Tier",
+      "acceptedAnswers": ["Rex ist ein Tier", "Rex ist ein tier", "rex ist ein tier", "rex ist tier"],
+      "hint": "Wenn alle X zu Y gehören, und Z ein X ist – was ist dann Z?",
+      "explain": "Deduktiver Schluss: Alle Hunde (X) sind Tiere (Y). Rex ist ein Hund (X). Also ist Rex ein Tier (Y). Das ist ein gültiger Syllogismus."
+    },
+    {
+      "id": "d007",
+      "type": "sequence",
+      "difficulty": "medium",
+      "emoji": "🔢",
+      "title": "Fibonacci-Variante",
+      "question": "1, 3, 4, 7, 11, 18, ?",
+      "answer": "29",
+      "acceptedAnswers": ["29"],
+      "hint": "Wie in der Fibonacci-Folge – schau dir immer zwei aufeinanderfolgende Zahlen an.",
+      "explain": "Jede Zahl ist die Summe der zwei vorherigen: 1+3=4, 3+4=7, 4+7=11, 7+11=18, 11+18=29."
+    },
+    {
+      "id": "d008",
+      "type": "analogy",
+      "difficulty": "medium",
+      "emoji": "🔗",
+      "title": "Analogie",
+      "question": "Dirigent : Orchester = Kapitän : ?",
+      "answer": "Schiff",
+      "acceptedAnswers": ["Schiff", "schiff", "Mannschaft", "mannschaft", "Crew", "crew"],
+      "hint": "Ein Dirigent leitet ein Orchester. Ein Kapitän leitet was?",
+      "explain": "Ein Dirigent leitet ein Orchester. Ein Kapitän leitet ein Schiff (oder die Mannschaft)."
+    },
+    {
+      "id": "d009",
+      "type": "truth",
+      "difficulty": "hard",
+      "emoji": "🎭",
+      "title": "Die drei Zeugen",
+      "question": "Drei Verdächtige: A sagt 'Ich war es nicht.' B sagt 'A lügt.' C sagt 'B lügt.' Genau einer sagt die Wahrheit. Wer ist es?",
+      "answer": "C",
+      "acceptedAnswers": ["C", "c"],
+      "hint": "Gehe jeden Fall durch: Was, wenn A die Wahrheit sagt? Was, wenn B?",
+      "explain": "Wenn A wahr: B lügt (korrekt, A war es nicht). Dann müsste C auch lügen. Dann sagt B die Wahrheit – Widerspruch (zwei wären wahr). Wenn B wahr: A lügt (A war es). C lügt, also B sagt die Wahrheit. Aber dann sind B und C... Probiere C=wahr: B lügt (also B sagt die Wahrheit – nein, B lügt). Also A war es nicht (A wahr) – aber dann lügt B. C sagt B lügt = wahr. Nur C sagt die Wahrheit."
+    },
+    {
+      "id": "d010",
+      "type": "sequence",
+      "difficulty": "hard",
+      "emoji": "🔢",
+      "title": "Primzahl-Muster",
+      "question": "2, 3, 5, 7, 11, 13, ?",
+      "answer": "17",
+      "acceptedAnswers": ["17"],
+      "hint": "Das sind besondere Zahlen – welche Eigenschaft haben sie gemeinsam?",
+      "explain": "Das sind Primzahlen: Zahlen, die nur durch 1 und sich selbst teilbar sind. Nach 13 kommt 17."
+    },
+    {
+      "id": "d011",
+      "type": "analogy",
+      "difficulty": "easy",
+      "emoji": "🔗",
+      "title": "Analogie",
+      "question": "Arzt : Krankenhaus = Lehrer : ?",
+      "answer": "Schule",
+      "acceptedAnswers": ["Schule", "schule"],
+      "hint": "Wo arbeitet ein Arzt? Wo arbeitet ein Lehrer?",
+      "explain": "Ein Arzt arbeitet im Krankenhaus. Ein Lehrer arbeitet in der Schule."
+    },
+    {
+      "id": "d012",
+      "type": "weight",
+      "difficulty": "easy",
+      "emoji": "⚖️",
+      "title": "Goldmünzen",
+      "question": "Du hast 5 Münzsäcke. Einer enthält nur Falschgeld (jede Münze 9g statt 10g). Du hast eine digitale Waage und darfst nur einmal wiegen. Wie findest du den Falschgeldsack?",
+      "answer": "1 2 3 4 5 Münzen entnehmen und wiegen",
+      "acceptedAnswers": ["1 münze aus sack 1", "unterschiedlich viele", "1 2 3 4 5", "abgestuft entnehmen", "verschiedene anzahl"],
+      "hint": "Du darfst unterschiedlich viele Münzen aus jedem Sack nehmen.",
+      "explain": "Entnimm 1 Münze aus Sack 1, 2 aus Sack 2, 3 aus Sack 3, 4 aus Sack 4, 5 aus Sack 5. Soll-Gewicht: 150g. Fehlt z.B. 3g, ist Sack 3 der Falsche (3 × 1g Unterschied)."
+    },
+    {
+      "id": "d013",
+      "type": "syllogism",
+      "difficulty": "medium",
+      "emoji": "💡",
+      "title": "Ungültige Schlussfolgerung",
+      "question": "Alle Vögel können fliegen. Pinguine sind Vögel. Können Pinguine fliegen?",
+      "answer": "Nein",
+      "acceptedAnswers": ["Nein", "nein", "Nein, Pinguine können nicht fliegen"],
+      "hint": "Ist die erste Aussage (Alle Vögel können fliegen) tatsächlich wahr?",
+      "explain": "Die Prämisse 'Alle Vögel können fliegen' ist falsch. Pinguine sind Vögel, aber sie können nicht fliegen. Dieser Syllogismus zeigt: Ungültige Prämissen führen zu falschen Schlüssen."
+    },
+    {
+      "id": "d014",
+      "type": "sequence",
+      "difficulty": "medium",
+      "emoji": "🔢",
+      "title": "Quadratzahlen",
+      "question": "1, 4, 9, 16, 25, ?",
+      "answer": "36",
+      "acceptedAnswers": ["36"],
+      "hint": "1×1, 2×2, 3×3 ...",
+      "explain": "Quadratzahlen: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25, 6²=36."
+    },
+    {
+      "id": "d015",
+      "type": "truth",
+      "difficulty": "medium",
+      "emoji": "🎭",
+      "title": "Auf der Insel",
+      "question": "Auf einer Insel sagen Eingeborene immer die Wahrheit oder immer die Lüge. Ein Eingeborener sagt: 'Ich bin ein Lügner.' Ist das möglich?",
+      "answer": "Nein",
+      "acceptedAnswers": ["Nein", "nein", "unmöglich", "nicht möglich"],
+      "hint": "Was würde passieren, wenn ein Lügner 'Ich bin ein Lügner' sagt?",
+      "explain": "Ein Lügner kann nicht sagen 'Ich bin ein Lügner' – denn das wäre die Wahrheit. Ein Wahrheitsager kann es auch nicht sagen. Diese Aussage ist ein Paradox und daher unmöglich."
+    },
+    {
+      "id": "d016",
+      "type": "analogy",
+      "difficulty": "hard",
+      "emoji": "🔗",
+      "title": "Komplexe Analogie",
+      "question": "Hypothese : Theorie = Entwurf : ?",
+      "answer": "Werk",
+      "acceptedAnswers": ["Werk", "werk", "Fertigprodukt", "Endprodukt", "Produkt", "fertiges Werk"],
+      "hint": "Eine Hypothese wird zur Theorie wenn sie bestätigt wird. Ein Entwurf wird zu ... wenn er fertiggestellt wird.",
+      "explain": "Eine Hypothese ist eine vorläufige Annahme – sie wird zur Theorie, wenn sie sich bewährt. Ein Entwurf ist die vorläufige Form – er wird zum fertigen Werk."
+    },
+    {
+      "id": "d017",
+      "type": "sequence",
+      "difficulty": "hard",
+      "emoji": "🔢",
+      "title": "Gemischte Folge",
+      "question": "2, 6, 3, 9, 4, 12, 5, ?",
+      "answer": "15",
+      "acceptedAnswers": ["15"],
+      "hint": "Schau dir abwechselnd die ungeraden und geraden Positionen an.",
+      "explain": "Zwei verschränkte Folgen: 2, 3, 4, 5 (Position 1,3,5,7: +1) und 6, 9, 12 (Position 2,4,6: ×3 der vorigen). Position 8 = 5×3 = 15."
+    },
+    {
+      "id": "d018",
+      "type": "syllogism",
+      "difficulty": "hard",
+      "emoji": "💡",
+      "title": "Dreifacher Schluss",
+      "question": "Alle Mathematiker lieben Logik. Manche Philosophen sind Mathematiker. Was folgt daraus sicher?",
+      "answer": "Manche Philosophen lieben Logik",
+      "acceptedAnswers": ["manche philosophen lieben logik", "einige philosophen lieben logik", "manche philosophen"],
+      "hint": "Was gilt für die Schnittmenge aus Philosophen und Mathematikern?",
+      "explain": "Die Philosophen, die auch Mathematiker sind, lieben Logik (weil alle Mathematiker Logik lieben). Also: Manche Philosophen lieben Logik. Mehr können wir nicht schlussfolgern."
+    },
+    {
+      "id": "d019",
+      "type": "weight",
+      "difficulty": "hard",
+      "emoji": "⚖️",
+      "title": "12 Kugeln",
+      "question": "12 Kugeln, eine ist anders (leichter oder schwerer). 3 Wägungen. Wie findest du die Sonderkugel?",
+      "answer": "Vier gegen vier wiegen dann aufteilen",
+      "acceptedAnswers": ["vier gegen vier", "4 gegen 4", "vier auf jede seite", "in vier gruppen"],
+      "hint": "Teile zuerst in drei Gruppen à 4 auf. Welche 4er-Gruppen legst du auf die Waage?",
+      "explain": "1. Wiegen: 4 vs. 4. Wenn gleich: Sonder-Kugel in den übrigen 4. Wenn ungleich: in einer der 8-Gruppen. 2./3. Wägung: Systematisch aufteilen und mit bekannt-normalen Kugeln vergleichen. Dieses Problem löst sich mit dem 12-Kugeln-Algorithmus."
+    },
+    {
+      "id": "d020",
+      "type": "analogy",
+      "difficulty": "medium",
+      "emoji": "🔗",
+      "title": "Wort-Analogie",
+      "question": "Messer : schneiden = Pinsel : ?",
+      "answer": "malen",
+      "acceptedAnswers": ["malen", "Malen", "streichen", "Streichen", "anmalen"],
+      "hint": "Womit schneidet man? Womit malt man?",
+      "explain": "Ein Messer dient zum Schneiden. Ein Pinsel dient zum Malen."
+    },
+    {
+      "id": "d021",
+      "type": "sequence",
+      "difficulty": "easy",
+      "emoji": "🔢",
+      "title": "Subtraktionsfolge",
+      "question": "100, 91, 83, 76, 70, ?",
+      "answer": "65",
+      "acceptedAnswers": ["65"],
+      "hint": "Schau wie viel abgezogen wird: 9, 8, 7, 6 ...",
+      "explain": "Abstände: -9, -8, -7, -6, -5. Also: 70 - 5 = 65."
+    },
+    {
+      "id": "d022",
+      "type": "truth",
+      "difficulty": "easy",
+      "emoji": "🎭",
+      "title": "Zwei Türen",
+      "question": "Zwei Türen, eine führt zum Ausgang. Hinter jeder steht ein Wächter – einer lügt immer, einer sagt immer die Wahrheit. Du darfst einen eine Frage stellen. Welche?",
+      "answer": "Was würde der andere sagen welche Tür zum Ausgang führt",
+      "acceptedAnswers": ["was würde der andere sagen", "was sagt der andere", "welche tür würde der andere zeigen"],
+      "hint": "Die Frage muss beide Wächter einbeziehen, egal wen du fragst.",
+      "explain": "Frage: 'Was würde der andere Wächter sagen, welche Tür zum Ausgang führt?' Beide werden dieselbe falsche Tür zeigen – nimm dann die andere!"
+    },
+    {
+      "id": "d023",
+      "type": "sequence",
+      "difficulty": "medium",
+      "emoji": "🔢",
+      "title": "Buchstaben und Zahlen",
+      "question": "A1, B4, C9, D16, ?",
+      "answer": "E25",
+      "acceptedAnswers": ["E25", "e25"],
+      "hint": "Buchstaben folgen dem Alphabet, Zahlen einem bekannten Muster.",
+      "explain": "Buchstaben: A, B, C, D, E (Alphabet). Zahlen: 1², 2², 3², 4², 5² = 1, 4, 9, 16, 25. Also: E25."
+    },
+    {
+      "id": "d024",
+      "type": "syllogism",
+      "difficulty": "easy",
+      "emoji": "💡",
+      "title": "Umkehrschluss",
+      "question": "Wenn es regnet, wird die Straße nass. Die Straße ist nass. Regnet es?",
+      "answer": "Nicht unbedingt",
+      "acceptedAnswers": ["nicht unbedingt", "nicht sicher", "vielleicht", "nein nicht sicher", "nicht zwingend"],
+      "hint": "Gibt es andere Möglichkeiten, warum die Straße nass sein könnte?",
+      "explain": "Die Straße könnte auch nass sein durch einen Hydranten, Putzwagen oder Tau. 'Regen → nasse Straße' bedeutet nicht 'nasse Straße → Regen'. Umkehrschluss ist ein häufiger Denkfehler."
+    },
+    {
+      "id": "d025",
+      "type": "analogy",
+      "difficulty": "hard",
+      "emoji": "🔗",
+      "title": "Wissenschafts-Analogie",
+      "question": "Teleskop : Astronomie = Mikroskop : ?",
+      "answer": "Biologie",
+      "acceptedAnswers": ["Biologie", "biologie", "Mikrobiologie", "mikrobiologie", "Medizin", "medizin"],
+      "hint": "Das Teleskop ist das Hauptwerkzeug welcher Wissenschaft? Das Mikroskop von welcher?",
+      "explain": "Das Teleskop ermöglicht die Astronomie (Beobachtung von Großem). Das Mikroskop ermöglicht die Biologie/Mikrobiologie (Beobachtung von Kleinem)."
+    },
+    {
+      "id": "d026",
+      "type": "sequence",
+      "difficulty": "hard",
+      "emoji": "🔢",
+      "title": "Look-and-Say",
+      "question": "1, 11, 21, 1211, ?",
+      "answer": "111221",
+      "acceptedAnswers": ["111221"],
+      "hint": "Lies die vorherige Zahl laut vor: eine 1, zwei 1en ...",
+      "explain": "'1': eine Eins → '11'. '11': zwei Einsen → '21'. '21': eine Zwei, eine Eins → '1211'. '1211': eine Eins, eine Zwei, zwei Einsen → '111221'."
+    },
+    {
+      "id": "d027",
+      "type": "truth",
+      "difficulty": "hard",
+      "emoji": "🎭",
+      "title": "Der Detektiv",
+      "question": "Ein Mord, drei Verdächtige. A: 'Ich war es nicht.' B: 'A lügt.' C: 'Ich und A haben es gemeinsam getan.' Genau eine Aussage ist wahr. Wer war es?",
+      "answer": "A",
+      "acceptedAnswers": ["A", "a"],
+      "hint": "Prüfe systematisch: Was wenn A wahr sagt? Was wenn B? Was wenn C?",
+      "explain": "Wenn C wahr: A und C tätig. Dann muss A sagen 'Ich war es nicht' – Lüge. B sagt A lügt – wahr. Aber dann sind C und B wahr – Widerspruch. Wenn B wahr (A lügt): A war es, also allein. C lügt (A und C – nein, nur A). Nur B ist wahr. ✓ Also war A es, und B sagt die Wahrheit."
+    },
+    {
+      "id": "d028",
+      "type": "sequence",
+      "difficulty": "easy",
+      "emoji": "🔢",
+      "title": "Mal-Folge",
+      "question": "2, 4, 8, 16, 32, ?",
+      "answer": "64",
+      "acceptedAnswers": ["64"],
+      "hint": "Was muss man immer tun, um von einer Zahl zur nächsten zu kommen?",
+      "explain": "Jede Zahl wird mit 2 multipliziert: 2×2=4, 4×2=8, 8×2=16, 16×2=32, 32×2=64."
+    }
+  ],
+
+  "escapeRooms": [
+    {
+      "id": "er001",
+      "title": "Der Zahlenturm",
+      "emoji": "🗼",
+      "difficulty": "easy",
+      "description": "Du bist in einem Turm gefangen. Jede Etage verbirgt einen Teil des Ausgangscodes.",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "🔢",
+          "title": "Etage 1 – Die Zahlenfolge",
+          "question": "Die Mauer zeigt: 5, 10, 20, 40, ? – Was fehlt?",
+          "answer": "80",
+          "acceptedAnswers": ["80"],
+          "clue": "Die erste Ziffer des Codes ist die Einerstelle dieser Zahl.",
+          "clueValue": "0",
+          "hint": "Schau dir an, was mit jeder Zahl passiert."
+        },
+        {
+          "step": 2,
+          "emoji": "🔡",
+          "title": "Etage 2 – Der Buchstabe",
+          "question": "An der Tür steht: A=1, B=2, C=3 ... Welche Zahl ist der Buchstabe 'G'?",
+          "answer": "7",
+          "acceptedAnswers": ["7"],
+          "clue": "Die zweite Ziffer des Codes.",
+          "clueValue": "7",
+          "hint": "Zähle die Buchstaben des Alphabets."
+        },
+        {
+          "step": 3,
+          "emoji": "🔺",
+          "title": "Etage 3 – Das Dreieck",
+          "question": "Ein Dreieck hat Seiten 3, 4 und X. Der Umfang ist 12. Was ist X?",
+          "answer": "5",
+          "acceptedAnswers": ["5"],
+          "clue": "Die dritte Ziffer des Codes.",
+          "clueValue": "5",
+          "hint": "Umfang = Summe aller Seiten."
+        },
+        {
+          "step": 4,
+          "emoji": "🚪",
+          "title": "Das Schloss",
+          "question": "Setze die drei Ziffern zusammen: Etage 1 → Einerstelle von 80, Etage 2 → 7, Etage 3 → 5. Was ist der Code?",
+          "answer": "075",
+          "acceptedAnswers": ["075", "0-7-5", "0 7 5"],
+          "clue": "Tür geöffnet!",
+          "clueValue": "",
+          "hint": "Die Ziffern der Reihe nach."
+        }
+      ]
+    },
+    {
+      "id": "er002",
+      "title": "Das Wissenschaftslabor",
+      "emoji": "🔬",
+      "difficulty": "medium",
+      "description": "Ein Alarm sperrt das Labor. Löse die Rätsel, um das System zurückzusetzen.",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "⚗️",
+          "title": "Terminal A – Chemie",
+          "question": "H₂O hat 3 Atome. CO₂ hat 3 Atome. Was haben beide gemeinsam? (Antwort: Anzahl der Atome)",
+          "answer": "3",
+          "acceptedAnswers": ["3", "drei", "drei atome", "3 atome"],
+          "clue": "Systemcode Teil 1 freigeschalten.",
+          "clueValue": "3",
+          "hint": "Zähle einfach alle Atome in der Formel."
+        },
+        {
+          "step": 2,
+          "emoji": "🧮",
+          "title": "Terminal B – Mathematik",
+          "question": "Was ist 12² - 10²?",
+          "answer": "44",
+          "acceptedAnswers": ["44"],
+          "clue": "Systemcode Teil 2 freigeschalten.",
+          "clueValue": "44",
+          "hint": "12²=144, 10²=100."
+        },
+        {
+          "step": 3,
+          "emoji": "🧬",
+          "title": "Terminal C – Biologie",
+          "question": "DNA hat 4 Basen. Wie viele Basenpaare entstehen, wenn du 6 Basen mit ihrer komplementären Base paarest?",
+          "answer": "6",
+          "acceptedAnswers": ["6", "sechs"],
+          "clue": "Systemcode Teil 3 freigeschalten.",
+          "clueValue": "6",
+          "hint": "Jede Base paart sich mit genau einer anderen."
+        },
+        {
+          "step": 4,
+          "emoji": "💻",
+          "title": "Hauptterminal",
+          "question": "Der Reset-Code: Multipliziere Teil 1 × Teil 3, dann addiere Teil 2. Was ergibt das?",
+          "answer": "62",
+          "acceptedAnswers": ["62"],
+          "clue": "System zurückgesetzt!",
+          "clueValue": "",
+          "hint": "3 × 6 + 44 = ?"
+        }
+      ]
+    },
+    {
+      "id": "er003",
+      "title": "Die Zeitmaschine",
+      "emoji": "⏰",
+      "difficulty": "hard",
+      "description": "Du steckst in einer Zeitmaschine. Berechne die Koordinaten, um nach Hause zu kommen.",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "📅",
+          "title": "Zeitkoordinate X",
+          "question": "Jahr 2024 minus das Jahr der ersten Mondlandung. Was ergibt das?",
+          "answer": "55",
+          "acceptedAnswers": ["55"],
+          "clue": "X = 55",
+          "clueValue": "55",
+          "hint": "Die erste Mondlandung war 1969."
+        },
+        {
+          "step": 2,
+          "emoji": "🌍",
+          "title": "Raumkoordinate Y",
+          "question": "Wie viele Kontinente hat die Erde? Multipliziere mit der Anzahl der Ozeane.",
+          "answer": "35",
+          "acceptedAnswers": ["35"],
+          "clue": "Y = 35",
+          "clueValue": "35",
+          "hint": "7 Kontinente und 5 Ozeane."
+        },
+        {
+          "step": 3,
+          "emoji": "🔭",
+          "title": "Dimensionskoordinate Z",
+          "question": "Die Fibonacci-Folge: 1,1,2,3,5,8,13,21,? Was ist die 9. Zahl?",
+          "answer": "34",
+          "acceptedAnswers": ["34"],
+          "clue": "Z = 34",
+          "clueValue": "34",
+          "hint": "Addiere immer die zwei letzten Zahlen: 13+21=?"
+        },
+        {
+          "step": 4,
+          "emoji": "⚡",
+          "title": "Aktivierungssequenz",
+          "question": "Zielkoordinate = (X + Y + Z) ÷ 4. Was ergibt das? (Runde auf ganze Zahlen)",
+          "answer": "31",
+          "acceptedAnswers": ["31"],
+          "clue": "Zeitmaschine aktiviert!",
+          "clueValue": "",
+          "hint": "55 + 35 + 34 = 124. 124 ÷ 4 = ?"
+        }
+      ]
+    },
+    {
+      "id": "er004",
+      "title": "Das Piratenschiff",
+      "emoji": "🏴‍☠️",
+      "difficulty": "easy",
+      "description": "Du hast eine alte Schatzkarte gefunden. Löse die Rätsel der Piraten!",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "🗺️",
+          "title": "Rätsel der Möwen",
+          "question": "5 Möwen sitzen auf einem Mast. 3 fliegen weg. Wie viele sitzen noch?",
+          "answer": "2",
+          "acceptedAnswers": ["2", "zwei"],
+          "clue": "Erste Koordinate: 2",
+          "clueValue": "2",
+          "hint": "5 minus 3."
+        },
+        {
+          "step": 2,
+          "emoji": "⚓",
+          "title": "Rätsel des Ankers",
+          "question": "Ein Anker wiegt 8 Tonnen. Eine Kette wiegt halb so viel. Wie schwer sind beide zusammen?",
+          "answer": "12",
+          "acceptedAnswers": ["12", "12 tonnen", "zwölf"],
+          "clue": "Zweite Koordinate: 12",
+          "clueValue": "12",
+          "hint": "8 + (8÷2) = ?"
+        },
+        {
+          "step": 3,
+          "emoji": "💎",
+          "title": "Rätsel des Schatzes",
+          "question": "Der Schatz hat 3 Truhen. Jede enthält doppelt so viele Münzen wie die vorherige. Truhe 1: 4 Münzen. Truhe 3 hat wie viele?",
+          "answer": "16",
+          "acceptedAnswers": ["16", "sechzehn"],
+          "clue": "Dritte Koordinate: 16",
+          "clueValue": "16",
+          "hint": "4, 8, 16..."
+        },
+        {
+          "step": 4,
+          "emoji": "🔓",
+          "title": "Das Schloss der Schatztruhe",
+          "question": "Schatz-Code: Koordinate 1 × Koordinate 2 + Koordinate 3. Was ist der Code?",
+          "answer": "40",
+          "acceptedAnswers": ["40"],
+          "clue": "Schatz gefunden! 🎉",
+          "clueValue": "",
+          "hint": "2 × 12 + 16 = ?"
+        }
+      ]
+    },
+    {
+      "id": "er005",
+      "title": "Der Detektivfall",
+      "emoji": "🕵️",
+      "difficulty": "medium",
+      "description": "Ein Rätsel wartet auf dich. Sammle Indizien und löse den Fall.",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "🔍",
+          "title": "Indiz 1 – Die Uhrzeit",
+          "question": "Der Mord geschah 3 Stunden vor Mitternacht. Um wie viel Uhr war es? (24h-Format, nur Stunden)",
+          "answer": "21",
+          "acceptedAnswers": ["21", "21:00", "21 uhr"],
+          "clue": "Tatzeit: 21 Uhr",
+          "clueValue": "21",
+          "hint": "Mitternacht = 24 Uhr."
+        },
+        {
+          "step": 2,
+          "emoji": "👣",
+          "title": "Indiz 2 – Die Schritte",
+          "question": "Der Täter machte 3 Schritte pro Sekunde. Er lief 20 Sekunden. Wie viele Schritte machte er?",
+          "answer": "60",
+          "acceptedAnswers": ["60"],
+          "clue": "Spurenlänge: 60 Schritte",
+          "clueValue": "60",
+          "hint": "3 × 20 = ?"
+        },
+        {
+          "step": 3,
+          "emoji": "🚗",
+          "title": "Indiz 3 – Das Fluchtauto",
+          "question": "Das Auto fuhr mit 90 km/h. In einer halben Stunde, wie weit kam es?",
+          "answer": "45",
+          "acceptedAnswers": ["45", "45 km", "45km"],
+          "clue": "Fluchtentfernung: 45 km",
+          "clueValue": "45",
+          "hint": "Weg = Geschwindigkeit × Zeit."
+        },
+        {
+          "step": 4,
+          "emoji": "⚖️",
+          "title": "Das Urteil",
+          "question": "Indiz-Summe: Tatzeit + Schritte + Fluchtentfernung. Was ergibt die Gesamtsumme?",
+          "answer": "126",
+          "acceptedAnswers": ["126"],
+          "clue": "Fall gelöst! Der Täter ist überführt.",
+          "clueValue": "",
+          "hint": "21 + 60 + 45 = ?"
+        }
+      ]
+    },
+    {
+      "id": "er006",
+      "title": "Der Tempel des Wissens",
+      "emoji": "🏛️",
+      "difficulty": "hard",
+      "description": "Ein alter Tempel birgt das Wissen der Weisen. Nur wer die Prüfungen besteht, darf es erhalten.",
+      "steps": [
+        {
+          "step": 1,
+          "emoji": "📐",
+          "title": "Prüfung der Geometrie",
+          "question": "Ein Quadrat hat Umfang 24 cm. Wie groß ist sein Flächeninhalt?",
+          "answer": "36",
+          "acceptedAnswers": ["36", "36 cm²", "36cm²"],
+          "clue": "Siegel 1: 36",
+          "clueValue": "36",
+          "hint": "Umfang = 4 × Seite → Seite = 6. Fläche = 6 × 6."
+        },
+        {
+          "step": 2,
+          "emoji": "🔢",
+          "title": "Prüfung der Zahlen",
+          "question": "Was ist die Summe aller Zahlen von 1 bis 10?",
+          "answer": "55",
+          "acceptedAnswers": ["55"],
+          "clue": "Siegel 2: 55",
+          "clueValue": "55",
+          "hint": "Gauß-Formel: n(n+1)/2."
+        },
+        {
+          "step": 3,
+          "emoji": "🌌",
+          "title": "Prüfung der Sterne",
+          "question": "Wie viele Planeten hat unser Sonnensystem? Multipliziere mit der Anzahl der Monde der Erde.",
+          "answer": "8",
+          "acceptedAnswers": ["8"],
+          "clue": "Siegel 3: 8",
+          "clueValue": "8",
+          "hint": "8 Planeten × 1 Mond = ?"
+        },
+        {
+          "step": 4,
+          "emoji": "🗝️",
+          "title": "Der Schlüssel der Weisheit",
+          "question": "Endformel: (Siegel1 + Siegel2) ÷ Siegel3. Was ergibt das?",
+          "answer": "11",
+          "acceptedAnswers": ["11", "11.375", "11,375"],
+          "clue": "Der Tempel öffnet sich!",
+          "clueValue": "",
+          "hint": "(36 + 55) ÷ 8 = 91 ÷ 8 ≈ 11"
+        }
+      ]
+    }
+  ],
+
+  "puzzleBoards": [
+    {
+      "id": "pb001",
+      "type": "sort",
+      "emoji": "📏",
+      "title": "Größe sortieren",
+      "question": "Sortiere vom Kleinsten zum Größten:",
+      "items": ["Elefant", "Maus", "Hund", "Wal", "Katze"],
+      "correctOrder": ["Maus", "Katze", "Hund", "Elefant", "Wal"],
+      "explain": "Maus (~20g) → Katze (~4kg) → Hund (~30kg) → Elefant (~5t) → Wal (~150t)."
+    },
+    {
+      "id": "pb002",
+      "type": "match",
+      "emoji": "🔗",
+      "title": "Erfinder und Erfindung",
+      "question": "Verbinde den Erfinder mit seiner Erfindung:",
+      "pairs": [
+        ["Edison", "Glühbirne"],
+        ["Bell", "Telefon"],
+        ["Gutenberg", "Buchdruck"],
+        ["Wright", "Flugzeug"]
+      ],
+      "explain": "Edison: Glühbirne (1879). Bell: Telefon (1876). Gutenberg: Buchdruck (~1450). Wright: Motorflugzeug (1903)."
+    },
+    {
+      "id": "pb003",
+      "type": "sort",
+      "emoji": "⏳",
+      "title": "Zeitliche Reihenfolge",
+      "question": "Sortiere von Alt nach Neu:",
+      "items": ["Internet", "Buchdruck", "Schrift", "Feuer", "Dampfmaschine"],
+      "correctOrder": ["Feuer", "Schrift", "Buchdruck", "Dampfmaschine", "Internet"],
+      "explain": "Feuer (~1Mio. J.) → Schrift (~5000 v.Chr.) → Buchdruck (1450) → Dampfmaschine (1769) → Internet (1969/1991)."
+    },
+    {
+      "id": "pb004",
+      "type": "match",
+      "emoji": "🌍",
+      "title": "Land und Hauptstadt",
+      "question": "Verbinde das Land mit seiner Hauptstadt:",
+      "pairs": [
+        ["Japan", "Tokio"],
+        ["Australien", "Canberra"],
+        ["Brasilien", "Brasília"],
+        ["Kanada", "Ottawa"]
+      ],
+      "explain": "Tokio (Japan), Canberra (Australien, nicht Sydney!), Brasília (Brasilien, nicht Rio!), Ottawa (Kanada, nicht Toronto!)."
+    },
+    {
+      "id": "pb005",
+      "type": "sort",
+      "emoji": "🔢",
+      "title": "Zahlen sortieren",
+      "question": "Sortiere vom Kleinsten zum Größten:",
+      "items": ["-5", "0,5", "3", "-0,1", "1"],
+      "correctOrder": ["-5", "-0,1", "0,5", "1", "3"],
+      "explain": "-5 < -0,1 < 0,5 < 1 < 3. Negative Zahlen sind kleiner als positive."
+    },
+    {
+      "id": "pb006",
+      "type": "match",
+      "emoji": "🔬",
+      "title": "Wissenschaft und Werkzeug",
+      "question": "Verbinde die Wissenschaft mit ihrem wichtigsten Werkzeug:",
+      "pairs": [
+        ["Astronomie", "Teleskop"],
+        ["Biologie", "Mikroskop"],
+        ["Chemie", "Reagenzglas"],
+        ["Physik", "Teilchenbeschleuniger"]
+      ],
+      "explain": "Jede Naturwissenschaft hat ihr Schlüsselwerkzeug – von der Beobachtung des Kleinen bis zum Großen."
+    },
+    {
+      "id": "pb007",
+      "type": "sort",
+      "emoji": "🌡️",
+      "title": "Temperaturen sortieren",
+      "question": "Sortiere von Kalt nach Heiß:",
+      "items": ["Siedepunkt Wasser", "Körpertemperatur", "Gefrierpunkt", "Absolute Nullpunkt", "Sonnenoberfläche"],
+      "correctOrder": ["Absolute Nullpunkt", "Gefrierpunkt", "Körpertemperatur", "Siedepunkt Wasser", "Sonnenoberfläche"],
+      "explain": "-273°C → 0°C → 37°C → 100°C → 5500°C."
+    },
+    {
+      "id": "pb008",
+      "type": "match",
+      "emoji": "🎵",
+      "title": "Komponist und Epoche",
+      "question": "Verbinde den Komponisten mit seiner Epoche:",
+      "pairs": [
+        ["Bach", "Barock"],
+        ["Mozart", "Klassik"],
+        ["Beethoven", "Übergang Klassik/Romantik"],
+        ["Debussy", "Impressionismus"]
+      ],
+      "explain": "Bach (1685–1750), Mozart (1756–1791), Beethoven (1770–1827), Debussy (1862–1918)."
+    },
+    {
+      "id": "pb009",
+      "type": "sort",
+      "emoji": "🚀",
+      "title": "Entfernung von der Erde",
+      "question": "Sortiere von Nah nach Fern:",
+      "items": ["Mars", "Mond", "Sonne", "Proxima Centauri", "ISS"],
+      "correctOrder": ["ISS", "Mond", "Sonne", "Mars", "Proxima Centauri"],
+      "explain": "ISS (400km) → Mond (384.000km) → Sonne (150Mio km) → Mars (bis 401Mio km) → Proxima Centauri (4,2 Lichtjahre)."
+    },
+    {
+      "id": "pb010",
+      "type": "match",
+      "emoji": "📚",
+      "title": "Autor und Werk",
+      "question": "Verbinde den Autor mit seinem bekanntesten Werk:",
+      "pairs": [
+        ["Goethe", "Faust"],
+        ["Shakespeare", "Hamlet"],
+        ["Kafka", "Die Verwandlung"],
+        ["Orwell", "1984"]
+      ],
+      "explain": "Goethe: Faust (1808). Shakespeare: Hamlet (~1600). Kafka: Die Verwandlung (1915). Orwell: 1984 (1949)."
+    },
+    {
+      "id": "pb011",
+      "type": "sort",
+      "emoji": "📐",
+      "title": "Winkel sortieren",
+      "question": "Sortiere von Klein nach Groß:",
+      "items": ["Stumpfer Winkel", "Rechter Winkel", "Spitzer Winkel", "Vollwinkel", "Gestreckter Winkel"],
+      "correctOrder": ["Spitzer Winkel", "Rechter Winkel", "Stumpfer Winkel", "Gestreckter Winkel", "Vollwinkel"],
+      "explain": "Spitz (<90°) → Recht (90°) → Stumpf (90°–180°) → Gestreckt (180°) → Voll (360°)."
+    },
+    {
+      "id": "pb012",
+      "type": "match",
+      "emoji": "⚽",
+      "title": "Sport und Begriff",
+      "question": "Verbinde den Sport mit seinem spezifischen Begriff:",
+      "pairs": [
+        ["Schach", "Schachmatt"],
+        ["Tennis", "Einstand"],
+        ["Boxen", "K.O."],
+        ["Golf", "Birdie"]
+      ],
+      "explain": "Schachmatt = Spielende im Schach. Einstand (Deuce) = 40:40 im Tennis. K.O. = Knock-out im Boxen. Birdie = 1 unter Par im Golf."
+    }
+  ]
+}
