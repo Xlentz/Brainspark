@@ -220,13 +220,14 @@
 
         /* Sort puzzle */
         .sort-container{display:flex;flex-direction:column;gap:8px;}
-        .sort-item{background:rgba(255,255,255,.08);border:1.5px solid var(--border);border-radius:13px;padding:12px 14px;font-weight:700;font-size:14px;cursor:grab;display:flex;align-items:center;gap:10px;user-select:none;transition:background .2s,transform .15s;}
-        .sort-item:active{cursor:grabbing;transform:scale(.98);}
-        .sort-item.dragging{opacity:.5;background:rgba(168,85,247,.2);border-color:var(--purple);}
+        .sort-item{background:rgba(255,255,255,.08);border:1.5px solid var(--border);border-radius:13px;padding:12px 14px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none;transition:background .2s,transform .15s,border-color .2s;}
+        .sort-item:active{transform:scale(.97);}
+        .sort-item.sort-selected{background:rgba(168,85,247,.25);border-color:var(--purple);transform:scale(1.02);}
         .sort-item.correct-pos{background:rgba(107,203,119,.15);border-color:var(--green);}
         .sort-item.wrong-pos{background:rgba(255,107,107,.15);border-color:var(--coral);}
         .sort-handle{opacity:.4;font-size:16px;}
         .sort-btn-row{display:flex;gap:10px;margin-top:14px;}
+        .sort-hint{font-size:11px;opacity:.5;text-align:center;margin-top:8px;}
 
         /* Match puzzle */
         .match-container{display:flex;gap:10px;}
@@ -1227,53 +1228,88 @@ function startPuzzleBoard(id){
     else if(currentPB.type==='match') renderMatchPuzzle();
 }
 
-// Sort Puzzle
+// Sort Puzzle – Tap-to-Swap
+let sortSelectedEl=null;
+
 function renderSortPuzzle(){
     sortOrder=[...currentPB.items].sort(()=>Math.random()-.5);
+    sortSelectedEl=null;
     const container=document.getElementById('pb-content');
     container.innerHTML='';
     const sc=document.createElement('div'); sc.className='sort-container'; sc.id='sort-container';
-    sortOrder.forEach((item,i)=>{
+    sortOrder.forEach((item)=>{
         const el=document.createElement('div');
-        el.className='sort-item'; el.draggable=true; el.dataset.index=i;
-        el.innerHTML=`<span class="sort-handle">⠿</span>${item}`;
-        el.addEventListener('dragstart',onDragStart);
-        el.addEventListener('dragover',onDragOver);
-        el.addEventListener('drop',onDrop);
-        el.addEventListener('dragend',onDragEnd);
+        el.className='sort-item';
+        el.dataset.value=item;
+        el.innerHTML=`<span class="sort-handle">☰</span><span>${item}</span>`;
+        el.addEventListener('click',onSortTap);
         sc.appendChild(el);
     });
     container.appendChild(sc);
+    const hint=document.createElement('div');
+    hint.className='sort-hint';
+    hint.textContent='Tippe zwei Elemente an, um sie zu tauschen.';
+    container.appendChild(hint);
     const btnRow=document.createElement('div'); btnRow.className='sort-btn-row';
     btnRow.innerHTML=`<button class="btn btn-outline btn-sm" style="flex:1;" onclick="checkSortPuzzle()">Prüfen ✓</button><button class="btn btn-sm" style="flex:1;" onclick="shuffleSortPuzzle()">Neu mischen 🔀</button>`;
     container.appendChild(btnRow);
 }
-let dragSrcEl=null;
-function onDragStart(e){ dragSrcEl=this; this.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
-function onDragOver(e){ e.preventDefault(); e.dataTransfer.dropEffect='move'; return false; }
-function onDrop(e){
-    e.stopPropagation();
-    if(dragSrcEl!==this){
+
+function onSortTap(){
+    // Bereits korrekt platzierte Elemente nicht mehr verschiebbar
+    if(this.classList.contains('correct-pos')) return;
+
+    if(!sortSelectedEl){
+        // Erstes Element auswählen
+        sortSelectedEl=this;
+        this.classList.add('sort-selected');
+        playSound('click');
+    } else if(sortSelectedEl===this){
+        // Gleiche Auswahl → deselektieren
+        this.classList.remove('sort-selected');
+        sortSelectedEl=null;
+    } else {
+        // Zweites Element → tauschen
         const sc=document.getElementById('sort-container');
         const items=[...sc.children];
-        const srcIdx=items.indexOf(dragSrcEl);
-        const dstIdx=items.indexOf(this);
-        if(srcIdx<dstIdx) sc.insertBefore(dragSrcEl,this.nextSibling);
-        else sc.insertBefore(dragSrcEl,this);
+        const idxA=items.indexOf(sortSelectedEl);
+        const idxB=items.indexOf(this);
+
+        // DOM-Tausch
+        const tmpA=document.createElement('div');
+        sc.insertBefore(tmpA, sortSelectedEl);
+        const tmpB=document.createElement('div');
+        sc.insertBefore(tmpB, this);
+        sc.insertBefore(sortSelectedEl, tmpB);
+        sc.insertBefore(this, tmpA);
+        sc.removeChild(tmpA);
+        sc.removeChild(tmpB);
+
+        sortSelectedEl.classList.remove('sort-selected');
+        // Falsch-Markierungen nach Tausch zurücksetzen
+        sortSelectedEl.classList.remove('wrong-pos');
+        this.classList.remove('wrong-pos');
+        sortSelectedEl=null;
+        playSound('click');
     }
-    return false;
 }
-function onDragEnd(){ document.querySelectorAll('.sort-item').forEach(i=>i.classList.remove('dragging')); }
+
 function shuffleSortPuzzle(){ renderSortPuzzle(); }
+
 function checkSortPuzzle(){
     const sc=document.getElementById('sort-container');
-    const current=[...sc.children].map(el=>el.textContent.replace('⠿','').trim());
     const correct=currentPB.correctOrder;
     let allCorrect=true;
     [...sc.children].forEach((el,i)=>{
-        const item=el.textContent.replace('⠿','').trim();
-        if(item===correct[i]){ el.classList.add('correct-pos'); el.classList.remove('wrong-pos'); }
-        else{ el.classList.add('wrong-pos'); el.classList.remove('correct-pos'); allCorrect=false; }
+        const item=el.dataset.value;
+        if(item===correct[i]){
+            el.classList.add('correct-pos');
+            el.classList.remove('wrong-pos');
+        } else {
+            el.classList.add('wrong-pos');
+            el.classList.remove('correct-pos');
+            allCorrect=false;
+        }
     });
     if(allCorrect){
         playSound('success');
