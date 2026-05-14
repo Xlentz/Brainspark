@@ -51,9 +51,10 @@
 
         /* ── Bottom Nav ── */
         #bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(10,31,68,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 max(12px,env(safe-area-inset-bottom));z-index:100;}
-        .nav-btn{background:none;border:none;color:rgba(255,255,255,0.35);display:flex;flex-direction:column;align-items:center;font-size:20px;cursor:pointer;gap:2px;padding:4px 8px;transition:color .2s;}
+        .nav-btn{background:none;border:none;color:rgba(255,255,255,0.35);display:flex;flex-direction:column;align-items:center;font-size:20px;cursor:pointer;gap:2px;padding:4px 8px;transition:color .2s;position:relative;}
         .nav-btn span{font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;}
         .nav-btn.active{color:var(--accent);}
+        .nav-badge{position:absolute;top:0;right:2px;background:var(--coral);color:#fff;font-size:9px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
 
         /* ── Main ── */
         main{width:100%;max-width:500px;padding:16px 16px 90px;flex:1;display:flex;flex-direction:column;}
@@ -83,6 +84,32 @@
         .loading-msg{grid-column:1/-1;text-align:center;opacity:.6;padding:30px;font-weight:700;}
         .loading-spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(14,196,196,.3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle;}
         @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* ── SR Banner ── */
+        .sr-banner{border-radius:18px;padding:14px 16px;margin-bottom:14px;border:1.5px solid rgba(255,107,107,.4);background:rgba(255,107,107,.08);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:transform .15s;}
+        .sr-banner:active{transform:scale(.98);}
+        .sr-banner-left{display:flex;align-items:center;gap:10px;}
+        .sr-banner-icon{font-size:28px;}
+        .sr-banner-title{font-weight:800;font-size:14px;color:var(--coral);}
+        .sr-banner-sub{font-size:11px;opacity:.6;margin-top:2px;}
+        .sr-banner-count{background:var(--coral);color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:12px;}
+
+        /* ── SR Session ── */
+        .sr-label{text-align:center;font-size:10px;font-weight:800;color:var(--coral);background:rgba(255,107,107,.1);padding:5px 12px;border-radius:10px;border:1px solid rgba(255,107,107,.3);margin-bottom:10px;}
+        .sr-interval-hint{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:12px;font-size:12px;color:rgba(255,255,255,.6);text-align:center;}
+        .sr-interval-hint strong{color:var(--accent);}
+
+        /* ── SR Ergebnis ── */
+        .sr-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+        .sr-result-tile{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:14px;text-align:center;}
+        .sr-result-tile .stat-num{font-size:22px;font-weight:800;}
+        .sr-result-tile .stat-label{font-size:11px;opacity:.6;}
+        .sr-progress-bar{background:rgba(255,255,255,.1);border-radius:8px;height:10px;overflow:hidden;margin:10px 0 4px;}
+        .sr-progress-fill{height:100%;border-radius:8px;background:var(--green);transition:width .8s ease;}
+        .sr-mastered-list{margin-top:10px;}
+        .sr-mastered-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+        .sr-mastered-item:last-child{border-bottom:none;}
+        .sr-mastered-days{margin-left:auto;font-size:11px;opacity:.6;font-weight:700;}
 
         /* ── Quiz ── */
         .quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
@@ -159,8 +186,6 @@
         /* ══════════════════════════════════════════════════
            LOGIK-BEREICH
         ══════════════════════════════════════════════════ */
-
-        /* ── Logik Hub ── */
         .logic-hub-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:4px;}
         .logic-mode-card{border-radius:22px;padding:20px;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:16px;transition:transform .15s,border-color .2s;background:var(--surface);}
         .logic-mode-card:active{transform:scale(.97);}
@@ -217,8 +242,6 @@
         .pb-card{border-radius:22px;padding:20px;border:1.5px solid rgba(168,85,247,.3);background:rgba(168,85,247,.05);margin-bottom:14px;}
         .pb-title{font-family:'Fredoka One',cursive;font-size:18px;color:var(--purple);margin-bottom:4px;}
         .pb-question{font-size:14px;opacity:.7;margin-bottom:16px;}
-
-        /* Sort puzzle */
         .sort-container{display:flex;flex-direction:column;gap:8px;}
         .sort-item{background:rgba(255,255,255,.08);border:1.5px solid var(--border);border-radius:13px;padding:12px 14px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none;transition:background .2s,transform .15s,border-color .2s;}
         .sort-item:active{transform:scale(.97);}
@@ -228,8 +251,6 @@
         .sort-handle{opacity:.4;font-size:16px;}
         .sort-btn-row{display:flex;gap:10px;margin-top:14px;}
         .sort-hint{font-size:11px;opacity:.5;text-align:center;margin-top:8px;}
-
-        /* Match puzzle */
         .match-container{display:flex;gap:10px;}
         .match-col{flex:1;display:flex;flex-direction:column;gap:8px;}
         .match-col-title{font-size:10px;font-weight:800;opacity:.5;margin-bottom:2px;text-align:center;}
@@ -237,10 +258,7 @@
         .match-item.selected{background:rgba(168,85,247,.2);border-color:var(--purple);}
         .match-item.matched-correct{background:rgba(107,203,119,.2);border-color:var(--green);cursor:default;}
         .match-item.matched-wrong{background:rgba(255,107,107,.2);border-color:var(--coral);}
-        .match-lines{position:absolute;pointer-events:none;top:0;left:0;width:100%;height:100%;}
         .match-wrapper{position:relative;}
-
-        /* Puzzle board grid */
         .pb-board-grid{display:grid;grid-template-columns:1fr;gap:12px;}
         .pb-board-card{border-radius:18px;padding:16px;border:1.5px solid rgba(168,85,247,.3);background:rgba(168,85,247,.05);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:transform .15s;}
         .pb-board-card:active{transform:scale(.97);}
@@ -310,6 +328,8 @@
             <h2 style="font-family:'Fredoka One',cursive;font-size:20px;">Wähle dein Ziel</h2>
             <div style="font-size:12px;font-weight:800;cursor:pointer;color:var(--yellow);" id="daily-teaser" onclick="showView('view-daily')">⭐ Daily</div>
         </div>
+        <!-- SR Banner wird hier dynamisch eingefügt -->
+        <div id="sr-banner-slot"></div>
         <div class="grid" id="cat-grid"><p class="loading-msg"><span class="loading-spinner"></span>Lade…</p></div>
     </section>
 
@@ -322,6 +342,7 @@
                 <span class="q-progress" id="q-count">1/10</span>
             </div>
             <div id="q-hybrid-label" class="hybrid-label hidden"></div>
+            <div id="q-sr-label" class="sr-label hidden">🔁 Wiederholung</div>
             <div id="timer-wrap" class="hidden"><div id="timer-bar-bg"><div id="timer-bar-fill" style="width:100%"></div></div><div id="timer-count">20</div></div>
             <div id="q-emoji">❓</div>
             <h3 id="q-text">Frage…</h3>
@@ -331,6 +352,7 @@
                 <button class="btn btn-sm" onclick="checkInputAnswer()">Prüfen ✓</button>
             </div>
             <div id="q-feedback" class="hidden"></div>
+            <div id="q-sr-hint" class="sr-interval-hint hidden"></div>
             <button id="q-next" class="btn hidden" onclick="nextQuestion()">Weiter →</button>
         </div>
     </section>
@@ -344,8 +366,26 @@
             <div id="res-xp-gain"></div>
             <div class="res-time" id="res-time"></div>
             <div class="result-summary" id="res-badges-row"></div>
+            <div id="res-sr-hint" class="hidden" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:14px;padding:12px;margin:10px 0;font-size:13px;"></div>
             <button class="btn" onclick="showView('view-categories')">Zurück zur Karte 🗺️</button>
             <button class="btn btn-outline btn-sm" onclick="replayQuiz()">Nochmal 🔄</button>
+        </div>
+    </section>
+
+    <!-- SR WIEDERHOLUNGS-SESSION ERGEBNIS -->
+    <section id="view-sr-result" class="view hidden">
+        <div class="card" style="text-align:center;padding:24px;">
+            <div style="font-size:50px;margin-bottom:8px;">🔁</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:22px;color:var(--coral);">Wiederholung abgeschlossen!</div>
+            <div class="sr-result-grid">
+                <div class="sr-result-tile"><div class="stat-num" id="sr-res-correct" style="color:var(--green);">0</div><div class="stat-label">Richtig ✅</div></div>
+                <div class="sr-result-tile"><div class="stat-num" id="sr-res-wrong" style="color:var(--coral);">0</div><div class="stat-label">Falsch ❌</div></div>
+                <div class="sr-result-tile"><div class="stat-num" id="sr-res-xp" style="color:var(--accent);">+0</div><div class="stat-label">XP verdient</div></div>
+                <div class="sr-result-tile"><div class="stat-num" id="sr-res-queue" style="color:var(--yellow);">0</div><div class="stat-label">Noch in Queue</div></div>
+            </div>
+            <div style="font-weight:800;font-size:13px;margin-bottom:8px;text-align:left;">Nächste Wiederholungen:</div>
+            <div id="sr-res-schedule" class="sr-mastered-list"></div>
+            <button class="btn" style="margin-top:14px;" onclick="showView('view-categories')">Zurück zur Karte 🗺️</button>
         </div>
     </section>
 
@@ -357,6 +397,20 @@
             <div class="stats-tile"><div class="stat-num" id="st-acc">0%</div><div class="stat-label">Trefferquote</div></div>
             <div class="stats-tile"><div class="stat-num" id="st-xp">0</div><div class="stat-label">Gesamt XP</div></div>
             <div class="stats-tile"><div class="stat-num" id="st-streak">0</div><div class="stat-label">Streak 🔥</div></div>
+        </div>
+        <div class="card">
+            <div style="font-weight:800;font-size:14px;margin-bottom:4px;">🔁 Spaced Repetition</div>
+            <div style="font-size:12px;opacity:.6;margin-bottom:12px;">Dein persönlicher Lernfortschritt</div>
+            <div class="stats-grid" style="margin:0 0 12px;">
+                <div class="stats-tile"><div class="stat-num" id="st-sr-queue" style="color:var(--coral);">0</div><div class="stat-label">Fällig heute</div></div>
+                <div class="stats-tile"><div class="stat-num" id="st-sr-total">0</div><div class="stat-label">In der Queue</div></div>
+                <div class="stats-tile"><div class="stat-num" id="st-sr-reviewed">0</div><div class="stat-label">Wiederholungen</div></div>
+                <div class="stats-tile"><div class="stat-num" id="st-sr-mastered" style="color:var(--green);">0</div><div class="stat-label">Gemeistert (7+ Tage)</div></div>
+            </div>
+            <div id="st-sr-bar-wrap">
+                <div class="stat-bar-top"><span>Fortschritt</span><span id="st-sr-pct">0%</span></div>
+                <div class="sr-progress-bar"><div class="sr-progress-fill" id="st-sr-fill" style="width:0%"></div></div>
+            </div>
         </div>
         <div class="card">
             <div style="font-weight:800;font-size:14px;margin-bottom:12px;">Bestleistung je Kategorie</div>
@@ -407,27 +461,15 @@
         <div class="logic-hub-grid">
             <div class="logic-mode-card denkraum" onclick="showDenkraum()">
                 <div class="lmc-icon">🧩</div>
-                <div>
-                    <div class="lmc-title">Denkraum</div>
-                    <div class="lmc-sub">Logikrätsel, Analogien & Syllogismen</div>
-                    <span class="lmc-badge daily">Täglich neue Aufgabe</span>
-                </div>
+                <div><div class="lmc-title">Denkraum</div><div class="lmc-sub">Logikrätsel, Analogien & Syllogismen</div><span class="lmc-badge daily">Täglich neue Aufgabe</span></div>
             </div>
             <div class="logic-mode-card escape" onclick="showEscapeRooms()">
                 <div class="lmc-icon">🚪</div>
-                <div>
-                    <div class="lmc-title">Escape Room</div>
-                    <div class="lmc-sub">Mehrstufige Rätselketten lösen</div>
-                    <span class="lmc-badge weekly">6 Räume verfügbar</span>
-                </div>
+                <div><div class="lmc-title">Escape Room</div><div class="lmc-sub">Mehrstufige Rätselketten lösen</div><span class="lmc-badge weekly">6 Räume verfügbar</span></div>
             </div>
             <div class="logic-mode-card puzzle" onclick="showPuzzleBoards()">
                 <div class="lmc-icon">🎛️</div>
-                <div>
-                    <div class="lmc-title">Puzzle Board</div>
-                    <div class="lmc-sub">Sortieren & Zuordnen</div>
-                    <span class="lmc-badge free">12 Puzzles</span>
-                </div>
+                <div><div class="lmc-title">Puzzle Board</div><div class="lmc-sub">Sortieren & Zuordnen</div><span class="lmc-badge free">12 Puzzles</span></div>
             </div>
         </div>
     </section>
@@ -572,9 +614,8 @@
 // ═══════════════════════════════════════════════════════════
 //  KONSTANTEN
 // ═══════════════════════════════════════════════════════════
-const STORAGE_KEY = 'nexoria_v2.1_stats';
-const OLD_KEY     = 'nexoria_v1.1_stats';
-const OLD_KEY2    = 'nexoria_v2.0_stats';
+const STORAGE_KEY = 'nexoria_v2.2_stats';
+const OLD_KEYS    = ['nexoria_v2.1_stats','nexoria_v2.0_stats','nexoria_v1.1_stats'];
 
 const XP_LEVELS = [0,100,250,450,700,1000,1400,1900,2500,3200];
 const RANKS = [
@@ -597,6 +638,8 @@ const SPECIAL_BADGES = [
     {id:'logician',   emoji:'🧩',name:'Logiker',       desc:'10 Denkraum-Rätsel gelöst'},
     {id:'escaper',    emoji:'🚪',name:'Ausbrecher',    desc:'3 Escape Rooms abgeschlossen'},
     {id:'puzzler',    emoji:'🎛️',name:'Puzzler',       desc:'5 Puzzle Boards gelöst'},
+    {id:'sr_streak',  emoji:'🔁',name:'Wiederholer',   desc:'10 SR-Reviews abgeschlossen'},
+    {id:'sr_master',  emoji:'🧬',name:'Lernmeister',   desc:'50 SR-Reviews abgeschlossen'},
 ];
 const CAT_EMOJIS = {1:'🌿',2:'🔢',3:'⏳',4:'🚀',5:'🧩',6:'⚽',7:'🇬🇧',8:'🎬'};
 const THEMES = {
@@ -604,6 +647,12 @@ const THEMES = {
     cosmos:{accent:'#a855f7',accentDark:'#7c3aed'},
     gold:  {accent:'#ffd93d',accentDark:'#c9a900'},
 };
+// SR SM-2 Konstanten
+const SR_EASE_DEFAULT  = 2.5;
+const SR_EASE_MIN      = 1.3;
+const SR_EASE_BONUS    = 0.1;
+const SR_EASE_PENALTY  = 0.2;
+const SR_MAX_PER_SESSION = 20;
 
 // ═══════════════════════════════════════════════════════════
 //  STATE
@@ -621,8 +670,11 @@ let hybridPhase   = 0;
 let hybridStep1OK = false;
 let timerInterval = null;
 let isDaily       = false;
+let isSR          = false;
 let audioCtx      = null;
-
+// SR Session State
+let srSessionItems   = [];
+let srSessionResults = [];
 // Logik-State
 let drIndex       = 0;
 let drHintShown   = false;
@@ -633,6 +685,7 @@ let currentPB     = null;
 let sortOrder     = [];
 let matchSelected = null;
 let matchMatched  = {};
+let sortSelectedEl = null;
 
 // ═══════════════════════════════════════════════════════════
 //  STATS LADEN
@@ -645,20 +698,26 @@ function loadStats() {
         totalRounds:0,totalCorrect:0,totalQuestions:0,
         catStats:{},dailyDone:null,dailyCount:0,
         logicStats:{drSolved:0,erSolved:0,pbSolved:0,logicXp:0,erDone:[],pbDone:[]},
+        srQueue:[],
+        srReviewed:0,
         settings:{timer:false,timerSeconds:20,sounds:true,theme:'dark',questionsPerRound:10}
     };
-    for (const key of [STORAGE_KEY, OLD_KEY2, OLD_KEY]) {
-        const raw = localStorage.getItem(key);
-        if (raw) {
-            try {
-                const parsed = JSON.parse(raw);
-                parsed.settings = Object.assign({},defaults.settings,parsed.settings||{});
-                parsed.logicStats = Object.assign({},defaults.logicStats,parsed.logicStats||{});
-                return Object.assign({},defaults,parsed);
-            } catch(e) {}
-        }
+    // Versuche aktuelle Version
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ try{ const p=JSON.parse(raw); return mergeDefaults(p,defaults); }catch(e){} }
+    // Versuche Migration aus alten Versionen
+    for(const key of OLD_KEYS){
+        const old = localStorage.getItem(key);
+        if(old){ try{ const p=JSON.parse(old); return mergeDefaults(p,defaults); }catch(e){} }
     }
     return defaults;
+}
+function mergeDefaults(p, defaults){
+    p.settings    = Object.assign({},defaults.settings,p.settings||{});
+    p.logicStats  = Object.assign({},defaults.logicStats,p.logicStats||{});
+    if(!p.srQueue)    p.srQueue = [];
+    if(!p.srReviewed) p.srReviewed = 0;
+    return Object.assign({},defaults,p);
 }
 function saveStats() { localStorage.setItem(STORAGE_KEY,JSON.stringify(stats)); }
 
@@ -797,12 +856,36 @@ function updateHeader(){
     const diffMap={'8-10':'JUNIOR','11-14':'SENIOR','15+':'EXPERTE'};
     document.getElementById('h-diff').textContent=diffMap[stats.age]||'JUNIOR';
     document.getElementById('xp-bar-fill').style.width=(getXPProgress(stats.xp,lv)*100)+'%';
+    // SR Badge im Nav
+    const due=getDueItems().length;
+    const navHome=document.getElementById('nav-home');
+    const existing=navHome.querySelector('.nav-badge');
+    if(existing) existing.remove();
+    if(due>0){ const b=document.createElement('div'); b.className='nav-badge'; b.textContent=due; navHome.appendChild(b); }
 }
 
 // ═══════════════════════════════════════════════════════════
 //  KATEGORIE GRID
 // ═══════════════════════════════════════════════════════════
 function renderCategoryGrid(){
+    // SR Banner
+    const slot=document.getElementById('sr-banner-slot');
+    const due=getDueItems();
+    if(due.length>0){
+        slot.innerHTML=`
+            <div class="sr-banner" onclick="startSRSession()">
+                <div class="sr-banner-left">
+                    <div class="sr-banner-icon">🔁</div>
+                    <div>
+                        <div class="sr-banner-title">Wiederholung fällig!</div>
+                        <div class="sr-banner-sub">${due.length} Frage${due.length!==1?'n':''} aus vergangenen Quiz</div>
+                    </div>
+                </div>
+                <div class="sr-banner-count">${due.length}</div>
+            </div>`;
+    } else {
+        slot.innerHTML='';
+    }
     const g=document.getElementById('cat-grid');
     g.innerHTML='';
     Object.keys(categoryData).forEach(id=>{
@@ -820,24 +903,144 @@ function renderCategoryGrid(){
 }
 
 // ═══════════════════════════════════════════════════════════
+//  ════════  SPACED REPETITION (SM-2)  ════════
+// ═══════════════════════════════════════════════════════════
+
+/* Eindeutige ID für eine Frage: cat{catId}_idx{qIndex}_{ageRange} */
+function getSRId(catId, qIndex, ageRange){ return `cat${catId}_idx${qIndex}_${ageRange}`; }
+
+/* Frage aus categoryData anhand eines SR-Items holen */
+function getSRQuestion(item){
+    const cat = categoryData[item.catId];
+    if(!cat) return null;
+    const q = cat.levels[item.qIndex];
+    if(!q || q.ageRange !== item.ageRange) return null;
+    return {...q, _catId: item.catId, _qIndex: item.qIndex};
+}
+
+/* Falsch beantwortete Frage zur SR-Queue hinzufügen / aktualisieren */
+function addToSRQueue(catId, qIndex, ageRange){
+    const id = getSRId(catId, qIndex, ageRange);
+    const today = todayStr();
+    const existing = stats.srQueue.find(i=>i.id===id);
+    if(existing){
+        // Bereits in Queue: auf morgen setzen, Ease senken
+        existing.interval = 1;
+        existing.ease = Math.max(SR_EASE_MIN, existing.ease - SR_EASE_PENALTY);
+        existing.reps = 0;
+        existing.due = dayOffset(today, 1);
+    } else {
+        stats.srQueue.push({
+            id,
+            catId: Number(catId),
+            qIndex,
+            ageRange,
+            due: dayOffset(today, 1),
+            interval: 1,
+            ease: SR_EASE_DEFAULT,
+            reps: 0
+        });
+    }
+}
+
+/* SR-Item nach Review aktualisieren (SM-2) */
+function updateSRItem(id, correct){
+    const item = stats.srQueue.find(i=>i.id===id);
+    if(!item) return;
+    const today = todayStr();
+    if(correct){
+        item.reps++;
+        item.ease = Math.min(item.ease + SR_EASE_BONUS, 4.0);
+        // Intervall berechnen
+        if(item.reps === 1)      item.interval = 1;
+        else if(item.reps === 2) item.interval = 3;
+        else                     item.interval = Math.round(item.interval * item.ease);
+        item.due = dayOffset(today, item.interval);
+    } else {
+        item.interval = 1;
+        item.ease = Math.max(SR_EASE_MIN, item.ease - SR_EASE_PENALTY);
+        item.reps = 0;
+        item.due = dayOffset(today, 1);
+    }
+}
+
+/* Fällige Items holen (due <= heute, max SR_MAX_PER_SESSION) */
+function getDueItems(){
+    const today = todayStr();
+    return stats.srQueue
+        .filter(i => i.due <= today)
+        .slice(0, SR_MAX_PER_SESSION);
+}
+
+/* Hilfsfunktion: Datum + N Tage */
+function dayOffset(dateStr, days){
+    const d = new Date(dateStr);
+    d.setDate(d.getDate() + days);
+    return d.toISOString().slice(0,10);
+}
+
+/* Anzahl gemeisterter Items (Intervall >= 7) */
+function getMasteredCount(){
+    return stats.srQueue.filter(i=>i.interval>=7).length;
+}
+
+/* SR-Session starten */
+function startSRSession(){
+    const due = getDueItems();
+    if(!due.length){ alert('Keine fälligen Wiederholungen.'); return; }
+    // Fragen auflösen
+    const questions = [];
+    for(const item of due){
+        const q = getSRQuestion(item);
+        if(q){ questions.push({...q, _srId: item.id}); }
+    }
+    if(!questions.length){ alert('Fragen konnten nicht geladen werden.'); return; }
+    isSR = true;
+    isDaily = false;
+    srSessionItems = due;
+    srSessionResults = [];
+    currentCatId = questions[0]._catId;
+    applyCatTheme('#ff6b6b');
+    document.getElementById('q-cat-title').textContent='🔁 Wiederholung';
+    document.getElementById('q-sr-label').classList.remove('hidden');
+    currentQuestions = questions;
+    currentIdx = 0; score = 0; quizStartTime = Date.now();
+    hybridPhase = 0; hybridStep1OK = false;
+    showView('view-quiz'); showQuestion();
+}
+
+/* SR-Badge Checks */
+function checkSRBadges(){
+    const sb = stats.specialBadges;
+    if(stats.srReviewed>=10 && !sb.includes('sr_streak')) sb.push('sr_streak');
+    if(stats.srReviewed>=50 && !sb.includes('sr_master'))  sb.push('sr_master');
+}
+
+// ═══════════════════════════════════════════════════════════
 //  QUIZ
 // ═══════════════════════════════════════════════════════════
-function startQuiz(id,forceQs){
+function startQuiz(id, forceQs){
     currentCatId=id; lastCatId=id;
+    isSR=false; isDaily=false;
     const cat=categoryData[id];
     applyCatTheme(cat.color);
     if(forceQs){ currentQuestions=forceQs; }
     else{
         const pool=cat.levels.filter(q=>q.ageRange===stats.age);
-        if(!pool.length){ alert(`Keine Fragen für diesen Modus.`); resetTheme(); return; }
-        currentQuestions=pool.sort(()=>Math.random()-.5).slice(0,stats.settings.questionsPerRound);
+        if(!pool.length){ alert('Keine Fragen für diesen Modus.'); resetTheme(); return; }
+        // Fragen mit Index anreichern für SR
+        currentQuestions=pool
+            .map((q,i)=>({...q, _catId:id, _qIndex:cat.levels.indexOf(q)}))
+            .sort(()=>Math.random()-.5)
+            .slice(0,stats.settings.questionsPerRound);
     }
     currentIdx=0; score=0; quizStartTime=Date.now();
     hybridPhase=0; hybridStep1OK=false;
     document.getElementById('q-cat-title').textContent=cat.name;
+    document.getElementById('q-sr-label').classList.add('hidden');
     showView('view-quiz'); showQuestion();
 }
-function confirmLeaveQuiz(){ if(confirm('Quiz abbrechen?')){ stopTimer(); resetTheme(); isDaily=false; showView('view-categories'); } }
+function confirmLeaveQuiz(){ if(confirm('Quiz abbrechen?')){ stopTimer(); resetTheme(); isSR=false; isDaily=false; showView('view-categories'); } }
 function replayQuiz(){ playSound('click'); if(isDaily){showView('view-daily');return;} startQuiz(lastCatId); }
 
 function showQuestion(){
@@ -848,6 +1051,7 @@ function showQuestion(){
     document.getElementById('q-feedback').classList.add('hidden');
     document.getElementById('q-next').classList.add('hidden');
     document.getElementById('q-hybrid-label').classList.add('hidden');
+    document.getElementById('q-sr-hint').classList.add('hidden');
     document.getElementById('timer-wrap').classList.add('hidden');
     const ansBox=document.getElementById('q-answers'),inBox=document.getElementById('q-input-wrap');
     ansBox.innerHTML=''; ansBox.classList.add('hidden'); inBox.classList.add('hidden');
@@ -898,6 +1102,8 @@ function handleTimeUp(){
     card.classList.add('anim-shake'); setTimeout(()=>card.classList.remove('anim-shake'),450);
     document.querySelectorAll('#q-answers .ans-btn').forEach((b,i)=>{b.onclick=null;b.disabled=true;if(i===q.correct)b.classList.add('correct');});
     document.getElementById('q-input-val').disabled=true;
+    // Timeout = falsch beantwortet
+    handleWrongAnswer(q, false);
     showFeedback(q.explain);
 }
 
@@ -906,8 +1112,16 @@ function checkAnswer(idx){
     stopTimer();
     const q=currentQuestions[currentIdx],btns=document.querySelectorAll('#q-answers .ans-btn'),card=document.getElementById('q-card');
     btns.forEach(b=>{b.onclick=null;b.disabled=true;});
-    if(idx===q.correct){ btns[idx].classList.add('correct'); card.classList.add('anim-correct'); setTimeout(()=>card.classList.remove('anim-correct'),350); score++; playSound('correct'); }
-    else{ btns[idx].classList.add('wrong'); btns[q.correct].classList.add('correct'); card.classList.add('anim-shake'); setTimeout(()=>card.classList.remove('anim-shake'),450); playSound('wrong'); }
+    if(idx===q.correct){
+        btns[idx].classList.add('correct'); card.classList.add('anim-correct'); setTimeout(()=>card.classList.remove('anim-correct'),350);
+        score++; playSound('correct');
+        handleCorrectAnswer(q);
+    } else {
+        btns[idx].classList.add('wrong'); btns[q.correct].classList.add('correct');
+        card.classList.add('anim-shake'); setTimeout(()=>card.classList.remove('anim-shake'),450);
+        playSound('wrong');
+        handleWrongAnswer(q, false);
+    }
     showFeedback(q.explain);
 }
 function checkHybridStep1(idx){
@@ -936,10 +1150,49 @@ function checkInputAnswer(){
     const q=currentQuestions[currentIdx],val=document.getElementById('q-input-val').value.trim().toLowerCase();
     const correct=hybridPhase===2?q.step2.correct.toString().toLowerCase():q.correct.toString().toLowerCase();
     const ok=val===correct&&(hybridPhase!==2||hybridStep1OK);
-    if(ok){score++;playSound('correct');}else playSound('wrong');
+    if(ok){ score++; playSound('correct'); handleCorrectAnswer(q); }
+    else  { playSound('wrong'); handleWrongAnswer(q, false); }
     document.getElementById('q-input-val').disabled=true;
     showFeedback(q.explain);
 }
+
+/* ── SR-Logik in Quiz-Antworten ── */
+function handleCorrectAnswer(q){
+    if(isSR && q._srId){
+        updateSRItem(q._srId, true);
+        stats.srReviewed++;
+        const item = stats.srQueue.find(i=>i.id===q._srId);
+        srSessionResults.push({qText: q.text||q.step1?.text, correct: true, interval: item ? item.interval : 1});
+        showSRIntervalHint(item, true);
+        checkSRBadges();
+    }
+}
+function handleWrongAnswer(q, isTimeout){
+    if(isSR && q._srId){
+        updateSRItem(q._srId, false);
+        stats.srReviewed++;
+        const item = stats.srQueue.find(i=>i.id===q._srId);
+        srSessionResults.push({qText: q.text||q.step1?.text, correct: false, interval: 1});
+        showSRIntervalHint(item, false);
+        checkSRBadges();
+    } else if(!isSR && q._catId !== undefined && q._qIndex !== undefined){
+        // Normale Quiz-Frage falsch → zur SR-Queue hinzufügen
+        addToSRQueue(q._catId, q._qIndex, stats.age);
+    }
+}
+function showSRIntervalHint(item, correct){
+    const hint = document.getElementById('q-sr-hint');
+    if(!item){ hint.classList.add('hidden'); return; }
+    const days = item.interval;
+    const dayStr = days===1 ? 'morgen' : `in ${days} Tagen`;
+    if(correct){
+        hint.innerHTML = `✅ Gut! Nächste Wiederholung: <strong>${dayStr}</strong>`;
+    } else {
+        hint.innerHTML = `📌 Wird <strong>morgen</strong> nochmal abgefragt`;
+    }
+    hint.classList.remove('hidden');
+}
+
 function showFeedback(txt){
     const f=document.getElementById('q-feedback');
     f.innerHTML=`<strong>💡 Wusstest du schon?</strong><br>${txt}`;
@@ -950,6 +1203,8 @@ function nextQuestion(){ currentIdx++; if(currentIdx<currentQuestions.length) sh
 
 function finishQuiz(){
     stopTimer(); resetTheme();
+    saveStats(); // SR-Queue speichern
+    if(isSR){ finishSRSession(); return; }
     const elapsed=Math.round((Date.now()-quizStartTime)/1000),total=currentQuestions.length;
     const xpGain=score*10+(isDaily?75:0);
     recordPlayToday();
@@ -983,8 +1238,45 @@ function finishQuiz(){
     if(score===total)row.innerHTML+=`<div class="res-badge"><div class="res-badge-icon">💎</div><div>Perfekt!</div></div>`;
     if(elapsed<60&&total>=10)row.innerHTML+=`<div class="res-badge"><div class="res-badge-icon">⚡</div><div>Blitz!</div></div>`;
     if(xpGain>score*10)row.innerHTML+=`<div class="res-badge"><div class="res-badge-icon">⭐</div><div>+75 Daily</div></div>`;
+    // SR Hinweis nach Quiz
+    const newDue=getDueItems().length;
+    const srHint=document.getElementById('res-sr-hint');
+    if(newDue>0){
+        srHint.innerHTML=`🔁 <strong>${newDue} neue Frage${newDue!==1?'n':''}</strong> wurden zur Wiederholung vorgemerkt.`;
+        srHint.classList.remove('hidden');
+    } else { srHint.classList.add('hidden'); }
     showView('view-result');
     if(pct===1)setTimeout(launchConfetti,400);
+}
+
+/* SR Session abschließen */
+function finishSRSession(){
+    isSR=false;
+    const correct = srSessionResults.filter(r=>r.correct).length;
+    const wrong   = srSessionResults.filter(r=>!r.correct).length;
+    const xpGain  = correct * 5;
+    addXP(xpGain);
+    saveStats();
+    document.getElementById('sr-res-correct').textContent = correct;
+    document.getElementById('sr-res-wrong').textContent   = wrong;
+    document.getElementById('sr-res-xp').textContent      = `+${xpGain}`;
+    document.getElementById('sr-res-queue').textContent   = getDueItems().length;
+    // Zeitplan-Liste
+    const list = document.getElementById('sr-res-schedule');
+    list.innerHTML='';
+    const reviewed = stats.srQueue
+        .filter(i => srSessionItems.some(s=>s.id===i.id))
+        .sort((a,b)=>a.due.localeCompare(b.due))
+        .slice(0,6);
+    reviewed.forEach(item=>{
+        const q = getSRQuestion(item);
+        const text = q ? (q.text||q.step1?.text||'Frage').slice(0,40) : 'Frage';
+        const daysUntil = Math.max(0, Math.round((new Date(item.due)-new Date(todayStr()))/86400000));
+        const label = daysUntil===0?'heute':daysUntil===1?'morgen':`in ${daysUntil} Tagen`;
+        list.innerHTML+=`<div class="sr-mastered-item"><span>${text}…</span><span class="sr-mastered-days">🔁 ${label}</span></div>`;
+    });
+    showView('view-sr-result');
+    if(wrong===0) setTimeout(launchConfetti,400);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1000,15 +1292,18 @@ function startDailyChallenge(){
     if(!Object.keys(categoryData).length){alert('Kategorien noch nicht geladen.');return;}
     const today=todayStr();
     let pool=[];
-    Object.keys(categoryData).forEach(id=>{categoryData[id].levels.filter(q=>q.ageRange===stats.age).forEach(q=>pool.push({...q,_catId:id}));});
+    Object.keys(categoryData).forEach(id=>{
+        categoryData[id].levels.filter(q=>q.ageRange===stats.age).forEach((q,i)=>pool.push({...q,_catId:id,_qIndex:categoryData[id].levels.indexOf(q)}));
+    });
     if(pool.length<5){alert('Nicht genug Fragen.');return;}
     const seed=parseInt(today.replace(/-/g,''));
     let s=seed;
     const shuffled=[...pool];
     for(let i=shuffled.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor((s/233280)*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
-    isDaily=true; currentCatId=shuffled[0]._catId;
+    isDaily=true; isSR=false; currentCatId=shuffled[0]._catId;
     applyCatTheme('#a855f7');
     document.getElementById('q-cat-title').textContent='⭐ Daily Challenge';
+    document.getElementById('q-sr-label').classList.add('hidden');
     currentQuestions=shuffled.slice(0,5);
     currentIdx=0; score=0; quizStartTime=Date.now();
     showView('view-quiz'); showQuestion();
@@ -1136,14 +1431,9 @@ function renderEscapeStep(){
     document.getElementById('er-hint-text').classList.add('hidden');
     document.getElementById('er-result').classList.add('hidden');
     document.getElementById('er-clue-box').classList.add('hidden');
-    // Step dots
     const dotsEl=document.getElementById('er-step-dots');
     dotsEl.innerHTML='';
-    currentER.steps.forEach((_,i)=>{
-        const dot=document.createElement('div');
-        dot.className='er-step-dot'+(i<erStepIdx?' done':i===erStepIdx?' active':'');
-        dotsEl.appendChild(dot);
-    });
+    currentER.steps.forEach((_,i)=>{ const dot=document.createElement('div'); dot.className='er-step-dot'+(i<erStepIdx?' done':i===erStepIdx?' active':''); dotsEl.appendChild(dot); });
 }
 function checkEscapeStep(){
     const step=currentER.steps[erStepIdx];
@@ -1154,29 +1444,12 @@ function checkEscapeStep(){
     resEl.classList.remove('hidden');
     document.getElementById('er-input').disabled=true;
     if(correct){
-        resEl.className='dr-result correct';
-        resEl.innerHTML=`✅ <strong>Richtig!</strong>`;
-        playSound('correct');
-        if(step.clueValue){
-            const clueBox=document.getElementById('er-clue-box');
-            document.getElementById('er-clue-text').textContent=step.clue;
-            clueBox.classList.remove('hidden');
-        }
-        setTimeout(()=>{
-            erStepIdx++;
-            if(erStepIdx>=currentER.steps.length){
-                finishEscapeRoom();
-            } else {
-                renderEscapeStep();
-            }
-        },1800);
+        resEl.className='dr-result correct'; resEl.innerHTML=`✅ <strong>Richtig!</strong>`; playSound('correct');
+        if(step.clueValue){ document.getElementById('er-clue-text').textContent=step.clue; document.getElementById('er-clue-box').classList.remove('hidden'); }
+        setTimeout(()=>{ erStepIdx++; if(erStepIdx>=currentER.steps.length) finishEscapeRoom(); else renderEscapeStep(); },1800);
     } else {
-        resEl.className='dr-result wrong';
-        resEl.innerHTML=`❌ <strong>Noch nicht ganz.</strong> Versuche es nochmal!`;
-        playSound('wrong');
-        document.getElementById('er-input').disabled=false;
-        document.getElementById('er-input').value='';
-        document.getElementById('er-input').focus();
+        resEl.className='dr-result wrong'; resEl.innerHTML=`❌ <strong>Noch nicht ganz.</strong> Versuche es nochmal!`; playSound('wrong');
+        document.getElementById('er-input').disabled=false; document.getElementById('er-input').value=''; document.getElementById('er-input').focus();
     }
 }
 function showEscapeHint(){
@@ -1188,15 +1461,10 @@ function showEscapeHint(){
 function finishEscapeRoom(){
     document.getElementById('er-active-card').classList.add('hidden');
     document.getElementById('er-success-box').classList.remove('hidden');
-    playSound('success');
-    launchConfetti();
+    playSound('success'); launchConfetti();
     if(!stats.logicStats.erDone.includes(currentER.id)){
-        stats.logicStats.erDone.push(currentER.id);
-        stats.logicStats.erSolved++;
-        stats.logicStats.logicXp+=50;
-        addXP(50);
-        checkLogicBadges();
-        saveStats();
+        stats.logicStats.erDone.push(currentER.id); stats.logicStats.erSolved++; stats.logicStats.logicXp+=50;
+        addXP(50); checkLogicBadges(); saveStats();
     }
 }
 
@@ -1229,98 +1497,53 @@ function startPuzzleBoard(id){
 }
 
 // Sort Puzzle – Tap-to-Swap
-let sortSelectedEl=null;
-
 function renderSortPuzzle(){
     sortOrder=[...currentPB.items].sort(()=>Math.random()-.5);
     sortSelectedEl=null;
     const container=document.getElementById('pb-content');
     container.innerHTML='';
     const sc=document.createElement('div'); sc.className='sort-container'; sc.id='sort-container';
-    sortOrder.forEach((item)=>{
+    sortOrder.forEach(item=>{
         const el=document.createElement('div');
-        el.className='sort-item';
-        el.dataset.value=item;
+        el.className='sort-item'; el.dataset.value=item;
         el.innerHTML=`<span class="sort-handle">☰</span><span>${item}</span>`;
         el.addEventListener('click',onSortTap);
         sc.appendChild(el);
     });
     container.appendChild(sc);
-    const hint=document.createElement('div');
-    hint.className='sort-hint';
-    hint.textContent='Tippe zwei Elemente an, um sie zu tauschen.';
+    const hint=document.createElement('div'); hint.className='sort-hint'; hint.textContent='Tippe zwei Elemente an, um sie zu tauschen.';
     container.appendChild(hint);
     const btnRow=document.createElement('div'); btnRow.className='sort-btn-row';
     btnRow.innerHTML=`<button class="btn btn-outline btn-sm" style="flex:1;" onclick="checkSortPuzzle()">Prüfen ✓</button><button class="btn btn-sm" style="flex:1;" onclick="shuffleSortPuzzle()">Neu mischen 🔀</button>`;
     container.appendChild(btnRow);
 }
-
 function onSortTap(){
-    // Bereits korrekt platzierte Elemente nicht mehr verschiebbar
     if(this.classList.contains('correct-pos')) return;
-
-    if(!sortSelectedEl){
-        // Erstes Element auswählen
-        sortSelectedEl=this;
-        this.classList.add('sort-selected');
-        playSound('click');
-    } else if(sortSelectedEl===this){
-        // Gleiche Auswahl → deselektieren
-        this.classList.remove('sort-selected');
-        sortSelectedEl=null;
-    } else {
-        // Zweites Element → tauschen
+    if(!sortSelectedEl){ sortSelectedEl=this; this.classList.add('sort-selected'); playSound('click'); }
+    else if(sortSelectedEl===this){ this.classList.remove('sort-selected'); sortSelectedEl=null; }
+    else {
         const sc=document.getElementById('sort-container');
-        const items=[...sc.children];
-        const idxA=items.indexOf(sortSelectedEl);
-        const idxB=items.indexOf(this);
-
-        // DOM-Tausch
-        const tmpA=document.createElement('div');
-        sc.insertBefore(tmpA, sortSelectedEl);
-        const tmpB=document.createElement('div');
-        sc.insertBefore(tmpB, this);
-        sc.insertBefore(sortSelectedEl, tmpB);
-        sc.insertBefore(this, tmpA);
-        sc.removeChild(tmpA);
-        sc.removeChild(tmpB);
-
-        sortSelectedEl.classList.remove('sort-selected');
-        // Falsch-Markierungen nach Tausch zurücksetzen
-        sortSelectedEl.classList.remove('wrong-pos');
+        const tmpA=document.createElement('div'); sc.insertBefore(tmpA,sortSelectedEl);
+        const tmpB=document.createElement('div'); sc.insertBefore(tmpB,this);
+        sc.insertBefore(sortSelectedEl,tmpB); sc.insertBefore(this,tmpA);
+        sc.removeChild(tmpA); sc.removeChild(tmpB);
+        sortSelectedEl.classList.remove('sort-selected','wrong-pos');
         this.classList.remove('wrong-pos');
-        sortSelectedEl=null;
-        playSound('click');
+        sortSelectedEl=null; playSound('click');
     }
 }
-
 function shuffleSortPuzzle(){ renderSortPuzzle(); }
-
 function checkSortPuzzle(){
     const sc=document.getElementById('sort-container');
     const correct=currentPB.correctOrder;
     let allCorrect=true;
     [...sc.children].forEach((el,i)=>{
         const item=el.dataset.value;
-        if(item===correct[i]){
-            el.classList.add('correct-pos');
-            el.classList.remove('wrong-pos');
-        } else {
-            el.classList.add('wrong-pos');
-            el.classList.remove('correct-pos');
-            allCorrect=false;
-        }
+        if(item===correct[i]){ el.classList.add('correct-pos'); el.classList.remove('wrong-pos'); }
+        else{ el.classList.add('wrong-pos'); el.classList.remove('correct-pos'); allCorrect=false; }
     });
-    if(allCorrect){
-        playSound('success');
-        launchConfetti();
-        const ex=document.getElementById('pb-explain');
-        ex.innerHTML=`✅ <strong>Perfekt sortiert!</strong><br>${currentPB.explain}`;
-        ex.classList.remove('hidden');
-        completePuzzleBoard();
-    } else {
-        playSound('wrong');
-    }
+    if(allCorrect){ playSound('success'); launchConfetti(); const ex=document.getElementById('pb-explain'); ex.innerHTML=`✅ <strong>Perfekt sortiert!</strong><br>${currentPB.explain}`; ex.classList.remove('hidden'); completePuzzleBoard(); }
+    else playSound('wrong');
 }
 
 // Match Puzzle
@@ -1332,68 +1555,42 @@ function renderMatchPuzzle(){
     const mc=document.createElement('div'); mc.className='match-container';
     const leftCol=document.createElement('div'); leftCol.className='match-col';
     const rightCol=document.createElement('div'); rightCol.className='match-col';
-    const leftTitle=document.createElement('div'); leftTitle.className='match-col-title'; leftTitle.textContent='Begriff';
-    const rightTitle=document.createElement('div'); rightTitle.className='match-col-title'; rightTitle.textContent='Zuordnung';
-    leftCol.appendChild(leftTitle); rightCol.appendChild(rightTitle);
+    const lTitle=document.createElement('div'); lTitle.className='match-col-title'; lTitle.textContent='Begriff'; leftCol.appendChild(lTitle);
+    const rTitle=document.createElement('div'); rTitle.className='match-col-title'; rTitle.textContent='Zuordnung'; rightCol.appendChild(rTitle);
     const pairs=currentPB.pairs;
     const leftItems=pairs.map(p=>p[0]);
     const rightItems=[...pairs.map(p=>p[1])].sort(()=>Math.random()-.5);
-    leftItems.forEach((item,i)=>{
-        const el=document.createElement('div');
-        el.className='match-item'; el.textContent=item; el.dataset.side='left'; el.dataset.value=item;
-        el.onclick=()=>handleMatchClick(el,'left');
-        leftCol.appendChild(el);
-    });
-    rightItems.forEach(item=>{
-        const el=document.createElement('div');
-        el.className='match-item'; el.textContent=item; el.dataset.side='right'; el.dataset.value=item;
-        el.onclick=()=>handleMatchClick(el,'right');
-        rightCol.appendChild(el);
-    });
+    leftItems.forEach(item=>{ const el=document.createElement('div'); el.className='match-item'; el.textContent=item; el.dataset.side='left'; el.dataset.value=item; el.onclick=()=>handleMatchClick(el,'left'); leftCol.appendChild(el); });
+    rightItems.forEach(item=>{ const el=document.createElement('div'); el.className='match-item'; el.textContent=item; el.dataset.side='right'; el.dataset.value=item; el.onclick=()=>handleMatchClick(el,'right'); rightCol.appendChild(el); });
     mc.appendChild(leftCol); mc.appendChild(rightCol);
-    wrapper.appendChild(mc);
-    container.appendChild(wrapper);
+    wrapper.appendChild(mc); container.appendChild(wrapper);
 }
 function handleMatchClick(el,side){
     if(el.classList.contains('matched-correct')) return;
-    if(matchSelected && matchSelected.el===el){ matchSelected.el.classList.remove('selected'); matchSelected=null; return; }
-    if(matchSelected && matchSelected.side===side){ matchSelected.el.classList.remove('selected'); matchSelected={el,side}; el.classList.add('selected'); return; }
+    if(matchSelected&&matchSelected.el===el){ matchSelected.el.classList.remove('selected'); matchSelected=null; return; }
+    if(matchSelected&&matchSelected.side===side){ matchSelected.el.classList.remove('selected'); matchSelected={el,side}; el.classList.add('selected'); return; }
     if(!matchSelected){ matchSelected={el,side}; el.classList.add('selected'); return; }
-    // Two selected, different sides
-    const leftEl = side==='right' ? matchSelected.el : el;
-    const rightEl = side==='right' ? el : matchSelected.el;
-    const leftVal = leftEl.dataset.value;
-    const rightVal = rightEl.dataset.value;
-    const correctPair = currentPB.pairs.find(p=>p[0]===leftVal);
-    if(correctPair && correctPair[1]===rightVal){
+    const leftEl=side==='right'?matchSelected.el:el;
+    const rightEl=side==='right'?el:matchSelected.el;
+    const leftVal=leftEl.dataset.value; const rightVal=rightEl.dataset.value;
+    const correctPair=currentPB.pairs.find(p=>p[0]===leftVal);
+    if(correctPair&&correctPair[1]===rightVal){
         leftEl.classList.add('matched-correct'); leftEl.classList.remove('selected');
         rightEl.classList.add('matched-correct'); rightEl.classList.remove('selected');
-        matchMatched[leftVal]=rightVal;
-        playSound('correct');
+        matchMatched[leftVal]=rightVal; playSound('correct');
         if(Object.keys(matchMatched).length===currentPB.pairs.length){
-            setTimeout(()=>{
-                playSound('success'); launchConfetti();
-                const ex=document.getElementById('pb-explain');
-                ex.innerHTML=`✅ <strong>Alle Paare gefunden!</strong><br>${currentPB.explain}`;
-                ex.classList.remove('hidden');
-                completePuzzleBoard();
-            },500);
+            setTimeout(()=>{ playSound('success'); launchConfetti(); const ex=document.getElementById('pb-explain'); ex.innerHTML=`✅ <strong>Alle Paare gefunden!</strong><br>${currentPB.explain}`; ex.classList.remove('hidden'); completePuzzleBoard(); },500);
         }
     } else {
-        leftEl.classList.add('matched-wrong'); rightEl.classList.add('matched-wrong');
-        playSound('wrong');
+        leftEl.classList.add('matched-wrong'); rightEl.classList.add('matched-wrong'); playSound('wrong');
         setTimeout(()=>{ leftEl.classList.remove('matched-wrong','selected'); rightEl.classList.remove('matched-wrong','selected'); },800);
     }
     matchSelected=null;
 }
 function completePuzzleBoard(){
     if(!stats.logicStats.pbDone.includes(currentPB.id)){
-        stats.logicStats.pbDone.push(currentPB.id);
-        stats.logicStats.pbSolved++;
-        stats.logicStats.logicXp+=20;
-        addXP(20);
-        checkLogicBadges();
-        saveStats();
+        stats.logicStats.pbDone.push(currentPB.id); stats.logicStats.pbSolved++; stats.logicStats.logicXp+=20;
+        addXP(20); checkLogicBadges(); saveStats();
     }
 }
 
@@ -1413,7 +1610,15 @@ function showView(id){
     document.getElementById(id).classList.remove('hidden');
     const hideNav=['view-setup','view-quiz'];
     document.getElementById('bottom-nav').classList.toggle('hidden',!stats.name||hideNav.includes(id));
-    const navMap={'view-categories':'nav-home','view-daily':'nav-daily','view-logic':'nav-logic','view-denkraum':'nav-logic','view-escape-list':'nav-logic','view-escape-active':'nav-logic','view-puzzle-list':'nav-logic','view-puzzle-active':'nav-logic','view-stats':'nav-stats','view-settings':'nav-stats','view-profile':'nav-profile'};
+    const navMap={
+        'view-categories':'nav-home','view-daily':'nav-daily',
+        'view-logic':'nav-logic','view-denkraum':'nav-logic',
+        'view-escape-list':'nav-logic','view-escape-active':'nav-logic',
+        'view-puzzle-list':'nav-logic','view-puzzle-active':'nav-logic',
+        'view-stats':'nav-stats','view-settings':'nav-stats',
+        'view-profile':'nav-profile',
+        'view-sr-result':'nav-home'
+    };
     document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
     if(navMap[id])document.getElementById(navMap[id])?.classList.add('active');
     if(id==='view-profile')initProfileView();
@@ -1469,6 +1674,18 @@ function initStatsView(){
     document.getElementById('st-er').textContent=stats.logicStats.erSolved;
     document.getElementById('st-pb').textContent=stats.logicStats.pbSolved;
     document.getElementById('st-logic-xp').textContent=stats.logicStats.logicXp;
+    // SR Stats
+    const dueNow=getDueItems().length;
+    const totalQ=stats.srQueue.length;
+    const mastered=getMasteredCount();
+    document.getElementById('st-sr-queue').textContent=dueNow;
+    document.getElementById('st-sr-total').textContent=totalQ;
+    document.getElementById('st-sr-reviewed').textContent=stats.srReviewed||0;
+    document.getElementById('st-sr-mastered').textContent=mastered;
+    const pct=totalQ>0?Math.round((mastered/totalQ)*100):0;
+    document.getElementById('st-sr-pct').textContent=pct+'%';
+    document.getElementById('st-sr-fill').style.width=pct+'%';
+    // Kategorie-Bars
     const container=document.getElementById('cat-bars'); container.innerHTML='';
     Object.keys(categoryData).forEach(id=>{
         const cs=stats.catStats[id],cat=categoryData[id],best=cs?cs.best:0,qMax=stats.settings.questionsPerRound,pct=Math.round((best/qMax)*100);
@@ -1497,7 +1714,7 @@ function setQCount(v){ stats.settings.questionsPerRound=v; saveStats(); initSett
 // ═══════════════════════════════════════════════════════════
 function resetApp(){
     if(confirm('Spielstand wirklich löschen?')){
-        [STORAGE_KEY,OLD_KEY,OLD_KEY2].forEach(k=>localStorage.removeItem(k));
+        [STORAGE_KEY,...OLD_KEYS].forEach(k=>localStorage.removeItem(k));
         location.reload();
     }
 }
